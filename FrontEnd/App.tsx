@@ -9,7 +9,6 @@ function App(): React.JSX.Element {
     </View>
   );
 }
-
 const styles = StyleSheet.create({
   sectionContainer: {
     marginTop: 32,
