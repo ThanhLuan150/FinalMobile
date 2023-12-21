@@ -35,13 +35,14 @@ function App(): React.JSX.Element {
           // eslint-disable-next-line react/no-unstable-nested-components
           tabBarIcon: ({focused, color, size}) => {
             let iconName: string = '';
-            if (route.name === 'Homes') {
+            if (route.name === 'Trang chủ') {
               iconName = focused ? 'home' : 'home-outline';
-            } else if (route.name === 'Details') {
-              iconName = focused ? 'list-sharp' : 'list-outline';
-            } else if (route.name === 'Settings') {
-              iconName = focused ? 'settings' : 'settings-outline';
-              // You can return any component that you like here!
+            } else if (route.name === 'Dịch vụ') {
+              iconName = focused ? 'shirt-sharp' : 'shirt-outline';
+            } else if (route.name === 'Đơn giặt') {
+              iconName = focused ? 'document-text' : 'document-text-outline';
+            } else if (route.name === 'Tài khoản') {
+              iconName = focused ? 'person' : 'persongit -outline';
             }
             return <Ionicons name={iconName} size={size} color={color} />;
           },
@@ -49,9 +50,10 @@ function App(): React.JSX.Element {
           tabBarActiveTintColor: '#91d3fa',
           headerShown: false,
         })}>
-        <Tab.Screen name="Homes" component={HomeDrawerScreen} />
-        <Tab.Screen name="Details" component={DetailScreen} />
-        <Tab.Screen name="Settings" component={SettingsStackScreen} />
+        <Tab.Screen name="Trang chủ" component={HomeDrawerScreen} />
+        <Tab.Screen name="Dịch vụ" component={DetailScreen} />
+        <Tab.Screen name="Đơn giặt" component={SettingsStackScreen} />
+        <Tab.Screen name="Tài khoản" component={SettingsStackScreen} />
       </Tab.Navigator>
     </NavigationContainer>
   );
