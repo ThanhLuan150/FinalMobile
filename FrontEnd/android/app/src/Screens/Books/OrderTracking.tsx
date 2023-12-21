@@ -22,7 +22,8 @@ const DATA = [
 export const OrderTracking = () => {
   return (
     <View style={styles.container}>
-      {renderOrder({item: DATA})}
+      <View style={styles.renderOrder}>{renderOrder({item: DATA})}</View>
+
       <View style={styles.statusContainer}>
         <View style={styles.iconStatusfullbg}>
           <Text style={styles.tickIcon}>√</Text>
@@ -47,12 +48,10 @@ export const OrderTracking = () => {
           source={require('../../Image/iconForViewOrder.png')}
         />
         <Text style={styles.Statustitle}>Đang giặt đồ...</Text>
-        <Text style={styles.title}>
+        <Text style={styles.titleMessage}>
           Xin vui lòng chờ, chúng mình vẫn đang xử lý đơn hàng hàng của bạn
         </Text>
-        <Text style={styles.title}>
-            🕗Sẽ hoàn tất trong 2 tiếng
-        </Text>
+        <Text style={styles.title}>🕗Sẽ hoàn tất trong 2 tiếng</Text>
       </View>
       <Pressable style={styles.button}>
         <Text style={styles.titlebutton}>Chi tiết đơn đặt</Text>
@@ -65,10 +64,12 @@ const styles = StyleSheet.create({
     backgroundColor: '#353B51',
     height: '100%',
   },
+  renderOrder:{
+    marginTop:30
+  },
   icon: {
-    width: 300,
-    height: 300,
-    margin: 50,
+    width: 350,
+    height: 350,
   },
   message: {
     alignItems: 'center',
@@ -81,11 +82,17 @@ const styles = StyleSheet.create({
     color: 'white',
     fontWeight: '300',
   },
+  titleMessage: {
+    color: 'white',
+    fontWeight: '300',
+    width:250,
+    margin:10
+  },
   button: {
     backgroundColor: '#7EB9C1',
     padding: 15,
     borderRadius: 15,
-    margin: 10,
+    margin: 20,
     alignItems: 'center',
   },
   titlebutton: {
@@ -101,8 +108,8 @@ const styles = StyleSheet.create({
     width: 20,
     height: 20,
     borderRadius: 15,
-    borderColor:'#AADDFA',
-    borderWidth:2,
+    borderColor: '#AADDFA',
+    borderWidth: 2,
     alignItems: 'center',
   },
   iconStatusfullbg: {
@@ -116,6 +123,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
+    marginTop: 20,
   },
   line: {
     width: 30,
