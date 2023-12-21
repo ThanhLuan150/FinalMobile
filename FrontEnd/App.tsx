@@ -42,7 +42,7 @@ function App(): React.JSX.Element {
             } else if (route.name === 'Đơn giặt') {
               iconName = focused ? 'document-text' : 'document-text-outline';
             } else if (route.name === 'Tài khoản') {
-              iconName = focused ? 'person' : 'persongit -outline';
+              iconName = focused ? 'person' : 'person-outline';
             }
             return <Ionicons name={iconName} size={size} color={color} />;
           },
