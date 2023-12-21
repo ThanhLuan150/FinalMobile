@@ -46,9 +46,12 @@ function App(): React.JSX.Element {
             }
             return <Ionicons name={iconName} size={size} color={color} />;
           },
-          tabBarInactiveTintColor: 'gray',
+          tabBarInactiveTintColor: '#91d3fa',
           tabBarActiveTintColor: '#91d3fa',
           headerShown: false,
+          tabBarStyle:{
+            backgroundColor: '#353B51',
+          },
         })}>
         <Tab.Screen name="Trang chủ" component={HomeDrawerScreen} />
         <Tab.Screen name="Dịch vụ" component={DetailScreen} />
