@@ -1,8 +1,7 @@
-/* eslint-disable react/no-unstable-nested-components */
+/* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-// import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import Notification from './android/app/src/Screens/Notification/Notification';
 import Chat from './android/app/src/Screens/Notification/Chat';
@@ -15,17 +14,23 @@ function App(): React.JSX.Element {
       <NavigationContainer>
         <Stack.Navigator screenOptions={{headerShown: false}}>
           <Stack.Screen
-              name="Notification" component = {Notification} options={{headerShown: false}}
+            name="Notification"
+            component={Notification}
+            options={{headerShown: false}}
           />
           <Stack.Screen
-              name="Chat" component = {Chat} options={{headerShown: false}}
+            name="Chat"
+            component={Chat}
+            options={{headerShown: false}}
           />
-           <Stack.Screen
-              name="DetailChat" component = {DetailChat} options={{headerShown: false}}
+          <Stack.Screen
+            name="DetailChat"
+            component={DetailChat}
+            options={{headerShown: false}}
           />
-          </Stack.Navigator>
+        </Stack.Navigator>
       </NavigationContainer>
-  </GestureHandlerRootView>
+    </GestureHandlerRootView>
   );
 }
 
