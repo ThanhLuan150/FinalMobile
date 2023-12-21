@@ -1,31 +1,32 @@
+/* eslint-disable react/no-unstable-nested-components */
 import React from 'react';
-
-import {StyleSheet, Text, View} from 'react-native';
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+// import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {GestureHandlerRootView} from 'react-native-gesture-handler';
+import Notification from './android/app/src/Screens/Notification/Notification';
+import Chat from './android/app/src/Screens/Notification/Chat';
+import DetailChat from './android/app/src/Screens/Notification/DetailChat';
+const Stack = createNativeStackNavigator();
 
 function App(): React.JSX.Element {
   return (
-    <View>
-      <Text>Hello</Text>
-    </View>
+    <GestureHandlerRootView style={{flex: 1}}>
+      <NavigationContainer>
+        <Stack.Navigator screenOptions={{headerShown: false}}>
+          <Stack.Screen
+              name="Notification" component = {Notification} options={{headerShown: false}}
+          />
+          <Stack.Screen
+              name="Chat" component = {Chat} options={{headerShown: false}}
+          />
+           <Stack.Screen
+              name="DetailChat" component = {DetailChat} options={{headerShown: false}}
+          />
+          </Stack.Navigator>
+      </NavigationContainer>
+  </GestureHandlerRootView>
   );
 }
-const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-});
 
 export default App;
