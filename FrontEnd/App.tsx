@@ -42,13 +42,16 @@ function App(): React.JSX.Element {
             } else if (route.name === 'Đơn giặt') {
               iconName = focused ? 'document-text' : 'document-text-outline';
             } else if (route.name === 'Tài khoản') {
-              iconName = focused ? 'person' : 'persongit -outline';
+              iconName = focused ? 'person' : 'person-outline';
             }
             return <Ionicons name={iconName} size={size} color={color} />;
           },
-          tabBarInactiveTintColor: 'gray',
+          tabBarInactiveTintColor: '#91d3fa',
           tabBarActiveTintColor: '#91d3fa',
           headerShown: false,
+          tabBarStyle:{
+            backgroundColor: '#353B51',
+          },
         })}>
         <Tab.Screen name="Trang chủ" component={HomeDrawerScreen} />
         <Tab.Screen name="Dịch vụ" component={DetailScreen} />
