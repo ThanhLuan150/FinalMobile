@@ -11,7 +11,6 @@ import {
   Keyboard,
   KeyboardAvoidingView,
   TextInput,
-//   TouchableOpacity,
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 const DetailChat: FC = (): JSX.Element => {
@@ -113,15 +112,6 @@ const DetailChat: FC = (): JSX.Element => {
                 <Text>Bạn chờ trong giây lát nha</Text>
               </View>
             </View>
-            <View style={styles.viewItemMessageCustomer}>
-              <View style={styles.viewmessageCustomer}>
-                <Text style={styles.textmessageCustomer}>Oki bạn nha</Text>
-              </View>
-              <Image
-                style={{width: 40, height: 40, borderRadius: 50}}
-                source={require('../../Image/huongho.jpg')}
-              />
-            </View>
           </View>
           <View style={styles.viewInputChat}>
             <Image
@@ -194,6 +184,7 @@ const styles = StyleSheet.create({
     paddingRight: 20,
     flexDirection: 'row',
     gap: 10,
+   
   },
   input: {
     borderWidth: 1.5,

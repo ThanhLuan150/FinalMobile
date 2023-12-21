@@ -12,6 +12,9 @@ import {StyleSheet, View, Text} from 'react-native';
 import {RegisterInformationScreen} from './android/app/src/Screens/Registers/RegisterInformation';
 import {OpenScreen} from './android/app/src/Screens/Registers/Open';
 import RegisterScreen from './android/app/src/Screens/Registers/RegisterPhone';
+import Profile from './android/app/src/Screens/EditProfile/Profile';
+import VerifyEmail from './android/app/src/Screens/EditProfile/VerifyEmail';
+import SetUpAccount from './android/app/src/Screens/EditProfile/SetUpAccount';
 const Stack = createNativeStackNavigator();
 
 function Homes(): React.JSX.Element {
@@ -64,7 +67,7 @@ const Homestack = () => {
             iconName = focused ? 'shirt-sharp' : 'shirt-outline';
           } else if (route.name === 'Đơn giặt') {
             iconName = focused ? 'document-text' : 'document-text-outline';
-          } else if (route.name === 'Tài khoản') {
+          } else if (route.name === 'Profile') {
             iconName = focused ? 'person' : 'person-outline';
           }
           return <Ionicons name={iconName} size={size} color={color} />;
@@ -79,7 +82,7 @@ const Homestack = () => {
       <Tab.Screen name="Trang chủ" component={Homes} />
       <Tab.Screen name="Dịch vụ" component={DetailScreen} />
       <Tab.Screen name="Đơn giặt" component={SettingsStackScreen} />
-      <Tab.Screen name="Tài khoản" component={SettingsStackScreen} />
+      <Tab.Screen name="Profile" component={Profile} />
     </Tab.Navigator>
   );
 };
@@ -104,6 +107,16 @@ function App(): React.JSX.Element {
         <Stack.Screen
           name="RegisterScreen"
           component={RegisterScreen}
+          options={{headerShown: false}}
+        />
+         <Stack.Screen
+          name="VerifyEmail"
+          component={VerifyEmail}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="SetUpAccount"
+          component={SetUpAccount}
           options={{headerShown: false}}
         />
         <Stack.Screen name="HomeScreen" component={Homestack} />
