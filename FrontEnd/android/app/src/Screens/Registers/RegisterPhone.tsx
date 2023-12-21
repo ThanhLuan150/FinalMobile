@@ -8,7 +8,7 @@ import {
   Text,
 } from 'react-native';
 
-const App = () => {
+const RegisterScreen = () => {
   const [number, onChangeNumber] = React.useState('');
   const [text, onChangeText] = React.useState('');
 
@@ -178,4 +178,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default App;
+export default RegisterScreen;

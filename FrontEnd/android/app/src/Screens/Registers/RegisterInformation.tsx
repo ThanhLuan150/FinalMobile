@@ -1,7 +1,15 @@
 import React from 'react';
-import {Image, StyleSheet, Text, View, TouchableOpacity} from 'react-native';
+import {
+  Image,
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
 
-function App(): React.JSX.Element {
+export function RegisterInformationScreen(): React.JSX.Element {
+  const navigation = useNavigation();
   return (
     <View style={styles.sectionContainer}>
       <Image
@@ -18,15 +26,17 @@ function App(): React.JSX.Element {
         {'\n'}
         Mọi quần áo được giặt sạch sẽ, gọn gàng và được giao tận nơi!
       </Text>
-        <TouchableOpacity style={styles.buttonLogin}>
-          <Text style={styles.buttonText}>Đăng nhập</Text>
-        </TouchableOpacity>
+      <TouchableOpacity style={styles.buttonLogin}>
+        <Text style={styles.buttonText}>Đăng nhập</Text>
+      </TouchableOpacity>
 
-        <TouchableOpacity style={styles.buttonRegister}>
-          <Text style={styles.buttonText}>Đăng ký</Text>
-        </TouchableOpacity>
-        <Text style={styles.termsText}>Bằng việc đăng nhập hoặc đăng ký bạn đã đồng ý với các điều khoản bảo mật
-        </Text>
+      <TouchableOpacity style={styles.buttonRegister} onPress={() => navigation.navigate('RegisterScreen')}>
+        <Text style={styles.buttonText}>Đăng ký</Text>
+      </TouchableOpacity>
+      <Text style={styles.termsText}>
+        Bằng việc đăng nhập hoặc đăng ký bạn đã đồng ý với các điều khoản bảo
+        mật
+      </Text>
     </View>
   );
 }
@@ -44,7 +54,6 @@ const styles = StyleSheet.create({
     color: 'white',
     marginTop: -16,
     paddingBottom: 650,
-    justifyContent: 'center',
   },
   imageLogo: {
     width: 100,
@@ -103,8 +112,6 @@ const styles = StyleSheet.create({
     color: '#CCEBFC',
     top: 710,
     width: 350,
-    textAlign:'center',
+    textAlign: 'center',
   },
 });
-
-export default App;
