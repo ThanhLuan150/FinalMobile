@@ -1,14 +1,13 @@
 import React from 'react';
-import Open from './android/app/src/Screens/Registers/Open';
 import {View} from 'react-native';
+import RegisterPhone from './android/app/src/Screens/Registers/RegisterPhone';
 
 function App(): React.JSX.Element {
   return (
-    <View>
-     <Open/>
+    <View style={{flex: 1}}>
+      <RegisterPhone/>
     </View>
   );
 }
-
 
 export default App;

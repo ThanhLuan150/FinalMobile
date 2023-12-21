@@ -1,33 +1,37 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Image, StyleSheet, Text, TouchableOpacity } from 'react-native';
 
 function App(): React.JSX.Element {
   return (
-    <View style={styles.sectionContainer}>
-      <Text style={styles.sectionTitle}>Hello</Text>
-    </View>
+    <TouchableOpacity style={styles.sectionContainer}>
+        <Image
+        source={ require('../../Image/logo.png')}
+        style={styles.imageStyle}/>
+      <Text style={styles.openTitle}>WashWizie</Text>
+    </TouchableOpacity>
   );
 }
 
 const styles = StyleSheet.create({
   sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-    color:'red',
-    backgroundColor:''
+    backgroundColor:'#353B51',
+    height:'100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    flex:1,
   },
-  sectionTitle: {
+  openTitle: {
     fontSize: 24,
     fontWeight: '600',
+    color:'white',
+    marginTop: -16,
   },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
+  imageStyle:{
+    width: 200,
+    height: 200,
+    resizeMode: 'contain',
   },
-  highlight: {
-    fontWeight: '700',
-  },
+
 });
 
 export default App;

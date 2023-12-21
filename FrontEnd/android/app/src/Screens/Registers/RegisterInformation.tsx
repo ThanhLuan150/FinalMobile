@@ -1,0 +1,110 @@
+import React from 'react';
+import {Image, StyleSheet, Text, View, TouchableOpacity} from 'react-native';
+
+function App(): React.JSX.Element {
+  return (
+    <View style={styles.sectionContainer}>
+      <Image
+        source={require('../../Image/logo.png')}
+        style={styles.imageLogo}
+      />
+      <Text style={styles.sectionTitle}>WashWizie</Text>
+      <Image
+        source={require('../../Image/imageRegister.png')}
+        style={styles.imageStyle}
+      />
+      <Text style={styles.containTitle}>
+        <Text style={styles.boldText}>Quần áo giao tận nơi</Text>
+        {'\n'}
+        Mọi quần áo được giặt sạch sẽ, gọn gàng và được giao tận nơi!
+      </Text>
+        <TouchableOpacity style={styles.buttonLogin}>
+          <Text style={styles.buttonText}>Đăng nhập</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.buttonRegister}>
+          <Text style={styles.buttonText}>Đăng ký</Text>
+        </TouchableOpacity>
+        <Text style={styles.termsText}>Bằng việc đăng nhập hoặc đăng ký bạn đã đồng ý với các điều khoản bảo mật
+        </Text>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  sectionContainer: {
+    backgroundColor: '#353B51',
+    height: '100%',
+    alignItems: 'center',
+    flex: 1,
+  },
+  sectionTitle: {
+    fontSize: 20,
+    fontWeight: '600',
+    color: 'white',
+    marginTop: -16,
+    paddingBottom: 650,
+    justifyContent: 'center',
+  },
+  imageLogo: {
+    width: 100,
+    height: 100,
+    resizeMode: 'contain',
+    justifyContent: 'center',
+  },
+  imageStyle: {
+    width: 200,
+    height: 300,
+    position: 'absolute',
+    top: 100,
+  },
+  containTitle: {
+    height: '100%',
+    position: 'absolute',
+    color: 'white',
+    top: 400,
+    fontSize: 18,
+    lineHeight: 24,
+    textAlign: 'center',
+  },
+  boldText: {
+    fontWeight: 'bold',
+    fontSize: 24,
+  },
+  buttonLogin: {
+    backgroundColor: '#CCEBFC',
+    padding: 20,
+    marginTop: 100,
+    borderRadius: 10,
+    position: 'absolute',
+    color: 'white',
+    top: 450,
+    width: 350,
+  },
+  buttonRegister: {
+    padding: 20,
+    marginTop: 100,
+    borderRadius: 10,
+    position: 'absolute',
+    color: '#CCEBFC',
+    top: 530,
+    width: 350,
+    borderWidth: 2,
+    borderColor: 'white',
+  },
+  buttonText: {
+    color: 'black',
+    fontSize: 18,
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+  termsText: {
+    position: 'absolute',
+    color: '#CCEBFC',
+    top: 710,
+    width: 350,
+    textAlign:'center',
+  },
+});
+
+export default App;
