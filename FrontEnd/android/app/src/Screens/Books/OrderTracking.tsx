@@ -1,6 +1,6 @@
 import React from 'react';
-import { Image, Pressable, StyleSheet, Text, View} from 'react-native';
-import { renderOrder } from './components/Order';
+import {Image, Pressable, StyleSheet, Text, View} from 'react-native';
+import {renderOrder} from './components/Order';
 const DATA = [
   {
     id: 'bd7acbea',
@@ -23,21 +23,35 @@ export const OrderTracking = () => {
   return (
     <View style={styles.container}>
       {renderOrder({item: DATA})}
-      <Image
-        style={styles.icon}
-        source={require('../../Image/iconForViewOrder.png')}
-      />
+      <View style={styles.statusContainer}>
+        <View style={styles.iconStatusfullbg}>
+          <Text style={styles.tickIcon}>√</Text>
+        </View>
+        <View style={styles.line}></View>
+        <View style={styles.iconStatusfullbg}>
+          <Text style={styles.tickIcon}>√</Text>
+        </View>
+        <View style={styles.line}></View>
+        <View style={styles.iconStatus}></View>
+        <View style={styles.line}></View>
+        <View style={styles.iconStatus}></View>
+        <View style={styles.line}></View>
+        <View style={styles.iconStatus}></View>
+        <View style={styles.line}></View>
+        <View style={styles.iconStatus}></View>
+      </View>
+
       <View style={styles.message}>
+        <Image
+          style={styles.icon}
+          source={require('../../Image/iconForViewOrder.png')}
+        />
         <Text style={styles.Statustitle}>Đang giặt đồ...</Text>
         <Text style={styles.title}>
           Xin vui lòng chờ, chúng mình vẫn đang xử lý đơn hàng hàng của bạn
         </Text>
         <Text style={styles.title}>
-          <Image
-           style={styles.iconClock}
-            source={require('../../Image/clockIcon.png')}
-          />
-          Sẽ hoàn tất trong 2 tiếng
+            🕗Sẽ hoàn tất trong 2 tiếng
         </Text>
       </View>
       <Pressable style={styles.button}>
@@ -50,16 +64,14 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: '#353B51',
     height: '100%',
-   
   },
   icon: {
-    width: 350,
-    height: 350,
-    margin:50,
+    width: 300,
+    height: 300,
+    margin: 50,
   },
   message: {
     alignItems: 'center',
-    margin: 10,
   },
   Statustitle: {
     color: 'white',
@@ -71,14 +83,47 @@ const styles = StyleSheet.create({
   },
   button: {
     backgroundColor: '#7EB9C1',
-    padding: 10,
+    padding: 15,
     borderRadius: 15,
+    margin: 10,
+    alignItems: 'center',
   },
   titlebutton: {
-    color: 'black',
+    color: 'white',
+    fontWeight: 'bold',
+    fontSize: 20,
   },
-  iconClock:{
-    width:50,
-    height:50
-  }
+  iconClock: {
+    width: 50,
+    height: 50,
+  },
+  iconStatus: {
+    width: 20,
+    height: 20,
+    borderRadius: 15,
+    borderColor:'#AADDFA',
+    borderWidth:2,
+    alignItems: 'center',
+  },
+  iconStatusfullbg: {
+    width: 20,
+    height: 20,
+    backgroundColor: '#AADDFA',
+    borderRadius: 15,
+    alignItems: 'center',
+  },
+  statusContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  line: {
+    width: 30,
+    height: 2,
+    backgroundColor: '#AADDFA',
+  },
+  tickIcon: {
+    fontSize: 17,
+    fontWeight: 'bold',
+  },
 });
