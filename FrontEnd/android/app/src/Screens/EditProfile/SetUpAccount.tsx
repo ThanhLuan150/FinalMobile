@@ -40,46 +40,46 @@ const SetUpAccount: FC = (): JSX.Element => {
         </View>
     )
 }
-const  styles = StyleSheet.create({
-    container:{
-        flex:1,
-        backgroundColor:'#353B51',
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: '#353B51',
     },
     viewbanner: {
         width: '100%',
         alignItems: 'center',
-        flexDirection:'row',
-        padding:10,
+        flexDirection: 'row',
+        padding: 10,
         // gap:70,
     },
-    image:{
+    image: {
         width: 20,
         height: 20,
     },
-    textVerify:{
-        fontSize:20,
+    textVerify: {
+        fontSize: 20,
         color: '#fff',
         marginLeft: '21%',
     },
-    view:{
-        padding:20,
+    view: {
+        padding: 20,
     },
-    viewinfo:{
-        flexDirection:'row',
-        justifyContent:'space-between',
-        paddingBottom:20,
+    viewinfo: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        paddingBottom: 20,
     },
-    textInfo:{
-        fontSize:18,
-        color:'#fff',
+    textInfo: {
+        fontSize: 18,
+        color: '#fff',
     },
-    images:{
+    images: {
         width: 30,
         height: 30,
     },
-    textDelete:{
-        fontSize:18,
-        color:'red',
-    }
-})
+    textDelete: {
+        fontSize: 18,
+        color: 'red',
+    },
+});
 export  default SetUpAccount;
