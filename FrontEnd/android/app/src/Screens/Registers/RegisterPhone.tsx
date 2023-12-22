@@ -1,3 +1,4 @@
+// import {useNavigation} from '@react-navigation/native';
 import React from 'react';
 import {
   View,
@@ -15,6 +16,8 @@ const RegisterScreen = () => {
   const [name, onChangeName] = React.useState('');
   const [number, onChangeNumber] = React.useState('');
   const [email, onChangeEmail] = React.useState('');
+  // const [text, onChangeText] = React.useState('');
+  // const navigation = useNavigation();
 
   return (
     <KeyboardAvoidingView
@@ -88,7 +91,7 @@ const styles = StyleSheet.create({
     gap: 10,
     alignItems: 'center',
   },
-  children:{
+  children: {
     width: '100%',
     alignItems: 'center',
   },
@@ -116,7 +119,7 @@ const styles = StyleSheet.create({
     color: 'white',
     marginBottom: 30,
   },
-  textInput:{
+  textInput: {
     color: 'white',
   },
   buttonRegister: {

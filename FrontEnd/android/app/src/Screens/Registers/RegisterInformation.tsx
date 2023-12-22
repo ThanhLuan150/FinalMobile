@@ -27,6 +27,7 @@ export function RegisterInformationScreen(): React.JSX.Element {
       <TouchableOpacity
         style={styles.buttonRegister}
         onPress={() => navigation.navigate('RegisterScreen')}>
+        {/* eslint-disable-next-line react-native/no-inline-styles */}
         <Text style={{...styles.buttonText, color: 'white'}}>Đăng ký</Text>
       </TouchableOpacity>
       <Text style={styles.termsText}>
