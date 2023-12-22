@@ -12,29 +12,29 @@ const SetUpAccount: FC = (): JSX.Element => {
     const useGoback = () =>{
         navigation.goBack()
     }
-    const useNavigationEditProfile =() =>{
+    const useNavigationEditProfile = () =>{
         navigation.navigate('EditProfile');
     }
     return (
         <View style={styles.container}>
             <View style= {styles.viewbanner}>
                 <TouchableOpacity style={{alignItems: 'center' }}  onPress={useGoback}>
-                    <Ionicons name="chevron-back-outline" size={30} />
+                    <Ionicons name="chevron-back-outline" size={30} color={'#fff'}/>
                 </TouchableOpacity>
                 <Text style={styles.textVerify}>Thiết lập tài khoản</Text>
             </View>
             <View style={styles.view}>
-                <TouchableOpacity style={styles.viewinfo}>
+                <TouchableOpacity onPress={useNavigationEditProfile} style={styles.viewinfo}>
                     <Text style={styles.textInfo}>Thông tin cá nhân</Text>
-                    <Ionicons name="chevron-forward-outline" size={35} />
+                    <Ionicons name="chevron-forward-outline" size={35} color={'#fff'} />
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.viewinfo}>
                     <Text style={styles.textInfo}>Gối giặc của tôi</Text>
-                    <Ionicons name="chevron-forward-outline" size={35} />
+                    <Ionicons name="chevron-forward-outline" size={35} color={'#fff'} />
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.viewinfo}>
                     <Text style={styles.textInfo}>Quyền riêng tư</Text>
-                    <Ionicons name="chevron-forward-outline" size={35} />
+                    <Ionicons name="chevron-forward-outline" size={35} color={'#fff'} />
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.viewinfo}>
                     <Text style={styles.textDelete}>Xóa tài khoản</Text>
