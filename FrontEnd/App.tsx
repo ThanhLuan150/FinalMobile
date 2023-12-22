@@ -15,6 +15,7 @@ import RegisterScreen from './android/app/src/Screens/Registers/RegisterPhone';
 import Profile from './android/app/src/Screens/EditProfile/Profile';
 import VerifyEmail from './android/app/src/Screens/EditProfile/VerifyEmail';
 import SetUpAccount from './android/app/src/Screens/EditProfile/SetUpAccount';
+import VerificationCodeScreen from './android/app/src/Screens/Registers/VerificationCode';
 const Stack = createNativeStackNavigator();
 
 function Homes(): React.JSX.Element {
@@ -107,6 +108,11 @@ function App(): React.JSX.Element {
         <Stack.Screen
           name="RegisterScreen"
           component={RegisterScreen}
+          options={{headerShown: false}}
+        />
+         <Stack.Screen
+          name="VerificationCodeScreen"
+          component={VerificationCodeScreen}
           options={{headerShown: false}}
         />
          <Stack.Screen

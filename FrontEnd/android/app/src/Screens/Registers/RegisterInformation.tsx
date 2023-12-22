@@ -27,7 +27,6 @@ export function RegisterInformationScreen(): React.JSX.Element {
       <TouchableOpacity
         style={styles.buttonRegister}
         onPress={() => navigation.navigate('RegisterScreen')}>
-        {/* eslint-disable-next-line react-native/no-inline-styles */}
         <Text style={{...styles.buttonText, color: 'white'}}>Đăng ký</Text>
       </TouchableOpacity>
       <Text style={styles.termsText}>
@@ -84,8 +83,8 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     position: 'absolute',
     color: 'white',
-    top: 450,
-    width: 350,
+    top: '55%',
+    width: '80%',
   },
   buttonRegister: {
     padding: 20,
@@ -93,8 +92,8 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     position: 'absolute',
     color: '#CCEBFC',
-    top: 530,
-    width: 350,
+    top: '65%',
+    width: '80%',
     borderWidth: 2,
     borderColor: 'white',
   },
@@ -107,7 +106,7 @@ const styles = StyleSheet.create({
   termsText: {
     position: 'absolute',
     color: '#CCEBFC',
-    top: 710,
+    top: '91%',
     width: 350,
     textAlign: 'center',
   },

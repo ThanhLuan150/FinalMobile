@@ -1,4 +1,5 @@
-// import {useNavigation} from '@react-navigation/native';
+
+import {useNavigation} from '@react-navigation/native';
 import React from 'react';
 import {
   View,
@@ -16,8 +17,7 @@ const RegisterScreen = () => {
   const [name, onChangeName] = React.useState('');
   const [number, onChangeNumber] = React.useState('');
   const [email, onChangeEmail] = React.useState('');
-  // const [text, onChangeText] = React.useState('');
-  // const navigation = useNavigation();
+  const navigation = useNavigation();
 
   return (
     <KeyboardAvoidingView
@@ -61,7 +61,8 @@ const RegisterScreen = () => {
                 style={styles.textInput}
               />
             </View>
-            <TouchableOpacity style={styles.buttonRegister}>
+            <TouchableOpacity style={styles.buttonRegister} onPress={() => navigation.navigate('VerificationCodeScreen')}>
+
               <Text style={styles.buttonText}>Tạo tài khoản</Text>
             </TouchableOpacity>
 
@@ -107,7 +108,7 @@ const styles = StyleSheet.create({
     height: 100,
     resizeMode: 'contain',
     justifyContent: 'center',
-    marginTop: 40,
+    marginTop: '30%',
   },
   input: {
     padding: 5,
