@@ -17,7 +17,7 @@ import {
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-const RatingScreen: FC = (): JSX.Element => {
+const EditRatingScreen: FC = (): JSX.Element => {
     const navigation = useNavigation();
     const useNavigationRatingSucessfully =() =>{
         navigation.navigate('RatingSucessfullyScreen')
@@ -182,4 +182,4 @@ const styles = StyleSheet.create({
         marginTop:6,
     },
 });
-export  default RatingScreen;
+export  default EditRatingScreen;
