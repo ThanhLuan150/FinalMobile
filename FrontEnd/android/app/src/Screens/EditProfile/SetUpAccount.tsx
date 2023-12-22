@@ -6,6 +6,7 @@ import React, { FC } from 'react';
 // import { useState } from 'react';
 import {  StyleSheet, Text, View, Image,TouchableOpacity} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 const SetUpAccount: FC = (): JSX.Element => {
     const navigation = useNavigation();
     const useGoback = () =>{
@@ -17,27 +18,27 @@ const SetUpAccount: FC = (): JSX.Element => {
     return (
         <View style={styles.container}>
             <View style= {styles.viewbanner}>
-                <TouchableOpacity style={{ marginTop:5 }}  onPress={useGoback}>
-                    <Image style={styles.image} source={require('../../Image/goback.png')}></Image> 
+                <TouchableOpacity style={{alignItems: 'center' }}  onPress={useGoback}>
+                    <Ionicons name="chevron-back-outline" size={30} />
                 </TouchableOpacity>
-                <Text style={styles.textVerify}>Thuyết lập tài khoản</Text>
+                <Text style={styles.textVerify}>Thiết lập tài khoản</Text>
             </View>
             <View style={styles.view}>
-                <TouchableOpacity onPress={useNavigationEditProfile} style={styles.viewinfo}>
+                <TouchableOpacity style={styles.viewinfo}>
                     <Text style={styles.textInfo}>Thông tin cá nhân</Text>
-                    <Image style={styles.images} source={require('../../Image/ten.png')}></Image>
+                    <Ionicons name="chevron-forward-outline" size={35} />
                 </TouchableOpacity>
-                <View style={styles.viewinfo}>
+                <TouchableOpacity style={styles.viewinfo}>
                     <Text style={styles.textInfo}>Gối giặc của tôi</Text>
-                    <Image style={styles.images} source={require('../../Image/ten.png')}></Image>
-                </View>
-                <View style={styles.viewinfo}>
+                    <Ionicons name="chevron-forward-outline" size={35} />
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.viewinfo}>
                     <Text style={styles.textInfo}>Quyền riêng tư</Text>
-                    <Image style={styles.images} source={require('../../Image/ten.png')}></Image>
-                </View>
-                <View style={styles.viewinfo}>
+                    <Ionicons name="chevron-forward-outline" size={35} />
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.viewinfo}>
                     <Text style={styles.textDelete}>Xóa tài khoản</Text>
-                </View>
+                </TouchableOpacity>
             </View>
         </View>
     )
@@ -47,10 +48,12 @@ const  styles = StyleSheet.create({
         flex:1,
         backgroundColor:'#353B51',
     },
-    viewbanner:{
+    viewbanner: {
+        width: '100%',
+        alignItems: 'center',
         flexDirection:'row',
-        padding:20,
-        gap:50,
+        padding:10,
+        // gap:70,
     },
     image:{
         width: 20,
@@ -58,8 +61,8 @@ const  styles = StyleSheet.create({
     },
     textVerify:{
         fontSize:20,
-        color:'#fff',
-        marginBottom:7,
+        color: '#fff',
+        marginLeft: '21%',
     },
     view:{
         padding:20,
