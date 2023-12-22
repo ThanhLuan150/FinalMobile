@@ -1,11 +1,5 @@
 import React from 'react';
-import {
-  Image,
-  StyleSheet,
-  Text,
-  View,
-  TouchableOpacity,
-} from 'react-native';
+import {Image, StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 
 export function RegisterInformationScreen(): React.JSX.Element {
@@ -30,8 +24,10 @@ export function RegisterInformationScreen(): React.JSX.Element {
         <Text style={styles.buttonText}>Đăng nhập</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.buttonRegister} onPress={() => navigation.navigate('RegisterScreen')}>
-        <Text style={styles.buttonText}>Đăng ký</Text>
+      <TouchableOpacity
+        style={styles.buttonRegister}
+        onPress={() => navigation.navigate('RegisterScreen')}>
+        <Text style={{...styles.buttonText, color: 'white'}}>Đăng ký</Text>
       </TouchableOpacity>
       <Text style={styles.termsText}>
         Bằng việc đăng nhập hoặc đăng ký bạn đã đồng ý với các điều khoản bảo
