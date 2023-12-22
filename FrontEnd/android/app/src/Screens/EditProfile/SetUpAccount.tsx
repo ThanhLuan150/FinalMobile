@@ -3,15 +3,18 @@
 /* eslint-disable react/self-closing-comp */
 /* eslint-disable react-native/no-inline-styles */
 import React, { FC } from 'react';
-import { useState } from 'react';
-import {  StyleSheet, Text, View, Image,TouchableOpacity, KeyboardAvoidingView, TextInput, ImageBackground} from 'react-native';
+// import { useState } from 'react';
+import {  StyleSheet, Text, View, Image,TouchableOpacity} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 const SetUpAccount: FC = (): JSX.Element => {
     const navigation = useNavigation();
-    const useGoback = () => {
-        navigation.goBack();
-    };
+    const useGoback = () =>{
+        navigation.goBack()
+    }
+    const useNavigationEditProfile =() =>{
+        navigation.navigate('EditProfile');
+    }
     return (
         <View style={styles.container}>
             <View style= {styles.viewbanner}>
@@ -22,11 +25,11 @@ const SetUpAccount: FC = (): JSX.Element => {
             </View>
             <View style={styles.view}>
                 <TouchableOpacity style={styles.viewinfo}>
-                    <Text style={styles.textInfo}>Thanh toán ngân hàng</Text>
+                    <Text style={styles.textInfo}>Thông tin cá nhân</Text>
                     <Ionicons name="chevron-forward-outline" size={35} />
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.viewinfo}>
-                    <Text style={styles.textInfo}>Khối giặc của tôi</Text>
+                    <Text style={styles.textInfo}>Gối giặc của tôi</Text>
                     <Ionicons name="chevron-forward-outline" size={35} />
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.viewinfo}>
