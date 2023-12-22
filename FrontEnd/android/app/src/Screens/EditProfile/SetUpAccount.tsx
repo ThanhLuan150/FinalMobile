@@ -3,13 +3,16 @@
 /* eslint-disable react/self-closing-comp */
 /* eslint-disable react-native/no-inline-styles */
 import React, { FC } from 'react';
-import { useState } from 'react';
-import {  StyleSheet, Text, View, Image,TouchableOpacity, KeyboardAvoidingView, TextInput, ImageBackground} from 'react-native';
+// import { useState } from 'react';
+import {  StyleSheet, Text, View, Image,TouchableOpacity} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 const SetUpAccount: FC = (): JSX.Element => {
     const navigation = useNavigation();
     const useGoback = () =>{
         navigation.goBack()
+    }
+    const useNavigationEditProfile =() =>{
+        navigation.navigate('EditProfile');
     }
     return (
         <View style={styles.container}>
@@ -20,12 +23,12 @@ const SetUpAccount: FC = (): JSX.Element => {
                 <Text style={styles.textVerify}>Thuyết lập tài khoản</Text>
             </View>
             <View style={styles.view}>
-                <View style={styles.viewinfo}>
-                    <Text style={styles.textInfo}>Thanh toán ngân hàng</Text>
+                <TouchableOpacity onPress={useNavigationEditProfile} style={styles.viewinfo}>
+                    <Text style={styles.textInfo}>Thông tin cá nhân</Text>
                     <Image style={styles.images} source={require('../../Image/ten.png')}></Image>
-                </View>
+                </TouchableOpacity>
                 <View style={styles.viewinfo}>
-                    <Text style={styles.textInfo}>Khối giặc của tôi</Text>
+                    <Text style={styles.textInfo}>Gối giặc của tôi</Text>
                     <Image style={styles.images} source={require('../../Image/ten.png')}></Image>
                 </View>
                 <View style={styles.viewinfo}>

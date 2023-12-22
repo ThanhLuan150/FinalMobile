@@ -15,6 +15,8 @@ import RegisterScreen from './android/app/src/Screens/Registers/RegisterPhone';
 import Profile from './android/app/src/Screens/EditProfile/Profile';
 import VerifyEmail from './android/app/src/Screens/EditProfile/VerifyEmail';
 import SetUpAccount from './android/app/src/Screens/EditProfile/SetUpAccount';
+// import EditProfile from './android/app/src/Screens/EditProfile/EditProfile';
+import KeyboardAvoidingComponent from './android/app/src/Screens/EditProfile/EditProfile';
 const Stack = createNativeStackNavigator();
 
 function Homes(): React.JSX.Element {
@@ -117,6 +119,11 @@ function App(): React.JSX.Element {
         <Stack.Screen
           name="SetUpAccount"
           component={SetUpAccount}
+          options={{headerShown: false}}
+        />
+         <Stack.Screen
+          name="EditProfile"
+          component={KeyboardAvoidingComponent}
           options={{headerShown: false}}
         />
         <Stack.Screen name="HomeScreen" component={Homestack} />
