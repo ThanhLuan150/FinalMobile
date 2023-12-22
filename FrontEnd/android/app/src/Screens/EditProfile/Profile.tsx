@@ -27,7 +27,9 @@ const Profile: FC = (): JSX.Element => {
   };
   const [isEnabled, setIsEnabled] = useState(false);
   const toggleSwitch = () => setIsEnabled(previousState => !previousState);
-
+  const useNavigationRating =() =>{
+    navigation.navigate('RatingScreen')
+  }
   return (
     <ScrollView style={styles.container}>
       <View style={styles.viewNotification}>
@@ -156,7 +158,7 @@ const Profile: FC = (): JSX.Element => {
           <Ionicons color={'#fff'} name="chevron-forward-outline" size={35} />
         </TouchableOpacity>
         <TouchableOpacity
-          //   onPress={}
+            onPress={useNavigationRating}
           style={styles.viewInfomation}>
           <View style={{flexDirection: 'row', gap: 10, alignItems: 'center'}}>
             <Ionicons color={'#fff'} name="star" size={30} />
