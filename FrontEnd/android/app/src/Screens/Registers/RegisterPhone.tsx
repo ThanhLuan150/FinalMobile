@@ -1,4 +1,5 @@
-import { useNavigation } from '@react-navigation/native';
+
+import {useNavigation} from '@react-navigation/native';
 import React from 'react';
 import {
   View,
@@ -7,76 +8,99 @@ import {
   TouchableOpacity,
   Image,
   Text,
+  Keyboard,
+  KeyboardAvoidingView,
+  TouchableWithoutFeedback,
+  Platform,
 } from 'react-native';
-
 const RegisterScreen = () => {
+  const [name, onChangeName] = React.useState('');
   const [number, onChangeNumber] = React.useState('');
-  const [text, onChangeText] = React.useState('');
+  const [email, onChangeEmail] = React.useState('');
   const navigation = useNavigation();
 
   return (
-    <View style={styles.sectionContainer}>
-      <Image
-        source={require('../../Image/logo.png')}
-        style={styles.imageLogo}
-      />
-      <Text style={styles.sectionTitle}>WashWizie</Text>
+    <KeyboardAvoidingView
+      behavior={Platform.OS === 'android' ? 'padding' : 'height'}
+      style={styles.container}>
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <View style={styles.sectionContainer}>
+          <View style={styles.children}>
+            <Image
+              source={require('../../Image/logo.png')}
+              style={styles.imageLogo}
+            />
+            <Text style={styles.sectionTitle}>WashWizie</Text>
 
-      <Text style={styles.textName}>
-        Nhập tên <Text style={{color:'red'}}>*</Text>
-      </Text>
-      <TextInput
-        style={styles.inputName}
-        onChangeText={onChangeText}
-        value={text}
-        placeholderTextColor="white"
-        placeholder="Candy Le"
-      />
-      <Text style={styles.textPhone}>
-        Nhập số điện thoại<Text style={{color:'red'}}>*</Text>
-      </Text>
-      <TextInput
-        style={styles.inputNumber}
-        onChangeText={onChangeNumber}
-        placeholderTextColor="white"
-        value={number}
-        placeholder="0325453657"
-      />
-      <Text style={styles.textEmail}>
-        Nhập Email <Text style={{color:'red'}}>*</Text>
-      </Text>
-      <TextInput
-        style={styles.inputEmail}
-        onChangeText={onChangeText}
-        value={text}
-        placeholderTextColor="white"
-        placeholder="hothihuong1234@gmail.com"
-        keyboardType="email-address"
-      />
-      <TouchableOpacity style={styles.buttonRegister} onPress={()=>navigation.navigate('HomeScreen')}>
-        <Text style={styles.buttonText}>Tiếp tục</Text>
-      </TouchableOpacity>
-      <Text style={styles.termsText}>
-        Bằng việc đăng nhập hoặc đăng ký bạn đã đồng ý với các điều khoản bảo
-        mật
-      </Text>
-    </View>
+            <View style={styles.input}>
+              <TextInput
+                onChangeText={onChangeName}
+                value={name}
+                placeholderTextColor="gray"
+                placeholder="Tên đăng nhập"
+                cursorColor={'#CCEBFC'}
+                style={styles.textInput}
+              />
+            </View>
+            <View style={styles.input}>
+              <TextInput
+                onChangeText={onChangeNumber}
+                placeholderTextColor="gray"
+                value={number}
+                placeholder="Số điện thoại"
+                style={styles.textInput}
+              />
+            </View>
+            <View style={styles.input}>
+              <TextInput
+                onChangeText={onChangeEmail}
+                value={email}
+                placeholderTextColor="gray"
+                placeholder="Nhập email"
+                keyboardType="email-address"
+                style={styles.textInput}
+              />
+            </View>
+            <TouchableOpacity style={styles.buttonRegister} onPress={() => navigation.navigate('VerificationCodeScreen')}>
+
+              <Text style={styles.buttonText}>Tạo tài khoản</Text>
+            </TouchableOpacity>
+
+            <Text style={styles.termsText}>
+              Bạn đã có tài khoản{' '}
+              <TouchableOpacity>
+                <Text style={styles.TextLogin}>Đăng nhập</Text>
+              </TouchableOpacity>
+            </Text>
+          </View>
+        </View>
+      </TouchableWithoutFeedback>
+    </KeyboardAvoidingView>
   );
 };
 
 const styles = StyleSheet.create({
-  sectionContainer: {
-    backgroundColor: '#353B51',
-    height: '100%',
-    alignItems: 'center',
+  container: {
     flex: 1,
+  },
+  sectionContainer: {
+    width: '100%',
+    backgroundColor: '#353B51',
+    padding: 24,
+    flex: 1,
+    justifyContent: 'space-around',
+    gap: 10,
+    alignItems: 'center',
+  },
+  children: {
+    width: '100%',
+    alignItems: 'center',
   },
   sectionTitle: {
     fontSize: 20,
-    fontWeight: '600',
+    fontWeight: '700',
     color: 'white',
-    marginTop: -16,
-    paddingBottom: 650,
+    marginBottom: '10%',
     justifyContent: 'center',
   },
   imageLogo: {
@@ -84,83 +108,27 @@ const styles = StyleSheet.create({
     height: 100,
     resizeMode: 'contain',
     justifyContent: 'center',
+    marginTop: '30%',
   },
-  inputEmail: {
-    padding: 20,
+  input: {
+    padding: 5,
+    paddingLeft: '5%',
     borderRadius: 10,
     borderWidth: 2,
     borderColor: '#CCEBFC',
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: 350,
-    top: 450,
-    position: 'absolute',
+    width: '100%',
     color: 'white',
+    marginBottom: 30,
   },
-  inputNumber: {
-    padding: 20,
-    borderRadius: 10,
-    borderWidth: 2,
-    borderColor: '#CCEBFC',
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: 350,
-    top: 330,
-    position: 'absolute',
+  textInput: {
     color: 'white',
-  },
-  inputName: {
-    padding: 20,
-    borderRadius: 10,
-    borderWidth: 2,
-    borderColor: '#CCEBFC',
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: 350,
-    top: 200,
-    position: 'absolute',
-    color: 'white',
-  },
-  textName: {
-    top: 160,
-    left: 30,
-    position: 'absolute',
-    color: 'white',
-  },
-  textPhone: {
-    top: 290,
-    left: 30,
-    position: 'absolute',
-    color: 'white',
-  },
-  textEmail: {
-    top: 420,
-    left: 30,
-    position: 'absolute',
-    color: 'white',
-  },
-
-  containTitle: {
-    height: '100%',
-    position: 'absolute',
-    color: 'white',
-    top: 400,
-    fontSize: 18,
-    lineHeight: 24,
-    textAlign: 'center',
-  },
-  boldText: {
-    fontWeight: 'bold',
-    fontSize: 24,
   },
   buttonRegister: {
     padding: 20,
-    marginTop: 100,
+    marginTop: 10,
     borderRadius: 10,
-    position: 'absolute',
     color: '#CCEBFC',
-    top: 530,
-    width: 350,
+    width: '70%',
     borderWidth: 2,
     borderColor: 'white',
     backgroundColor: '#CCEBFC',
@@ -172,11 +140,13 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   termsText: {
-    position: 'absolute',
     color: '#CCEBFC',
-    top: 710,
-    width: 350,
-    textAlign: 'center',
+    padding: 20,
+  },
+  TextLogin: {
+    color: 'white',
+    top: 4,
+    fontWeight: '700',
   },
 });
 
