@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 
-const loginSuccessfullyScreeen = () => {
+const LoginSuccessfullyScreeen = () => {
   const [otp, setOtp] = useState(['', '', '', '', '']);
   const navigation = useNavigation();
 
@@ -129,4 +129,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default loginSuccessfullyScreeen;
+export default LoginSuccessfullyScreeen;

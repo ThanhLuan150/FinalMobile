@@ -17,11 +17,11 @@ import VerifyEmail from './android/app/src/Screens/EditProfile/VerifyEmail';
 import SetUpAccount from './android/app/src/Screens/EditProfile/SetUpAccount';
 import VerificationCodeScreen from './android/app/src/Screens/Registers/VerificationCode';
 import KeyboardAvoidingComponent from './android/app/src/Screens/EditProfile/EditProfile';
-import loginSuccessfullyScreeen from './android/app/src/Screens/Login/LoginSuccessfully';
 import RatingScreen from './android/app/src/Screens/Raiting/Raiting';
 import RatingSucessfullyScreen from './android/app/src/Screens/Raiting/RaitingSuccessfully';
 import EditRatingScreen from './android/app/src/Screens/Raiting/EditRating';
 import LoginScreen from './android/app/src/Screens/Login/Login';
+import LoginSuccessfullyScreeen from './android/app/src/Screens/Login/LoginSuccessfully';
 
 const Stack = createNativeStackNavigator();
 
@@ -129,7 +129,7 @@ function App(): React.JSX.Element {
         />
          <Stack.Screen
           name="loginSuccessfullyScreeen"
-          component={loginSuccessfullyScreeen}
+          component={LoginSuccessfullyScreeen}
           options={{headerShown: false}}
         />
          <Stack.Screen

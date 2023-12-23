@@ -33,7 +33,7 @@ const LoginScreen = ({navigation}) => {
       />
       <TouchableOpacity
         style={styles.buttonLogin}
-        onPress={() => navigation.navigate('HomeScreen')}>
+        onPress={() => navigation.navigate('loginSuccessfullyScreeen')}>
         <Text style={styles.buttonText}>Đăng nhập</Text>
       </TouchableOpacity>
     </View>
