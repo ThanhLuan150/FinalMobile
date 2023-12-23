@@ -20,7 +20,9 @@ export function RegisterInformationScreen(): React.JSX.Element {
         {'\n'}
         Mọi quần áo được giặt sạch sẽ, gọn gàng và được giao tận nơi!
       </Text>
-      <TouchableOpacity style={styles.buttonLogin}>
+      <TouchableOpacity
+        style={styles.buttonLogin}
+        onPress={() => navigation.navigate('loginScreen')}>
         <Text style={styles.buttonText}>Đăng nhập</Text>
       </TouchableOpacity>
 
