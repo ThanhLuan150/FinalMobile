@@ -18,6 +18,9 @@ import SetUpAccount from './android/app/src/Screens/EditProfile/SetUpAccount';
 import VerificationCodeScreen from './android/app/src/Screens/Registers/VerificationCode';
 import KeyboardAvoidingComponent from './android/app/src/Screens/EditProfile/EditProfile';
 import loginScreen from './android/app/src/Screens/Login/Login';
+import RatingScreen from './android/app/src/Screens/Raiting/Raiting';
+import RatingSucessfullyScreen from './android/app/src/Screens/Raiting/RaitingSuccessfully';
+import EditRatingScreen from './android/app/src/Screens/Raiting/EditRating';
 
 const Stack = createNativeStackNavigator();
 
@@ -136,6 +139,21 @@ function App(): React.JSX.Element {
          <Stack.Screen
           name="EditProfile"
           component={KeyboardAvoidingComponent}
+          options={{headerShown: false}}
+        />
+          <Stack.Screen
+          name="RatingScreen"
+          component={RatingScreen}
+          options={{headerShown: false}}
+        />
+         <Stack.Screen
+          name="RatingSucessfullyScreen"
+          component={RatingSucessfullyScreen}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="EditRatingScreen"
+          component={EditRatingScreen}
           options={{headerShown: false}}
         />
         <Stack.Screen name="HomeScreen" component={Homestack} />
