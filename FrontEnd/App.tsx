@@ -17,6 +17,7 @@ import VerifyEmail from './android/app/src/Screens/EditProfile/VerifyEmail';
 import SetUpAccount from './android/app/src/Screens/EditProfile/SetUpAccount';
 import VerificationCodeScreen from './android/app/src/Screens/Registers/VerificationCode';
 import KeyboardAvoidingComponent from './android/app/src/Screens/EditProfile/EditProfile';
+import loginScreen from './android/app/src/Screens/Login/Login';
 
 const Stack = createNativeStackNavigator();
 
@@ -115,6 +116,11 @@ function App(): React.JSX.Element {
          <Stack.Screen
           name="VerificationCodeScreen"
           component={VerificationCodeScreen}
+          options={{headerShown: false}}
+        />
+         <Stack.Screen
+          name="loginScreen"
+          component={loginScreen}
           options={{headerShown: false}}
         />
          <Stack.Screen
