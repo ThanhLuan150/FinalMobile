@@ -15,7 +15,7 @@ const VerificationCodeScreen = () => {
 
   const handleVerification = () => {
     console.log('Entered OTP:', otp.join(''));
-    navigation.navigate('HomeScreen');
+    navigation.navigate('LoginScreen');
   };
 
   return (

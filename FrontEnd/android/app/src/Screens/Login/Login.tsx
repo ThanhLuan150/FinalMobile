@@ -9,7 +9,7 @@ import {
   Image,
 } from 'react-native';
 
-const loginScreen = ({navigation}) => {
+const LoginScreen = ({navigation}) => {
   const [phoneNumber, setPhoneNumber] = useState('');
 
   const handleLogin = () => {
@@ -33,7 +33,7 @@ const loginScreen = ({navigation}) => {
       />
       <TouchableOpacity
         style={styles.buttonLogin}
-        onPress={() => navigation.navigate('loginSuccessfullyScreeen')}>
+        onPress={() => navigation.navigate('HomeScreen')}>
         <Text style={styles.buttonText}>Đăng nhập</Text>
       </TouchableOpacity>
     </View>
@@ -92,4 +92,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default loginScreen;
+export default LoginScreen;

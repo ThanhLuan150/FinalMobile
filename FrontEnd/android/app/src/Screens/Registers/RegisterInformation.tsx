@@ -22,7 +22,7 @@ export function RegisterInformationScreen(): React.JSX.Element {
       </Text>
       <TouchableOpacity
         style={styles.buttonLogin}
-        onPress={() => navigation.navigate('loginScreen')}>
+        onPress={() => navigation.navigate('LoginScreen')}>
         <Text style={styles.buttonText}>Đăng nhập</Text>
       </TouchableOpacity>
 
