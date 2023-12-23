@@ -15,6 +15,7 @@ import RegisterScreen from './android/app/src/Screens/Registers/RegisterPhone';
 import Profile from './android/app/src/Screens/EditProfile/Profile';
 import VerifyEmail from './android/app/src/Screens/EditProfile/VerifyEmail';
 import SetUpAccount from './android/app/src/Screens/EditProfile/SetUpAccount';
+import { HomePage } from './android/app/src/Screens/Home/HomePage';
 const Stack = createNativeStackNavigator();
 
 function Homes(): React.JSX.Element {
@@ -79,7 +80,7 @@ const Homestack = () => {
           backgroundColor: '#353B51',
         },
       })}>
-      <Tab.Screen name="Trang chủ" component={Homes} />
+      <Tab.Screen name="Trang chủ" component={HomePage} />
       <Tab.Screen name="Dịch vụ" component={DetailScreen} />
       <Tab.Screen name="Đơn giặt" component={SettingsStackScreen} />
       <Tab.Screen name="Profile" component={Profile} />
