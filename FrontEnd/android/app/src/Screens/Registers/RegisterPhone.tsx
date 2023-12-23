@@ -61,14 +61,14 @@ const RegisterScreen = () => {
                 style={styles.textInput}
               />
             </View>
-            <TouchableOpacity style={styles.buttonRegister} onPress={() => navigation.navigate('RegisterScreen')}>
+            <TouchableOpacity style={styles.buttonRegister} onPress={() => navigation.navigate('VerificationCodeScreen')}>
 
               <Text style={styles.buttonText}>Tạo tài khoản</Text>
             </TouchableOpacity>
 
             <Text style={styles.termsText}>
               Bạn đã có tài khoản{' '}
-              <TouchableOpacity onPress={() => navigation.navigate('loginScreen')}>
+              <TouchableOpacity onPress={() => navigation.navigate('LoginScreen')}>
                 <Text style={styles.TextLogin}>Đăng nhập</Text>
               </TouchableOpacity>
             </Text>
