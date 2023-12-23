@@ -1,13 +1,6 @@
 import React from 'react';
-import {
-  Image,
-  StyleSheet,
-  Text,
-  View,
-  TouchableOpacity,
-} from 'react-native';
+import {Image, StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
-
 export function RegisterInformationScreen(): React.JSX.Element {
   const navigation = useNavigation();
   return (
@@ -26,12 +19,16 @@ export function RegisterInformationScreen(): React.JSX.Element {
         {'\n'}
         Mọi quần áo được giặt sạch sẽ, gọn gàng và được giao tận nơi!
       </Text>
-      <TouchableOpacity style={styles.buttonLogin}>
+      <TouchableOpacity
+        style={styles.buttonLogin}
+        onPress={() => navigation.navigate('LoginScreen')}>
         <Text style={styles.buttonText}>Đăng nhập</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.buttonRegister} onPress={() => navigation.navigate('RegisterScreen')}>
-        <Text style={styles.buttonText}>Đăng ký</Text>
+      <TouchableOpacity
+        style={styles.buttonRegister}
+        onPress={() => navigation.navigate('RegisterScreen')}>
+        <Text style={{...styles.buttonText, color: 'white'}}>Đăng ký</Text>
       </TouchableOpacity>
       <Text style={styles.termsText}>
         Bằng việc đăng nhập hoặc đăng ký bạn đã đồng ý với các điều khoản bảo
@@ -87,8 +84,8 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     position: 'absolute',
     color: 'white',
-    top: 450,
-    width: 350,
+    top: '55%',
+    width: '80%',
   },
   buttonRegister: {
     padding: 20,
@@ -96,8 +93,8 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     position: 'absolute',
     color: '#CCEBFC',
-    top: 530,
-    width: 350,
+    top: '65%',
+    width: '80%',
     borderWidth: 2,
     borderColor: 'white',
   },
@@ -110,7 +107,7 @@ const styles = StyleSheet.create({
   termsText: {
     position: 'absolute',
     color: '#CCEBFC',
-    top: 710,
+    top: '91%',
     width: 350,
     textAlign: 'center',
   },
