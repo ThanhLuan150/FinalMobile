@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
     marginLeft: 20,
     marginRight:10,
     marginTop:10,
-    marginBottom:20
+    marginBottom:20,
   },
   Left: {
     backgroundColor: '#6D7693',
@@ -78,12 +78,18 @@ const styles = StyleSheet.create({
   nameVoucher: {
     backgroundColor: 'lightblue',
     fontWeight: 'bold',
+    fontSize:13,
+    paddingTop:5,
+    paddingBottom:5,
+    paddingLeft:2,
+    paddingRight:2,
     borderTopLeftRadius: 10,
   },
   valueVoucher: {
-    fontSize: 30,
+    fontSize: 27,
     fontWeight: 'bold',
     color: 'white',
+    textAlign:'center',
   },
   containerVoucherValue: {
     justifyContent: 'center',

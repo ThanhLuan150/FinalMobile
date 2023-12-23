@@ -58,12 +58,11 @@ const styles = StyleSheet.create({
   imageSlide: {
     width: 351,
     height: 200,
-    borderRadius:20
+    borderRadius:20,
   },
   SlideShow: {
-    marginTop:100,
     marginLeft:30,
     marginRight:30,
-    marginBottom:30
+    marginBottom:30,
   },
 });

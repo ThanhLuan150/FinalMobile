@@ -14,6 +14,7 @@ import {renderOrder} from './components/Order';
 import {RenderNearLocation} from './components/NearLocation';
 import {RenderMiniGame} from './components/RenderMiniGame';
 import {RenderVoucher} from './components/Voucher';
+import { Header } from './components/Header';
 
 export const HomePage = () => {
   const DATA = [
@@ -105,6 +106,7 @@ export const HomePage = () => {
   ];
   return (
     <View style={styles.container}>
+      <Header/>
       <ScrollView>
         <View style={styles.header}></View>
         <View>{SlideShowImage()}</View>
@@ -223,7 +225,8 @@ const styles = StyleSheet.create({
     width: 351,
     height: 200,
     marginTop: 10,
-    marginLeft: 30,
+    marginLeft: 15,
+    marginRight:30,
     marginBottom: 30,
     borderRadius: 20,
   },

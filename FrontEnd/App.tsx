@@ -163,6 +163,21 @@ function App(): React.JSX.Element {
           component={EditRatingScreen}
           options={{headerShown: false}}
         />
+         <Stack.Screen
+            name="Notification"
+            component={Notification}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen
+            name="Chat"
+            component={Chat}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen
+            name="DetailChat"
+            component={DetailChat}
+            options={{headerShown: false}}
+          />
         <Stack.Screen name="HomeScreen" component={Homestack} />
       </Stack.Navigator>
     </NavigationContainer>
