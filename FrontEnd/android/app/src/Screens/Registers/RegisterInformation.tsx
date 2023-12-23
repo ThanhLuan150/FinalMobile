@@ -62,8 +62,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   imageStyle: {
-    width: 200,
-    height: 300,
+    width: '80%',
+    height: '35%',
     position: 'absolute',
     top: 100,
   },

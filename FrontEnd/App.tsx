@@ -15,6 +15,7 @@ import RegisterScreen from './android/app/src/Screens/Registers/RegisterPhone';
 import Profile from './android/app/src/Screens/EditProfile/Profile';
 import VerifyEmail from './android/app/src/Screens/EditProfile/VerifyEmail';
 import SetUpAccount from './android/app/src/Screens/EditProfile/SetUpAccount';
+import { AddBookingScreen } from './android/app/src/Screens/Booking/AddBooking';
 const Stack = createNativeStackNavigator();
 
 function Homes(): React.JSX.Element {
@@ -38,14 +39,6 @@ function Homes(): React.JSX.Element {
           />
         </Stack.Navigator>
     </GestureHandlerRootView>)}
-
-const DetailScreen = () => {
-  return (
-    <View>
-      <Text style={styles.text}>Detail</Text>
-    </View>
-  );
-};
 const SettingsStackScreen = () => {
   return (
     <View>
@@ -80,7 +73,7 @@ const Homestack = () => {
         },
       })}>
       <Tab.Screen name="Trang chủ" component={Homes} />
-      <Tab.Screen name="Dịch vụ" component={DetailScreen} />
+      <Tab.Screen name="Dịch vụ" component={AddBookingScreen} />
       <Tab.Screen name="Đơn giặt" component={SettingsStackScreen} />
       <Tab.Screen name="Profile" component={Profile} />
     </Tab.Navigator>
@@ -97,6 +90,7 @@ function App(): React.JSX.Element {
         <Stack.Screen
           name="Open"
           component={OpenScreen}
+          // component={AddBookingScreen}
           options={{headerShown: false}}
         />
         <Stack.Screen
@@ -140,6 +134,9 @@ const styles = StyleSheet.create({
   },
   highlight: {
     fontWeight: '700',
+  },
+  text: {
+    color: 'black',
   },
 });
 export default App;
