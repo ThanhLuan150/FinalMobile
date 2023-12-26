@@ -16,11 +16,14 @@ import Profile from './android/app/src/Screens/EditProfile/Profile';
 import VerifyEmail from './android/app/src/Screens/EditProfile/VerifyEmail';
 import SetUpAccount from './android/app/src/Screens/EditProfile/SetUpAccount';
 import { AddBookingScreen } from './android/app/src/Screens/Booking/AddBooking';
+// import HomePage from './android/app/src/Screens/Home/HomePage';
 import VerificationCodeScreen from './android/app/src/Screens/Registers/VerificationCode';
 import KeyboardAvoidingComponent from './android/app/src/Screens/EditProfile/EditProfile';
 import RatingScreen from './android/app/src/Screens/Raiting/Raiting';
 import RatingSucessfullyScreen from './android/app/src/Screens/Raiting/RaitingSuccessfully';
 import EditRatingScreen from './android/app/src/Screens/Raiting/EditRating';
+import LoginScreen from './android/app/src/Screens/Login/Login';
+import LoginSuccessfullyScreeen from './android/app/src/Screens/Login/LoginSuccessfully';
 
 const Stack = createNativeStackNavigator();
 
@@ -95,8 +98,8 @@ function App(): React.JSX.Element {
        }}>
         <Stack.Screen
           name="Open"
-          // component={OpenScreen}
-          component={AddBookingScreen}
+          component={OpenScreen}
+          // component={AddBookingScreen}
           options={{headerShown: false}}
         />
         <Stack.Screen
@@ -112,6 +115,16 @@ function App(): React.JSX.Element {
          <Stack.Screen
           name="VerificationCodeScreen"
           component={VerificationCodeScreen}
+          options={{headerShown: false}}
+        />
+         <Stack.Screen
+          name="LoginScreen"
+          component={LoginScreen}
+          options={{headerShown: false}}
+        />
+         <Stack.Screen
+          name="loginSuccessfullyScreeen"
+          component={LoginSuccessfullyScreeen}
           options={{headerShown: false}}
         />
          <Stack.Screen
@@ -144,6 +157,21 @@ function App(): React.JSX.Element {
           component={EditRatingScreen}
           options={{headerShown: false}}
         />
+         <Stack.Screen
+            name="Notification"
+            component={Notification}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen
+            name="Chat"
+            component={Chat}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen
+            name="DetailChat"
+            component={DetailChat}
+            options={{headerShown: false}}
+          />
         <Stack.Screen name="HomeScreen" component={Homestack} />
       </Stack.Navigator>
     </NavigationContainer>

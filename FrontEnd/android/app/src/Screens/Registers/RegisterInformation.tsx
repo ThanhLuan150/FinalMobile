@@ -1,7 +1,6 @@
 import React from 'react';
 import {Image, StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
-
 export function RegisterInformationScreen(): React.JSX.Element {
   const navigation = useNavigation();
   return (
@@ -20,7 +19,9 @@ export function RegisterInformationScreen(): React.JSX.Element {
         {'\n'}
         Mọi quần áo được giặt sạch sẽ, gọn gàng và được giao tận nơi!
       </Text>
-      <TouchableOpacity style={styles.buttonLogin}>
+      <TouchableOpacity
+        style={styles.buttonLogin}
+        onPress={() => navigation.navigate('LoginScreen')}>
         <Text style={styles.buttonText}>Đăng nhập</Text>
       </TouchableOpacity>
 

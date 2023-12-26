@@ -17,7 +17,7 @@ const RegisterScreen = () => {
   const [name, onChangeName] = React.useState('');
   const [number, onChangeNumber] = React.useState('');
   const [email, onChangeEmail] = React.useState('');
-  const navigation = useNavigation();
+   const navigation = useNavigation();
 
   return (
     <KeyboardAvoidingView
@@ -68,7 +68,7 @@ const RegisterScreen = () => {
 
             <Text style={styles.termsText}>
               Bạn đã có tài khoản{' '}
-              <TouchableOpacity>
+              <TouchableOpacity onPress={() => navigation.navigate('LoginScreen')}>
                 <Text style={styles.TextLogin}>Đăng nhập</Text>
               </TouchableOpacity>
             </Text>
