@@ -18,6 +18,8 @@ return new class extends Migration
             $table->decimal('quatity');
             $table->integer('id_branch')->unsigned();
             $table->foreign('id_branch')->references('id_branch')->on('branches')->onDelete('cascade');
+            $table->integer('id_service')->unsigned();
+            $table->foreign('id_service')->references('id_service')->on('service')->onDelete('cascade');
             $table->timestamps();
         });
     }
