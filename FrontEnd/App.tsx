@@ -23,6 +23,7 @@ import RatingSucessfullyScreen from './android/app/src/Screens/Raiting/RaitingSu
 import EditRatingScreen from './android/app/src/Screens/Raiting/EditRating';
 import LoginScreen from './android/app/src/Screens/Login/Login';
 import LoginSuccessfullyScreeen from './android/app/src/Screens/Login/LoginSuccessfully';
+import BookScreen from './android/app/src/Screens/Books/OrderIsOnGoing';
 
 const Stack = createNativeStackNavigator();
 
@@ -90,7 +91,7 @@ const Homestack = () => {
       })}>
       <Tab.Screen name="Trang chủ" component={HomePage} />
       <Tab.Screen name="Dịch vụ" component={DetailScreen} />
-      <Tab.Screen name="Đơn giặt" component={SettingsStackScreen} />
+      <Tab.Screen name="Đơn giặt" component={BookScreen} />
       <Tab.Screen name="Profile" component={Profile} />
     </Tab.Navigator>
   );
@@ -176,6 +177,11 @@ function App(): React.JSX.Element {
           <Stack.Screen
             name="DetailChat"
             component={DetailChat}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen
+            name="BookScreen"
+            component={BookScreen}
             options={{headerShown: false}}
           />
         <Stack.Screen name="HomeScreen" component={Homestack} />
