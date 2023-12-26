@@ -17,6 +17,42 @@ import {useNavigation} from '@react-navigation/native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
+const ChooseLocationComponent: FC = (): JSX.Element => {
+  const defaultTextColor = 'white';
+  return (
+    <View style={styles.chooselocation}>
+      <View style={styles.locationtexts}>
+        <Text style={styles.headingText}>Chi nhánh giặt:</Text>
+        <TouchableOpacity>
+          <Text style={styles.mapslink}>Thay đổi</Text>
+        </TouchableOpacity>
+      </View>
+      <View style={styles.locationdetail}>
+        <Image
+          source={require('../../Image/logo.png')}
+          style={styles.locationImage}
+        />
+        <View style={styles.locationCardTexts}>
+          <Text style={{...styles.headingText, color: defaultTextColor}}>
+            WashWizie - Hồ Văn Huê
+          </Text>
+          <View style={styles.locationDetailTexts}>
+            <Ionicons name="time" size={13} color={'#91d3fa'} />
+            <Text style={styles.textLocation}> Mở cửa: 8:00 SA</Text>
+          </View>
+          <View style={styles.rateAndSpace}>
+            <View style={styles.locationDetailTexts}>
+              <Ionicons name="star" size={13} color={'yellow'} />
+              <Text style={styles.textLocation}> 4.8/5</Text>
+            </View>
+            <Text style={styles.textLocation}>Cách 1km</Text>
+          </View>
+        </View>
+      </View>
+    </View>
+  );
+};
+
 const TypeServiceComponent: FC = (): JSX.Element => {
   const services = ['drying', 'steam'];
   const [serviceChecked, setserviceChecked] = useState('');
@@ -117,22 +153,40 @@ const TypeClothesComponent: FC = (): JSX.Element => {
   };
 
   return (
-    <View style={styles.clothesTypes}>
-      <FlatList
-        style={{gap: 5}}
-        data={clothesTypes}
-        renderItem={RenderTypeClother}
-        keyExtractor={(item, index) => `${item.title}-${index}`}
-      />
-    </View>
+    <FlatList
+      ListHeaderComponent={FlatListHeaderComponent}
+      showsVerticalScrollIndicator={false}
+      style={{gap: 5}}
+      data={clothesTypes}
+      renderItem={RenderTypeClother}
+      keyExtractor={(item, index) => `${item.title}-${index}`}
+    />
+  );
+};
+
+const FlatListHeaderComponent: FC = (): JSX.Element => {
+  return (
+    <>
+      <ChooseLocationComponent />
+      <View style={styles.headingTexts}>
+        <Text style={styles.headingText}>Loại dịch vụ</Text>
+        <Ionicons name="alert-circle" size={18} color={'#91d3fa'} />
+      </View>
+      <TypeServiceComponent />
+      <View>
+        <View style={styles.headingTexts}>
+          <Text style={styles.headingText}>Loại đồ giặt</Text>
+          <Ionicons name="alert-circle" size={18} color={'#91d3fa'} />
+        </View>
+      </View>
+    </>
   );
 };
 
 export const AddBookingScreen: FC = (): JSX.Element => {
   const navigation = useNavigation();
-  const defaultTextColor = 'white';
   return (
-    <ScrollView style={styles.container}>
+    <View style={styles.container}>
       <View style={styles.header}>
         <TouchableOpacity style={styles.backicon}>
           <Ionicons name="chevron-back-outline" size={35} color={'white'} />
@@ -140,50 +194,9 @@ export const AddBookingScreen: FC = (): JSX.Element => {
         <Text style={styles.headertext}>Đơn mới</Text>
       </View>
       <View style={styles.mainContent}>
-        <View style={styles.chooselocation}>
-          <View style={styles.locationtexts}>
-            <Text style={styles.headingText}>Chi nhánh giặt:</Text>
-            <TouchableOpacity>
-              <Text style={styles.mapslink}>Thay đổi</Text>
-            </TouchableOpacity>
-          </View>
-          <View style={styles.locationdetail}>
-            <Image
-              source={require('../../Image/logo.png')}
-              style={styles.locationImage}
-            />
-            <View style={styles.locationCardTexts}>
-              <Text style={{...styles.headingText, color: defaultTextColor}}>
-                WashWizie - Hồ Văn Huê
-              </Text>
-              <View style={styles.locationDetailTexts}>
-                <Ionicons name="time" size={13} color={'#91d3fa'} />
-                <Text style={styles.textLocation}> Mở cửa: 8:00 SA</Text>
-              </View>
-              <View style={styles.rateAndSpace}>
-                <View style={styles.locationDetailTexts}>
-                  <Ionicons name="star" size={13} color={'yellow'} />
-                  <Text style={styles.textLocation}> 4.8/5</Text>
-                </View>
-                <Text style={styles.textLocation}>Cách 1km</Text>
-              </View>
-            </View>
-          </View>
-          <View style={styles.headingTexts}>
-            <Text style={styles.headingText}>Loại dịch vụ</Text>
-            <Ionicons name="alert-circle" size={18} color={'#91d3fa'} />
-          </View>
-          <TypeServiceComponent />
-        </View>
-        <View>
-          <View style={styles.headingTexts}>
-            <Text style={styles.headingText}>Loại đồ giặt</Text>
-            <Ionicons name="alert-circle" size={18} color={'#91d3fa'} />
-          </View>
-        </View>
         <TypeClothesComponent />
       </View>
-    </ScrollView>
+    </View>
   );
 };
 const styles = StyleSheet.create({
@@ -193,13 +206,13 @@ const styles = StyleSheet.create({
   mainContent: {
     width: '90%',
     alignSelf: 'center',
+    height: '100%',
   },
   header: {
     height: 50,
     alignItems: 'center',
     justifyContent: 'center',
     flexDirection: 'row',
-    marginBottom: 20,
   },
   backicon: {
     position: 'absolute',
@@ -219,6 +232,7 @@ const styles = StyleSheet.create({
     color: '#91d3fa',
   },
   locationtexts: {
+    marginTop: 15,
     width: '100%',
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -291,9 +305,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  clothesTypes: {
-    marginTop: 15,
-  },
   clothesType: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -302,6 +313,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     borderWidth: 2,
     borderRadius: 10,
+    marginBottom: 5,
   },
   clothesTypeText: {
     fontSize: 15,
