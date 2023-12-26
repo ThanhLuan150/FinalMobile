@@ -16,6 +16,12 @@ import Profile from './android/app/src/Screens/EditProfile/Profile';
 import VerifyEmail from './android/app/src/Screens/EditProfile/VerifyEmail';
 import SetUpAccount from './android/app/src/Screens/EditProfile/SetUpAccount';
 import { AddBookingScreen } from './android/app/src/Screens/Booking/AddBooking';
+import VerificationCodeScreen from './android/app/src/Screens/Registers/VerificationCode';
+import KeyboardAvoidingComponent from './android/app/src/Screens/EditProfile/EditProfile';
+import RatingScreen from './android/app/src/Screens/Raiting/Raiting';
+import RatingSucessfullyScreen from './android/app/src/Screens/Raiting/RaitingSuccessfully';
+import EditRatingScreen from './android/app/src/Screens/Raiting/EditRating';
+
 const Stack = createNativeStackNavigator();
 
 function Homes(): React.JSX.Element {
@@ -38,7 +44,7 @@ function Homes(): React.JSX.Element {
             options={{headerShown: false}}
           />
         </Stack.Navigator>
-    </GestureHandlerRootView>)}
+    </GestureHandlerRootView>);}
 const SettingsStackScreen = () => {
   return (
     <View>
@@ -84,7 +90,7 @@ const Tab = createBottomTabNavigator();
 function App(): React.JSX.Element {
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={{ 
+      <Stack.Navigator screenOptions={{
         headerShown: false,
        }}>
         <Stack.Screen
@@ -104,6 +110,11 @@ function App(): React.JSX.Element {
           options={{headerShown: false}}
         />
          <Stack.Screen
+          name="VerificationCodeScreen"
+          component={VerificationCodeScreen}
+          options={{headerShown: false}}
+        />
+         <Stack.Screen
           name="VerifyEmail"
           component={VerifyEmail}
           options={{headerShown: false}}
@@ -111,6 +122,26 @@ function App(): React.JSX.Element {
         <Stack.Screen
           name="SetUpAccount"
           component={SetUpAccount}
+          options={{headerShown: false}}
+        />
+         <Stack.Screen
+          name="EditProfile"
+          component={KeyboardAvoidingComponent}
+          options={{headerShown: false}}
+        />
+          <Stack.Screen
+          name="RatingScreen"
+          component={RatingScreen}
+          options={{headerShown: false}}
+        />
+         <Stack.Screen
+          name="RatingSucessfullyScreen"
+          component={RatingSucessfullyScreen}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="EditRatingScreen"
+          component={EditRatingScreen}
           options={{headerShown: false}}
         />
         <Stack.Screen name="HomeScreen" component={Homestack} />

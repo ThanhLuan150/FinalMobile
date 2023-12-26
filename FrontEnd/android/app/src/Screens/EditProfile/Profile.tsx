@@ -27,7 +27,9 @@ const Profile: FC = (): JSX.Element => {
   };
   const [isEnabled, setIsEnabled] = useState(false);
   const toggleSwitch = () => setIsEnabled(previousState => !previousState);
-
+  const useNavigationRating =() =>{
+    navigation.navigate('RatingScreen')
+  }
   return (
     <ScrollView style={styles.container}>
       <View style={styles.viewNotification}>
@@ -95,23 +97,23 @@ const Profile: FC = (): JSX.Element => {
           onPress={useNavigationSetUpAccount}
           style={styles.viewInfomation}>
           <View style={{flexDirection: 'row', gap: 10, alignItems: 'center'}}>
-            <Ionicons name="person" size={30} />
+            <Ionicons color={'#fff'} name="person" size={30} />
             <Text style={styles.text}>Thiết lập tài khoản</Text>
           </View>
-          <Ionicons name="chevron-forward-outline" size={35} />
+          <Ionicons color={'#fff'} name="chevron-forward-outline" size={35} />
         </TouchableOpacity>
         <TouchableOpacity
           //   onPress={}
           style={styles.viewInfomation}>
           <View style={{flexDirection: 'row', gap: 10, alignItems: 'center'}}>
-            <Ionicons name="volume-high" size={30} />
+            <Ionicons color={'#fff'} name="volume-high" size={30} />
             <Text style={styles.text}>Âm thanh hoặc Rung</Text>
           </View>
-          <Ionicons name="chevron-forward-outline" size={35} />
+          <Ionicons color={'#fff'} name="chevron-forward-outline" size={35} />
         </TouchableOpacity>
         <View style={styles.viewInfomation}>
           <View style={{flexDirection: 'row', gap: 10, alignItems: 'center'}}>
-            <Ionicons name="moon" size={30} />
+            <Ionicons color={'#fff'} name="moon" size={30} />
             <Text style={styles.text}>Chế độ tối</Text>
           </View>
           <View style={{flexDirection: 'row', gap: 10, alignItems: 'center'}}>
@@ -129,40 +131,40 @@ const Profile: FC = (): JSX.Element => {
           //   onPress={}
           style={styles.viewInfomation}>
           <View style={{flexDirection: 'row', gap: 10, alignItems: 'center'}}>
-            <Ionicons name="volume-high" size={30} />
+            <Ionicons color={'#fff'} name="volume-high" size={30} />
             <Text style={styles.text}>Âm thanh hoặc Rung</Text>
           </View>
-          <Ionicons name="chevron-forward-outline" size={35} />
+          <Ionicons color={'#fff'} name="chevron-forward-outline" size={35} />
         </TouchableOpacity>
         <TouchableOpacity
           //   onPress={}
           style={styles.viewInfomation}>
           <View style={{flexDirection: 'row', gap: 10, alignItems: 'center'}}>
-            <Ionicons name="language" size={30} />
+            <Ionicons color={'#fff'} name="language" size={30} />
             <Text style={styles.text}>Ngôn ngữ</Text>
           </View>
           <View style={{flexDirection: 'row', gap: 10, alignItems: 'center'}}>
             <Text>Tiếng Việt</Text>
-            <Ionicons name="chevron-forward-outline" size={35} />
+            <Ionicons color={'#fff'} name="chevron-forward-outline" size={35} />
           </View>
         </TouchableOpacity>
         <TouchableOpacity
           //   onPress={}
           style={styles.viewInfomation}>
           <View style={{flexDirection: 'row', gap: 10, alignItems: 'center'}}>
-            <MaterialCommunityIcons name="history" size={30} />
+            <MaterialCommunityIcons color={'#fff'} name="history" size={30} />
             <Text style={styles.text}>Lịch sử giao dịch</Text>
           </View>
-          <Ionicons name="chevron-forward-outline" size={35} />
+          <Ionicons color={'#fff'} name="chevron-forward-outline" size={35} />
         </TouchableOpacity>
         <TouchableOpacity
-          //   onPress={}
+            onPress={useNavigationRating}
           style={styles.viewInfomation}>
           <View style={{flexDirection: 'row', gap: 10, alignItems: 'center'}}>
-            <Ionicons name="star" size={30} />
+            <Ionicons color={'#fff'} name="star" size={30} />
             <Text style={styles.text}>Đánh giá của tôi</Text>
           </View>
-          <Ionicons name="chevron-forward-outline" size={35} />
+          <Ionicons color={'#fff'} name="chevron-forward-outline" size={35} />
         </TouchableOpacity>
       </View>
     </ScrollView>
