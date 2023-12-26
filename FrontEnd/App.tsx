@@ -16,7 +16,7 @@ import Profile from './android/app/src/Screens/EditProfile/Profile';
 import VerifyEmail from './android/app/src/Screens/EditProfile/VerifyEmail';
 import SetUpAccount from './android/app/src/Screens/EditProfile/SetUpAccount';
 import { AddBookingScreen } from './android/app/src/Screens/Booking/AddBooking';
-// import HomePage from './android/app/src/Screens/Home/HomePage';
+import { HomePage } from './android/app/src/Screens/Home/HomePage';
 import VerificationCodeScreen from './android/app/src/Screens/Registers/VerificationCode';
 import KeyboardAvoidingComponent from './android/app/src/Screens/EditProfile/EditProfile';
 import RatingScreen from './android/app/src/Screens/Raiting/Raiting';
@@ -82,15 +82,9 @@ const Homestack = () => {
           backgroundColor: '#353B51',
         },
       })}>
-<!-- <<<<<<< booking
-      <Tab.Screen name="Trang chủ" component={Homes} />
-      <Tab.Screen name="Dịch vụ" component={AddBookingScreen} />
-      <Tab.Screen name="Đơn giặt" component={SettingsStackScreen} /> -->
-<!-- ======= -->
       <Tab.Screen name="Trang chủ" component={HomePage} />
-      <Tab.Screen name="Dịch vụ" component={DetailScreen} />
+      <Tab.Screen name="Dịch vụ" component={AddBookingScreen} />
       <Tab.Screen name="Đơn giặt" component={BookScreen} />
-<!-- >>>>>>> dev -->
       <Tab.Screen name="Profile" component={Profile} />
     </Tab.Navigator>
   );
@@ -106,7 +100,6 @@ function App(): React.JSX.Element {
         <Stack.Screen
           name="Open"
           component={OpenScreen}
-          // component={AddBookingScreen}
           options={{headerShown: false}}
         />
         <Stack.Screen
