@@ -1,5 +1,8 @@
-import React, {FC} from 'react';
+/* eslint-disable react/no-unstable-nested-components */
+/* eslint-disable react-native/no-inline-styles */
+import React, {FC, JSXElementConstructor} from 'react';
 import {useState} from 'react';
+
 import {
   StyleSheet,
   Text,
@@ -7,33 +10,178 @@ import {
   Image,
   TouchableOpacity,
   ScrollView,
+  FlatList,
 } from 'react-native';
+
 import {useNavigation} from '@react-navigation/native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+
+const TypeServiceComponent: FC = (): JSX.Element => {
+  const services = ['drying', 'steam'];
+  const [serviceChecked, setserviceChecked] = useState('');
+  const toggleTypeService = (type: String) =>
+    setserviceChecked(services.filter(value => value === type)[0]);
+  return (
+    <View style={styles.serviceTypes}>
+      <TouchableOpacity
+        id={services[0]}
+        style={styles.serviceType}
+        onPress={() => toggleTypeService(services[0])}>
+        <Ionicons
+          name="shirt"
+          size={100}
+          color={serviceChecked === services[0] ? '#91d3fa' : '#fff'}
+        />
+        <Text
+          style={{
+            ...styles.headingText,
+            color: serviceChecked === services[0] ? '#91d3fa' : '#fff',
+          }}>
+          Giặt sấy
+        </Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        id={services[1]}
+        style={styles.serviceType}
+        onPress={() => toggleTypeService(services[1])}>
+        <Ionicons
+          name="shirt-outline"
+          size={100}
+          color={serviceChecked === services[1] ? '#91d3fa' : '#fff'}
+        />
+        <Text
+          style={{
+            ...styles.headingText,
+            color: serviceChecked === services[1] ? '#91d3fa' : '#fff',
+          }}>
+          Giặt hấp
+        </Text>
+      </TouchableOpacity>
+    </View>
+  );
+};
+
+const TypeClothesComponent: FC = (): JSX.Element => {
+  const clothesTypes = [
+    {title: 'Đồ bình thường'},
+    {title: 'Đồ trắng/ ra màu'},
+    {title: 'Đồ đặc thù'},
+    {title: 'Chăn/ Drap/ Rèm cửa'},
+    {title: 'Gấu bông'},
+    {title: 'Cặp/ Balo'},
+  ];
+  const [clothesChecked, setClothesChecked] = useState<string[]>([]);
+  const toggleClothes = (chosen: string) => {
+    setClothesChecked(() => {
+      if (clothesChecked.includes(chosen)) {
+        return clothesChecked.filter(item => item !== chosen);
+      } else {
+        return [...clothesChecked, chosen];
+      }
+    });
+  };
+
+  type ItemProps = {item: any; index: number};
+  const RenderTypeClother = ({item, index}: ItemProps) => {
+    const checkboxColor = clothesChecked.includes(item.title)
+      ? '#91d3fa'
+      : '#999999';
+    const style = StyleSheet.create({
+      clothesCheckedStyle: {
+        backgroundColor: clothesChecked.includes(item.title)
+          ? '#8888'
+          : '#353B51',
+        borderColor: clothesChecked.includes(item.title)
+          ? '#91d3fa'
+          : '#999999',
+      },
+    });
+    return (
+      <TouchableOpacity
+        key={index}
+        style={{...styles.clothesType, ...style.clothesCheckedStyle}}
+        onPress={() => toggleClothes(item.title)}>
+        <Text style={styles.clothesTypeText}>{item.title}</Text>
+        <MaterialCommunityIcons
+          name={
+            clothesChecked.includes(item.title)
+              ? 'checkbox-marked'
+              : 'checkbox-blank-outline'
+          }
+          size={15}
+          color={checkboxColor}
+        />
+      </TouchableOpacity>
+    );
+  };
+
+  return (
+    <View style={styles.clothesTypes}>
+      <FlatList
+        style={{gap: 5}}
+        data={clothesTypes}
+        renderItem={RenderTypeClother}
+        keyExtractor={(item, index) => `${item.title}-${index}`}
+      />
+    </View>
+  );
+};
+
 export const AddBookingScreen: FC = (): JSX.Element => {
-  navigation = useNavigation();
+  const navigation = useNavigation();
+  const defaultTextColor = 'white';
   return (
     <ScrollView style={styles.container}>
       <View style={styles.header}>
-        <Ionicons
-          style={styles.backicon}
-          name="chevron-back-outline"
-          size={35}
-        />
+        <TouchableOpacity style={styles.backicon}>
+          <Ionicons name="chevron-back-outline" size={35} color={'white'} />
+        </TouchableOpacity>
         <Text style={styles.headertext}>Đơn mới</Text>
       </View>
       <View style={styles.mainContent}>
         <View style={styles.chooselocation}>
           <View style={styles.locationtexts}>
-            <Text style={styles.locationtext}>Chi nhánh giặt:</Text>
+            <Text style={styles.headingText}>Chi nhánh giặt:</Text>
             <TouchableOpacity>
               <Text style={styles.mapslink}>Thay đổi</Text>
             </TouchableOpacity>
           </View>
           <View style={styles.locationdetail}>
-            <Text>ádflk</Text>
+            <Image
+              source={require('../../Image/logo.png')}
+              style={styles.locationImage}
+            />
+            <View style={styles.locationCardTexts}>
+              <Text style={{...styles.headingText, color: defaultTextColor}}>
+                WashWizie - Hồ Văn Huê
+              </Text>
+              <View style={styles.locationDetailTexts}>
+                <Ionicons name="time" size={13} color={'#91d3fa'} />
+                <Text style={styles.textLocation}> Mở cửa: 8:00 SA</Text>
+              </View>
+              <View style={styles.rateAndSpace}>
+                <View style={styles.locationDetailTexts}>
+                  <Ionicons name="star" size={13} color={'yellow'} />
+                  <Text style={styles.textLocation}> 4.8/5</Text>
+                </View>
+                <Text style={styles.textLocation}>Cách 1km</Text>
+              </View>
+            </View>
+          </View>
+          <View style={styles.headingTexts}>
+            <Text style={styles.headingText}>Loại dịch vụ</Text>
+            <Ionicons name="alert-circle" size={18} color={'#91d3fa'} />
+          </View>
+          <TypeServiceComponent />
+        </View>
+        <View>
+          <View style={styles.headingTexts}>
+            <Text style={styles.headingText}>Loại đồ giặt</Text>
+            <Ionicons name="alert-circle" size={18} color={'#91d3fa'} />
           </View>
         </View>
+        <TypeClothesComponent />
       </View>
     </ScrollView>
   );
@@ -59,12 +207,16 @@ const styles = StyleSheet.create({
   },
   headertext: {
     fontSize: 20,
+    color: 'white',
   },
   mapslink: {
     fontSize: 12,
+    color: '#91d3fa',
+    textDecorationLine: 'underline',
   },
-  locationtext: {
+  headingText: {
     fontWeight: '700',
+    color: '#91d3fa',
   },
   locationtexts: {
     width: '100%',
@@ -83,6 +235,76 @@ const styles = StyleSheet.create({
     backgroundColor: '#999999',
     marginTop: 15,
     borderRadius: 15,
+    padding: 12,
+    flexDirection: 'row',
+  },
+  locationImage: {
+    height: '100%',
+    width: '19%',
+    marginRight: 10,
+  },
+  locationCardTexts: {
+    flex: 1,
+    justifyContent: 'space-between',
+    marginRight: 10,
+  },
+  rateAndSpace: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  locationDetailTexts: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    color: 'white',
+  },
+  textLocation: {
+    fontSize: 12,
+    color: 'white',
+  },
+  headingTexts: {
+    width: '100%',
+    marginTop: 20,
+    alignItems: 'center',
+    flexDirection: 'row',
+    gap: 10,
+  },
+  serviceTypes: {
+    marginTop: 15,
+    height: 150,
+    width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+  },
+  serviceType: {
+    height: '100%',
+    width: 150,
+    backgroundColor: '#8888',
+    borderRadius: 15,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  serviceTypeFocus: {
+    height: '100%',
+    width: 150,
+    backgroundColor: '#91d3fa',
+    borderRadius: 15,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  clothesTypes: {
+    marginTop: 15,
+  },
+  clothesType: {
+    flexDirection: 'row',
+    alignItems: 'center',
     padding: 10,
+    justifyContent: 'space-between',
+    fontSize: 20,
+    borderWidth: 2,
+    borderRadius: 10,
+  },
+  clothesTypeText: {
+    fontSize: 15,
+    fontWeight: '600',
   },
 });

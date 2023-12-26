@@ -95,8 +95,8 @@ function App(): React.JSX.Element {
        }}>
         <Stack.Screen
           name="Open"
-          component={OpenScreen}
-          // component={AddBookingScreen}
+          // component={OpenScreen}
+          component={AddBookingScreen}
           options={{headerShown: false}}
         />
         <Stack.Screen
