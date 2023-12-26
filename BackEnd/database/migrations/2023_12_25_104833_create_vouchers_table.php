@@ -13,8 +13,11 @@ return new class extends Migration
     {
         Schema::create('vouchers', function (Blueprint $table) {
             $table->increments('id_voucher');
+            $table->string('name_voucher');
             $table->string('code')->unique();
             $table->decimal('discount_amount', 8, 2);
+            $table->date('start_date');
+            $table->date('end_date');
             $table->integer('id_branch')->unsigned();
             $table->foreign('id_branch')->references('id_branch')->on('branches')->onDelete('cascade');
             $table->timestamps();
