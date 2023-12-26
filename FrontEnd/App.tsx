@@ -15,7 +15,8 @@ import RegisterScreen from './android/app/src/Screens/Registers/RegisterPhone';
 import Profile from './android/app/src/Screens/EditProfile/Profile';
 import VerifyEmail from './android/app/src/Screens/EditProfile/VerifyEmail';
 import SetUpAccount from './android/app/src/Screens/EditProfile/SetUpAccount';
-import { HomePage } from './android/app/src/Screens/Home/HomePage';
+import { AddBookingScreen } from './android/app/src/Screens/Booking/AddBooking';
+// import HomePage from './android/app/src/Screens/Home/HomePage';
 import VerificationCodeScreen from './android/app/src/Screens/Registers/VerificationCode';
 import KeyboardAvoidingComponent from './android/app/src/Screens/EditProfile/EditProfile';
 import RatingScreen from './android/app/src/Screens/Raiting/Raiting';
@@ -47,15 +48,7 @@ function Homes(): React.JSX.Element {
             options={{headerShown: false}}
           />
         </Stack.Navigator>
-    </GestureHandlerRootView>)}
-
-const DetailScreen = () => {
-  return (
-    <View>
-      <Text style={styles.text}>Detail</Text>
-    </View>
-  );
-};
+    </GestureHandlerRootView>);}
 const SettingsStackScreen = () => {
   return (
     <View>
@@ -89,9 +82,15 @@ const Homestack = () => {
           backgroundColor: '#353B51',
         },
       })}>
+<!-- <<<<<<< booking
+      <Tab.Screen name="Trang chủ" component={Homes} />
+      <Tab.Screen name="Dịch vụ" component={AddBookingScreen} />
+      <Tab.Screen name="Đơn giặt" component={SettingsStackScreen} /> -->
+<!-- ======= -->
       <Tab.Screen name="Trang chủ" component={HomePage} />
       <Tab.Screen name="Dịch vụ" component={DetailScreen} />
       <Tab.Screen name="Đơn giặt" component={BookScreen} />
+<!-- >>>>>>> dev -->
       <Tab.Screen name="Profile" component={Profile} />
     </Tab.Navigator>
   );
@@ -101,12 +100,13 @@ const Tab = createBottomTabNavigator();
 function App(): React.JSX.Element {
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={{ 
+      <Stack.Navigator screenOptions={{
         headerShown: false,
        }}>
         <Stack.Screen
           name="Open"
           component={OpenScreen}
+          // component={AddBookingScreen}
           options={{headerShown: false}}
         />
         <Stack.Screen
@@ -205,6 +205,9 @@ const styles = StyleSheet.create({
   },
   highlight: {
     fontWeight: '700',
+  },
+  text: {
+    color: 'black',
   },
 });
 export default App;
