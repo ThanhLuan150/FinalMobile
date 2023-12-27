@@ -2,9 +2,11 @@
 
 use App\Http\Controllers\BranchController;
 use App\Http\Controllers\MiniGameController;
+use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\VoucherController;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -41,3 +43,6 @@ Route::get('/Vouchers/{id_branch}',[VoucherController::class,'Vouchers']);
 Route::get('/Voucher',[VoucherController::class,'Voucher']);
 //API MiniGame 
 Route::get('/minigame',[MiniGameController::class,'miniGame']);
+//API User
+Route::get('/user',[RegisterController::class,'getUser']);
+Route::post('/Register',[RegisterController::class,'register']);
