@@ -24,9 +24,11 @@ import EditRatingScreen from './android/app/src/Screens/Raiting/EditRating';
 import LoginScreen from './android/app/src/Screens/Login/Login';
 import LoginSuccessfullyScreeen from './android/app/src/Screens/Login/LoginSuccessfully';
 import BookScreen from './android/app/src/Screens/Books/OrderIsOnGoing';
-
+import { OrderTrackingScreen } from './android/app/src/Screens/Books/OrderTracking';
+import { OrderDetail } from './android/app/src/Screens/Books/OrderDetail';
 const Stack = createNativeStackNavigator();
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function Homes(): React.JSX.Element {
   return (
     <GestureHandlerRootView style={{flex: 1}}>
@@ -52,17 +54,11 @@ function Homes(): React.JSX.Element {
 const DetailScreen = () => {
   return (
     <View>
-      <Text style={styles.text}>Detail</Text>
+      <Text>Detail</Text>
     </View>
   );
 };
-const SettingsStackScreen = () => {
-  return (
-    <View>
-      <Text style={styles.text}>Setting</Text>
-    </View>
-  );
-};
+
 
 const Homestack = () => {
   return (
@@ -182,6 +178,16 @@ function App(): React.JSX.Element {
           <Stack.Screen
             name="BookScreen"
             component={BookScreen}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen
+            name="OrderTrackingScreen"
+            component={OrderTrackingScreen}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen
+            name="OrderDetail"
+            component={OrderDetail}
             options={{headerShown: false}}
           />
         <Stack.Screen name="HomeScreen" component={Homestack} />

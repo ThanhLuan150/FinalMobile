@@ -7,6 +7,7 @@ import {
   Image,
   TouchableOpacity,
 } from 'react-native';
+import {useNavigation} from '@react-navigation/native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 import AllOrder from './AllOrder';
@@ -45,8 +46,10 @@ type ItemProps = {
   time: string;
 };
 
-const Item = ({title, image, status, time}: ItemProps) => (
-  <View style={styles.item}>
+const Item = ({ title, image, status, time, navigation }: ItemProps & { navigation: any }) => (
+  <TouchableOpacity
+    style={styles.item}
+    onPress={() => navigation.navigate('OrderTrackingScreen', { title, image, status, time })}>
     <View style={styles.leftContent}>
       <Image source={{uri: image}} style={styles.image} />
       <View style={styles.textContainer}>
@@ -55,15 +58,16 @@ const Item = ({title, image, status, time}: ItemProps) => (
       </View>
     </View>
     <View style={styles.rightContent}>
-      <TouchableOpacity style={styles.button}>
+      <View style={styles.button}>
         <Text>Giặt thường</Text>
-      </TouchableOpacity>
+      </View>
       <Text style={styles.time}>{time}</Text>
     </View>
-  </View>
+  </TouchableOpacity>
 );
 
-function OrderIsOnGoing() {
+export function OrderIsOnGoing(): React.JSX.Element {
+  const navigation = useNavigation();
   return (
     <View style={styles.container}>
       <FlatList
@@ -74,6 +78,7 @@ function OrderIsOnGoing() {
             image={item.image}
             status={item.status}
             time={item.time}
+            navigation={navigation}
           />
         )}
         keyExtractor={item => item.id}
