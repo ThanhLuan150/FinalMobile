@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class transport extends Model
 {
     use HasFactory;
+    protected $fillable=['nametransport','id_branch '];
+    public function branch()
+    {
+        return $this->belongsTo(Branches::class, 'id_branch'); 
+    }
 }
