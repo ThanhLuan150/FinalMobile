@@ -77,20 +77,22 @@ const Homestack = () => {
         },
         tabBarInactiveTintColor: '#91d3fa',
         tabBarActiveTintColor: '#91d3fa',
+        keyboardHidesTabBar: true,
         headerShown: false,
         tabBarStyle: {
           backgroundColor: '#353B51',
         },
       })}>
-<!-- <<<<<<< booking
+{/* <!-- <<<<<<< booking */}
       <Tab.Screen name="Trang chủ" component={Homes} />
       <Tab.Screen name="Dịch vụ" component={AddBookingScreen} />
-      <Tab.Screen name="Đơn giặt" component={SettingsStackScreen} /> -->
-<!-- ======= -->
+      <Tab.Screen name="Đơn giặt" component={SettingsStackScreen} />
+       {/* --> */}
+{/* <!-- ======= -->
       <Tab.Screen name="Trang chủ" component={HomePage} />
       <Tab.Screen name="Dịch vụ" component={DetailScreen} />
       <Tab.Screen name="Đơn giặt" component={BookScreen} />
-<!-- >>>>>>> dev -->
+<!-- >>>>>>> dev --> */}
       <Tab.Screen name="Profile" component={Profile} />
     </Tab.Navigator>
   );

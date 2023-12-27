@@ -1,6 +1,6 @@
 /* eslint-disable react/no-unstable-nested-components */
 /* eslint-disable react-native/no-inline-styles */
-import React, {FC, JSXElementConstructor} from 'react';
+import React, {FC} from 'react';
 import {useState} from 'react';
 
 import {
@@ -9,8 +9,10 @@ import {
   View,
   Image,
   TouchableOpacity,
-  ScrollView,
   FlatList,
+  TextInput,
+  Platform,
+  KeyboardAvoidingView,
 } from 'react-native';
 
 import {useNavigation} from '@react-navigation/native';
@@ -98,6 +100,58 @@ const TypeServiceComponent: FC = (): JSX.Element => {
   );
 };
 
+const QuantityDropdown: FC = (): JSX.Element => {
+  const [quantity, setQuantity] = useState(1);
+
+  const updateQuantity = (newQuantity: number) => {
+    // Ensure the quantity is a non-negative integer
+    const clampedQuantity = Math.max(0, Math.floor(newQuantity));
+    setQuantity(clampedQuantity);
+  };
+
+  const increaseQuantity = () => {
+    updateQuantity(quantity + 1);
+  };
+
+  const decreaseQuantity = () => {
+    updateQuantity(quantity - 1);
+  };
+
+  const handleInputChange = (text: string) => {
+    // Allow only numeric input
+    const numericValue = parseInt(text, 10);
+
+    if (!isNaN(numericValue)) {
+      updateQuantity(numericValue);
+    }
+  };
+
+  return (
+    <View style={styles.dropdownQuantity}>
+      <Text>Số lượng</Text>
+      <View style={styles.quantityContainer}>
+        <TouchableOpacity
+          onPress={decreaseQuantity}
+          style={styles.quantityButton}>
+          <Ionicons name="remove-circle-sharp" size={20} />
+        </TouchableOpacity>
+        <TextInput
+          style={styles.quantityInput}
+          value={quantity.toString()}
+          onChangeText={handleInputChange}
+          keyboardType="numeric"
+          // KeyboardAvoidingView
+        />
+        <TouchableOpacity
+          onPress={increaseQuantity}
+          style={styles.quantityButton}>
+          <Ionicons name="add-circle-sharp" size={20} />
+        </TouchableOpacity>
+      </View>
+    </View>
+  );
+};
+
 const TypeClothesComponent: FC = (): JSX.Element => {
   const clothesTypes = [
     {title: 'Đồ bình thường'},
@@ -107,22 +161,26 @@ const TypeClothesComponent: FC = (): JSX.Element => {
     {title: 'Gấu bông'},
     {title: 'Cặp/ Balo'},
   ];
+
   const [clothesChecked, setClothesChecked] = useState<string[]>([]);
+
   const toggleClothes = (chosen: string) => {
-    setClothesChecked(() => {
-      if (clothesChecked.includes(chosen)) {
-        return clothesChecked.filter(item => item !== chosen);
+    setClothesChecked(prevChecked => {
+      if (prevChecked.includes(chosen)) {
+        return prevChecked.filter(item => item !== chosen);
       } else {
-        return [...clothesChecked, chosen];
+        return [...prevChecked, chosen];
       }
     });
   };
 
   type ItemProps = {item: any; index: number};
-  const RenderTypeClother = ({item, index}: ItemProps) => {
+
+  const RenderTypeClothes = ({item, index}: ItemProps) => {
     const checkboxColor = clothesChecked.includes(item.title)
       ? '#91d3fa'
       : '#999999';
+
     const style = StyleSheet.create({
       clothesCheckedStyle: {
         backgroundColor: clothesChecked.includes(item.title)
@@ -133,34 +191,40 @@ const TypeClothesComponent: FC = (): JSX.Element => {
           : '#999999',
       },
     });
+
     return (
-      <TouchableOpacity
-        key={index}
-        style={{...styles.clothesType, ...style.clothesCheckedStyle}}
-        onPress={() => toggleClothes(item.title)}>
-        <Text style={styles.clothesTypeText}>{item.title}</Text>
-        <MaterialCommunityIcons
-          name={
-            clothesChecked.includes(item.title)
-              ? 'checkbox-marked'
-              : 'checkbox-blank-outline'
-          }
-          size={15}
-          color={checkboxColor}
-        />
-      </TouchableOpacity>
+      <View>
+        <TouchableOpacity
+          key={index}
+          style={{...styles.clothesType, ...style.clothesCheckedStyle}}
+          onPress={() => toggleClothes(item.title)}>
+          <Text style={styles.clothesTypeText}>{item.title}</Text>
+          <MaterialCommunityIcons
+            name={
+              clothesChecked.includes(item.title)
+                ? 'checkbox-marked'
+                : 'checkbox-blank-outline'
+            }
+            size={15}
+            color={checkboxColor}
+          />
+        </TouchableOpacity>
+        {clothesChecked.includes(item.title) && (
+          <QuantityDropdown />
+        )}
+      </View>
     );
   };
 
   return (
-    <FlatList
-      ListHeaderComponent={FlatListHeaderComponent}
-      showsVerticalScrollIndicator={false}
-      style={{gap: 5}}
-      data={clothesTypes}
-      renderItem={RenderTypeClother}
-      keyExtractor={(item, index) => `${item.title}-${index}`}
-    />
+       <FlatList
+         ListHeaderComponent={FlatListHeaderComponent}
+         showsVerticalScrollIndicator={false}
+         style={{gap: 5}}
+         data={clothesTypes}
+         renderItem={RenderTypeClothes}
+         keyExtractor={(item, index) => `${item.title}-${index}`}
+       />
   );
 };
 
@@ -186,7 +250,8 @@ const FlatListHeaderComponent: FC = (): JSX.Element => {
 export const AddBookingScreen: FC = (): JSX.Element => {
   const navigation = useNavigation();
   return (
-    <View style={styles.container}>
+    <View
+     style={styles.container}>
       <View style={styles.header}>
         <TouchableOpacity style={styles.backicon}>
           <Ionicons name="chevron-back-outline" size={35} color={'white'} />
@@ -202,11 +267,13 @@ export const AddBookingScreen: FC = (): JSX.Element => {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#353B51',
+    height: '100%',
   },
   mainContent: {
     width: '90%',
     alignSelf: 'center',
-    height: '100%',
+    // height: '100%',
+    flex: 1,
   },
   header: {
     height: 50,
@@ -230,6 +297,7 @@ const styles = StyleSheet.create({
   headingText: {
     fontWeight: '700',
     color: '#91d3fa',
+    marginBottom: 15,
   },
   locationtexts: {
     marginTop: 15,
@@ -247,7 +315,6 @@ const styles = StyleSheet.create({
     width: '100%',
     height: 80,
     backgroundColor: '#999999',
-    marginTop: 15,
     borderRadius: 15,
     padding: 12,
     flexDirection: 'row',
@@ -278,12 +345,10 @@ const styles = StyleSheet.create({
   headingTexts: {
     width: '100%',
     marginTop: 20,
-    alignItems: 'center',
     flexDirection: 'row',
     gap: 10,
   },
   serviceTypes: {
-    marginTop: 15,
     height: 150,
     width: '100%',
     flexDirection: 'row',
@@ -318,5 +383,30 @@ const styles = StyleSheet.create({
   clothesTypeText: {
     fontSize: 15,
     fontWeight: '600',
+  },
+  dropdownQuantity: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#8888',
+    padding: 10,
+    paddingTop: 8,
+    paddingBottom: 8,
+    borderRadius: 10,
+    marginBottom: 5,
+    justifyContent: 'space-between',
+  },
+  quantityContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 5,
+  },
+  quantityInput: {
+    height: 20,
+    textAlign: 'center',
+    padding: 0,
+  },
+  quantityButton: {
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });
