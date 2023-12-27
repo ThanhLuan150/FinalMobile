@@ -14,6 +14,7 @@ import Profile from './android/app/src/Screens/EditProfile/Profile';
 import VerifyEmail from './android/app/src/Screens/EditProfile/VerifyEmail';
 import SetUpAccount from './android/app/src/Screens/EditProfile/SetUpAccount';
 import { AddBookingScreen } from './android/app/src/Screens/Booking/AddBooking';
+import { HomePage } from './android/app/src/Screens/Home/HomePage';
 import VerificationCodeScreen from './android/app/src/Screens/Registers/VerificationCode';
 import KeyboardAvoidingComponent from './android/app/src/Screens/EditProfile/EditProfile';
 import RatingScreen from './android/app/src/Screens/Raiting/Raiting';
@@ -22,8 +23,8 @@ import EditRatingScreen from './android/app/src/Screens/Raiting/EditRating';
 import LoginScreen from './android/app/src/Screens/Login/Login';
 import LoginSuccessfullyScreeen from './android/app/src/Screens/Login/LoginSuccessfully';
 import BookScreen from './android/app/src/Screens/Books/OrderIsOnGoing';
-import { HomePage } from './android/app/src/Screens/Home/HomePage';
-
+import { OrderTrackingScreen } from './android/app/src/Screens/Books/OrderTracking';
+import { OrderDetail } from './android/app/src/Screens/Books/OrderDetail';
 const Stack = createNativeStackNavigator();
 
 const Homestack = () => {
@@ -55,7 +56,6 @@ const Homestack = () => {
       <Tab.Screen name="Trang chủ" component={HomePage} />
       <Tab.Screen name="Dịch vụ" component={AddBookingScreen} />
       <Tab.Screen name="Đơn giặt" component={BookScreen} />
-
       <Tab.Screen name="Profile" component={Profile} />
     </Tab.Navigator>
   );
@@ -71,7 +71,6 @@ function App(): React.JSX.Element {
         <Stack.Screen
           name="Open"
           component={OpenScreen}
-          // component={AddBookingScreen}
           options={{headerShown: false}}
         />
         <Stack.Screen
@@ -147,6 +146,16 @@ function App(): React.JSX.Element {
           <Stack.Screen
             name="BookScreen"
             component={BookScreen}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen
+            name="OrderTrackingScreen"
+            component={OrderTrackingScreen}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen
+            name="OrderDetail"
+            component={OrderDetail}
             options={{headerShown: false}}
           />
         <Stack.Screen name="HomeScreen" component={Homestack} />
