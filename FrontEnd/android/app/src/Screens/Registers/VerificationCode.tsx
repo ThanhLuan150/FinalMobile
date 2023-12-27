@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: '600',
     color: 'white',
-    bottom: '10%',
+    bottom: '5%',
   },
   imageLogo: {
     bottom: '7%',
