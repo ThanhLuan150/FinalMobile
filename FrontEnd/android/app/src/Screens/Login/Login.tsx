@@ -50,12 +50,14 @@ const styles = StyleSheet.create({
   header: {
     fontSize: 30,
     color:'white',
+    bottom:50,
   },
   sectionTitle: {
     fontSize: 20,
     fontWeight: '700',
     color: 'white',
-    marginBottom: '20%',
+    marginTop: '5%',
+    marginBottom :'30%',
     justifyContent: 'center',
   },
   imageLogo: {
@@ -72,11 +74,11 @@ const styles = StyleSheet.create({
     borderColor: '#CCEBFC',
     width: '90%',
     color: 'white',
-    marginBottom: 30,
+    marginBottom: 20,
   },
   buttonLogin: {
     padding: 20,
-    marginTop: 10,
+    marginTop: 20,
     borderRadius: 10,
     color: '#CCEBFC',
     width: '70%',

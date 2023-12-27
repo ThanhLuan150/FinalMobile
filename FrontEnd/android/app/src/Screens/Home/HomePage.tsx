@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import {
   FlatList,
@@ -108,7 +109,7 @@ export const HomePage = () => {
     <View style={styles.container}>
       <Header/>
       <ScrollView>
-        <View style={styles.header}></View>
+        <View style={styles.header} />
         <View>{SlideShowImage()}</View>
         <View style={styles.feature}>
           <View>
@@ -178,7 +179,6 @@ export const HomePage = () => {
         />
         <Text style={styles.titlemenu}>Mã giảm giá</Text>
         {DataVoucher.map(item => RenderVoucher(item))}
-        
       </ScrollView>
     </View>
   );

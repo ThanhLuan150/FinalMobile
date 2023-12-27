@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: '600',
     color: 'white',
-    marginTop: -16,
+    marginTop: 20,
   },
   imageStyle: {
     width: 200,
