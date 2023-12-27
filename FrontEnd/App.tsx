@@ -24,7 +24,8 @@ import EditRatingScreen from './android/app/src/Screens/Raiting/EditRating';
 import LoginScreen from './android/app/src/Screens/Login/Login';
 import LoginSuccessfullyScreeen from './android/app/src/Screens/Login/LoginSuccessfully';
 import BookScreen from './android/app/src/Screens/Books/OrderIsOnGoing';
-
+import { OrderTrackingScreen } from './android/app/src/Screens/Books/OrderTracking';
+import { OrderDetail } from './android/app/src/Screens/Books/OrderDetail';
 const Stack = createNativeStackNavigator();
 
 const Homestack = () => {
@@ -146,6 +147,16 @@ function App(): React.JSX.Element {
           <Stack.Screen
             name="BookScreen"
             component={BookScreen}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen
+            name="OrderTrackingScreen"
+            component={OrderTrackingScreen}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen
+            name="OrderDetail"
+            component={OrderDetail}
             options={{headerShown: false}}
           />
         <Stack.Screen name="HomeScreen" component={Homestack} />

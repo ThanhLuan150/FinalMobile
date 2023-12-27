@@ -1,6 +1,7 @@
 import React from 'react';
 import {Image, StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
+
 export function RegisterInformationScreen(): React.JSX.Element {
   const navigation = useNavigation();
   return (
