@@ -1,14 +1,13 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
+import {StyleSheet} from 'react-native';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import Notification from './android/app/src/Screens/Notification/Notification';
 import Chat from './android/app/src/Screens/Notification/Chat';
 import DetailChat from './android/app/src/Screens/Notification/DetailChat';
-import Ionicons from 'react-native-vector-icons/Ionicons';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {StyleSheet, View, Text} from 'react-native';
 import {RegisterInformationScreen} from './android/app/src/Screens/Registers/RegisterInformation';
 import {OpenScreen} from './android/app/src/Screens/Registers/Open';
 import RegisterScreen from './android/app/src/Screens/Registers/RegisterPhone';
@@ -16,7 +15,6 @@ import Profile from './android/app/src/Screens/EditProfile/Profile';
 import VerifyEmail from './android/app/src/Screens/EditProfile/VerifyEmail';
 import SetUpAccount from './android/app/src/Screens/EditProfile/SetUpAccount';
 import { AddBookingScreen } from './android/app/src/Screens/Booking/AddBooking';
-// import HomePage from './android/app/src/Screens/Home/HomePage';
 import VerificationCodeScreen from './android/app/src/Screens/Registers/VerificationCode';
 import KeyboardAvoidingComponent from './android/app/src/Screens/EditProfile/EditProfile';
 import RatingScreen from './android/app/src/Screens/Raiting/Raiting';
@@ -25,37 +23,9 @@ import EditRatingScreen from './android/app/src/Screens/Raiting/EditRating';
 import LoginScreen from './android/app/src/Screens/Login/Login';
 import LoginSuccessfullyScreeen from './android/app/src/Screens/Login/LoginSuccessfully';
 import BookScreen from './android/app/src/Screens/Books/OrderIsOnGoing';
+import { HomePage } from './android/app/src/Screens/Home/HomePage';
 
 const Stack = createNativeStackNavigator();
-
-function Homes(): React.JSX.Element {
-  return (
-    <GestureHandlerRootView style={{flex: 1}}>
-        <Stack.Navigator screenOptions={{headerShown: false}}>
-          <Stack.Screen
-            name="Notification"
-            component={Notification}
-            options={{headerShown: false}}
-          />
-          <Stack.Screen
-            name="Chat"
-            component={Chat}
-            options={{headerShown: false}}
-          />
-          <Stack.Screen
-            name="DetailChat"
-            component={DetailChat}
-            options={{headerShown: false}}
-          />
-        </Stack.Navigator>
-    </GestureHandlerRootView>);}
-const SettingsStackScreen = () => {
-  return (
-    <View>
-      <Text style={styles.text}>Setting</Text>
-    </View>
-  );
-};
 
 const Homestack = () => {
   return (
@@ -83,16 +53,10 @@ const Homestack = () => {
           backgroundColor: '#353B51',
         },
       })}>
-{/* <!-- <<<<<<< booking */}
-      <Tab.Screen name="Trang chủ" component={Homes} />
-      <Tab.Screen name="Dịch vụ" component={AddBookingScreen} />
-      <Tab.Screen name="Đơn giặt" component={SettingsStackScreen} />
-       {/* --> */}
-{/* <!-- ======= -->
       <Tab.Screen name="Trang chủ" component={HomePage} />
-      <Tab.Screen name="Dịch vụ" component={DetailScreen} />
+      <Tab.Screen name="Dịch vụ" component={AddBookingScreen} />
       <Tab.Screen name="Đơn giặt" component={BookScreen} />
-<!-- >>>>>>> dev --> */}
+
       <Tab.Screen name="Profile" component={Profile} />
     </Tab.Navigator>
   );

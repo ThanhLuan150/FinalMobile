@@ -250,7 +250,8 @@ const FlatListHeaderComponent: FC = (): JSX.Element => {
 export const AddBookingScreen: FC = (): JSX.Element => {
   const navigation = useNavigation();
   return (
-    <View
+    <KeyboardAvoidingView
+    behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
      style={styles.container}>
       <View style={styles.header}>
         <TouchableOpacity style={styles.backicon}>
@@ -261,7 +262,7 @@ export const AddBookingScreen: FC = (): JSX.Element => {
       <View style={styles.mainContent}>
         <TypeClothesComponent />
       </View>
-    </View>
+    </KeyboardAvoidingView>
   );
 };
 const styles = StyleSheet.create({
@@ -272,7 +273,6 @@ const styles = StyleSheet.create({
   mainContent: {
     width: '90%',
     alignSelf: 'center',
-    // height: '100%',
     flex: 1,
   },
   header: {
@@ -393,6 +393,7 @@ const styles = StyleSheet.create({
     paddingBottom: 8,
     borderRadius: 10,
     marginBottom: 5,
+    marginLeft: '50%',
     justifyContent: 'space-between',
   },
   quantityContainer: {
