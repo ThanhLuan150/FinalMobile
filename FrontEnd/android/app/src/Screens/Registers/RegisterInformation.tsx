@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: '600',
     color: 'white',
-    marginTop: -16,
+    marginTop: 5,
     paddingBottom: 650,
   },
   imageLogo: {
@@ -60,8 +60,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   imageStyle: {
-    width: 200,
-    height: 300,
+    width: '80%',
+    height: '35%',
     position: 'absolute',
     top: 100,
   },
