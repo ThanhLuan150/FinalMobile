@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
   Left: {
     backgroundColor: '#6D7693',
     height: 100,
-    flex: 2,
+    flex: 1.5,
     borderBottomLeftRadius: 10,
     borderTopLeftRadius:10,
     marginRight:10
