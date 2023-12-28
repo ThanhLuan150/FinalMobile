@@ -1,6 +1,6 @@
 import React, {useState, useRef, useEffect} from 'react';
+import { Dimensions } from 'react-native';
 import {Image, StyleSheet, View, FlatList} from 'react-native';
-
 const ImageSlide = [
   require('../../../Image/slideShow1.png'),
   require('../../../Image/slideShow2.png'),
@@ -17,7 +17,7 @@ export const SlideShowImage = () => {
         flatListRef.current.scrollToIndex({index: nextPage, animated: true});
         setCurrentPage(nextPage);
       }
-    }, 3000); // Change the interval time (in milliseconds) as needed
+    }, 3000);
 
     return () => clearInterval(interval);
   }, [currentPage]);
@@ -30,9 +30,10 @@ export const SlideShowImage = () => {
         keyExtractor={(_item, index) => 'key' + index}
         horizontal
         pagingEnabled
+        style={styles.FlastlistSlide}
         showsHorizontalScrollIndicator={false}
         renderItem={({item, index}) => (
-          <Image key={index} source={item} style={styles.imageSlide} />
+          <Image key={index} source={item} style={styles.imageSlide}/>
         )}
       />
     </View>
@@ -40,29 +41,19 @@ export const SlideShowImage = () => {
 };
 
 const styles = StyleSheet.create({
-  dotView: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    marginTop: 10,
-  },
-  dot: {
-    color: 'white',
-    margin: 5,
-    fontSize: 25,
-  },
-  activeDot: {
-    color: '#88cbd1',
-    margin: 5,
-    fontSize: 25,
-  },
   imageSlide: {
-    width: 351,
+    width: 350,
     height: 200,
     borderRadius:20,
+    objectFit:'fill'
   },
   SlideShow: {
     marginLeft:30,
     marginRight:30,
     marginBottom:30,
+    alignItems:'center',
   },
+  FlastlistSlide:{
+    width:350,
+  }
 });

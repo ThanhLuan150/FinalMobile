@@ -11,9 +11,11 @@ export const RenderNearLocation = ({item}: any) => {
 
       <View>
         <Text style={styles.textdescription}>{item.name}</Text>
-        <Text style={styles.textseedetail}>Xem để nhận vé ngay nhé!</Text>
         <View style={{flexDirection: 'row', gap: 10, paddingTop: 8}}>
-          <Text style={styles.textTime}>🕑 Mở cửa {item.time}</Text>
+          <Text style={styles.textTime}>🕑 Mở cửa 8AM</Text>
+        </View>
+        <View>
+          <Text>⭐4.9/5</Text>
         </View>
       </View>
     </TouchableOpacity>
@@ -27,10 +29,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     marginStart: 20,
     marginRight: 10,
+  
   },
   viewImgae: {
-    width: 100,
-    height: 70,
+    width: 70,
+    height: 50,
+    objectFit:'contain'
   },
   textdescription: {
     color: '#BBF4FB',
