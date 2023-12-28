@@ -33,6 +33,7 @@ const styles = StyleSheet.create({
   view:{
     padding:20, 
     flexDirection:'row',
+    marginRight:25
   },
   viewSearch:{
     borderRadius:15,
