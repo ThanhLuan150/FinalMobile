@@ -1,5 +1,4 @@
 import React from 'react';
-import {StyleSheet} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
@@ -47,11 +46,11 @@ const Homestack = () => {
         },
         tabBarInactiveTintColor: '#91d3fa',
         tabBarActiveTintColor: '#91d3fa',
-        keyboardHidesTabBar: true,
         headerShown: false,
         tabBarStyle: {
           backgroundColor: '#353B51',
         },
+        tabBarHideOnKeyboard: true,
       })}>
       <Tab.Screen name="Trang chủ" component={HomePage} />
       <Tab.Screen name="Dịch vụ" component={AddBookingScreen} />
@@ -163,25 +162,4 @@ function App(): React.JSX.Element {
     </NavigationContainer>
   );
 }
-const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-  text: {
-    color: 'black',
-  },
-});
 export default App;
