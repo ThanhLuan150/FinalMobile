@@ -23,7 +23,8 @@ import EditRatingScreen from './android/app/src/Screens/Raiting/EditRating';
 import LoginScreen from './android/app/src/Screens/Login/Login';
 import LoginSuccessfullyScreeen from './android/app/src/Screens/Login/LoginSuccessfully';
 import BookScreen from './android/app/src/Screens/Books/OrderIsOnGoing';
-import { OrderTrackingScreen } from './android/app/src/Screens/Books/OrderTracking';
+// import { OrderTrackingScreen } from './android/app/src/Screens/Books/OrderTracking';
+
 import { HomePage } from './android/app/src/Screens/Home/HomePage';
 
 const Stack = createNativeStackNavigator();
