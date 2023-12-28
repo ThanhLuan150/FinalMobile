@@ -100,58 +100,6 @@ const TypeServiceComponent: FC = (): JSX.Element => {
   );
 };
 
-const QuantityDropdown: FC = (): JSX.Element => {
-  const [quantity, setQuantity] = useState(1);
-
-  const updateQuantity = (newQuantity: number) => {
-    // Ensure the quantity is a non-negative integer
-    const clampedQuantity = Math.max(0, Math.floor(newQuantity));
-    setQuantity(clampedQuantity);
-  };
-
-  const increaseQuantity = () => {
-    updateQuantity(quantity + 1);
-  };
-
-  const decreaseQuantity = () => {
-    updateQuantity(quantity - 1);
-  };
-
-  const handleInputChange = (text: string) => {
-    // Allow only numeric input
-    const numericValue = parseInt(text, 10);
-
-    if (!isNaN(numericValue)) {
-      updateQuantity(numericValue);
-    }
-  };
-
-  return (
-    <View style={styles.dropdownQuantity}>
-      <Text>Số lượng</Text>
-      <View style={styles.quantityContainer}>
-        <TouchableOpacity
-          onPress={decreaseQuantity}
-          style={styles.quantityButton}>
-          <Ionicons name="remove-circle-sharp" size={20} />
-        </TouchableOpacity>
-        <TextInput
-          style={styles.quantityInput}
-          value={quantity.toString()}
-          onChangeText={handleInputChange}
-          keyboardType="numeric"
-          // KeyboardAvoidingView
-        />
-        <TouchableOpacity
-          onPress={increaseQuantity}
-          style={styles.quantityButton}>
-          <Ionicons name="add-circle-sharp" size={20} />
-        </TouchableOpacity>
-      </View>
-    </View>
-  );
-};
-
 const TypeClothesComponent: FC = (): JSX.Element => {
   const clothesTypes = [
     {title: 'Đồ bình thường'},
@@ -198,7 +146,13 @@ const TypeClothesComponent: FC = (): JSX.Element => {
           key={index}
           style={{...styles.clothesType, ...style.clothesCheckedStyle}}
           onPress={() => toggleClothes(item.title)}>
-          <Text style={styles.clothesTypeText}>{item.title}</Text>
+          <Text
+            style={{
+              ...styles.clothesTypeText,
+              color: clothesChecked.includes(item.title) ? '#91d3fa' : '#fff',
+            }}>
+            {item.title}
+          </Text>
           <MaterialCommunityIcons
             name={
               clothesChecked.includes(item.title)
@@ -209,22 +163,72 @@ const TypeClothesComponent: FC = (): JSX.Element => {
             color={checkboxColor}
           />
         </TouchableOpacity>
-        {clothesChecked.includes(item.title) && (
-          <QuantityDropdown />
-        )}
+        {clothesChecked.includes(item.title) && <QuantityDropdown />}
       </View>
     );
   };
 
   return (
-       <FlatList
-         ListHeaderComponent={FlatListHeaderComponent}
-         showsVerticalScrollIndicator={false}
-         style={{gap: 5}}
-         data={clothesTypes}
-         renderItem={RenderTypeClothes}
-         keyExtractor={(item, index) => `${item.title}-${index}`}
-       />
+    <FlatList
+      ListHeaderComponent={FlatListHeaderComponent}
+      ListFooterComponent={FlatListFooterComponent}
+      showsVerticalScrollIndicator={false}
+      style={{gap: 5}}
+      data={clothesTypes}
+      renderItem={RenderTypeClothes}
+      keyExtractor={(item, index) => `${item.title}-${index}`}
+    />
+  );
+};
+
+const QuantityDropdown: FC = (): JSX.Element => {
+  const [quantity, setQuantity] = useState(1);
+
+  const updateQuantity = (newQuantity: number) => {
+    // Ensure the quantity is a non-negative integer
+    const clampedQuantity = Math.max(0, Math.floor(newQuantity));
+    setQuantity(clampedQuantity);
+  };
+
+  const increaseQuantity = () => {
+    updateQuantity(quantity + 1);
+  };
+
+  const decreaseQuantity = () => {
+    updateQuantity(quantity - 1);
+  };
+
+  const handleInputChange = (text: string) => {
+    // Allow only numeric input
+    const numericValue = parseInt(text, 10);
+
+    if (!isNaN(numericValue)) {
+      updateQuantity(numericValue);
+    }
+  };
+
+  return (
+    <View style={styles.dropdownQuantity}>
+      <Text style={{color: '#fff'}}>Số lượng</Text>
+      <View style={styles.quantityContainer}>
+        <TouchableOpacity
+          onPress={decreaseQuantity}
+          style={styles.quantityButton}>
+          <Ionicons name="remove-circle-sharp" size={20} color={'#fff'} />
+        </TouchableOpacity>
+        <TextInput
+          style={styles.quantityInput}
+          value={quantity.toString()}
+          onChangeText={handleInputChange}
+          keyboardType="numeric"
+        />
+        <TouchableOpacity
+          onPress={increaseQuantity}
+          style={styles.quantityButton}>
+          <Ionicons name="add-circle-sharp" size={20} color={'#fff'} />
+        </TouchableOpacity>
+      </View>
+    </View>
   );
 };
 
@@ -247,12 +251,253 @@ const FlatListHeaderComponent: FC = (): JSX.Element => {
   );
 };
 
+const FlatListFooterComponent: FC = (): JSX.Element => {
+  return (
+    <>
+      <WashingLiquidComponent />
+      <SabricSoftenerComponent />
+      <MoreOptionComponent />
+    </>
+  );
+};
+
+const WashingLiquidComponent: FC = (): JSX.Element => {
+  const washingLiquids = ['Mặc định', 'Vico', 'Flora'];
+  const [washingLiquidChecked, setwashingLiquidChecked] = useState('Mặc định');
+
+  const toggleTypewashingLiquid = (type: String) =>
+    setwashingLiquidChecked(washingLiquids.filter(value => value === type)[0]);
+  type ItemProps = {item: any; index: number};
+  const RenderTypeWashingLiquid = ({item}: ItemProps) => {
+    const style = StyleSheet.create({
+      washingLiquidclothesCheckedStyle: {
+        backgroundColor: washingLiquidChecked === item ? '#8888' : '#353B51',
+        borderColor: washingLiquidChecked === item ? '#91d3fa' : '#999999',
+      },
+    });
+    return (
+      <TouchableOpacity
+        style={{
+          ...styles.clothesType,
+          ...style.washingLiquidclothesCheckedStyle,
+        }}
+        id={item}
+        onPress={() => toggleTypewashingLiquid(item)}>
+        <Text
+          style={{
+            ...styles.clothesTypeText,
+            color: washingLiquidChecked === item ? '#91d3fa' : '#fff',
+          }}>
+          {item}
+        </Text>
+        <Ionicons
+          name={
+            washingLiquidChecked === item
+              ? 'radio-button-on'
+              : 'radio-button-off'
+          }
+          size={20}
+          color={washingLiquidChecked === item ? '#91d3fa' : '#fff'}
+        />
+      </TouchableOpacity>
+    );
+  };
+  return (
+    <>
+      <View style={{...styles.headingTexts, marginTop: 10}}>
+        <Text style={styles.headingText}>Nước giặt:</Text>
+      </View>
+      <FlatList
+        showsVerticalScrollIndicator={false}
+        style={{gap: 5}}
+        data={washingLiquids}
+        renderItem={RenderTypeWashingLiquid}
+        keyExtractor={(item, index) => `${item}-${index}`}
+      />
+    </>
+  );
+};
+
+const SabricSoftenerComponent: FC = (): JSX.Element => {
+  const sabricSofteners = ['Mặc định', 'Vico', 'Downy', 'Comfort'];
+  const [SabricSoftenerChecked, setSabricSoftenerChecked] =
+    useState('Mặc định');
+
+  const toggleTypeSabricSoftener = (type: String) =>
+    setSabricSoftenerChecked(
+      sabricSofteners.filter(value => value === type)[0],
+    );
+  type ItemProps = {item: any; index: number};
+  const RenderTypeSabricSoftener = ({item}: ItemProps) => {
+    const style = StyleSheet.create({
+      SabricSoftenerclothesCheckedStyle: {
+        backgroundColor: SabricSoftenerChecked === item ? '#8888' : '#353B51',
+        borderColor: SabricSoftenerChecked === item ? '#91d3fa' : '#999999',
+      },
+    });
+    return (
+      <TouchableOpacity
+        style={{
+          ...styles.clothesType,
+          ...style.SabricSoftenerclothesCheckedStyle,
+        }}
+        id={item}
+        onPress={() => toggleTypeSabricSoftener(item)}>
+        <Text
+          style={{
+            ...styles.clothesTypeText,
+            color: SabricSoftenerChecked === item ? '#91d3fa' : '#fff',
+          }}>
+          {item}
+        </Text>
+        <Ionicons
+          name={
+            SabricSoftenerChecked === item
+              ? 'radio-button-on'
+              : 'radio-button-off'
+          }
+          size={20}
+          color={SabricSoftenerChecked === item ? '#91d3fa' : '#fff'}
+        />
+      </TouchableOpacity>
+    );
+  };
+  return (
+    <>
+      <View style={{...styles.headingTexts, marginTop: 10}}>
+        <Text style={styles.headingText}>Nước xả vải:</Text>
+      </View>
+      <FlatList
+        showsVerticalScrollIndicator={false}
+        style={{gap: 5}}
+        data={sabricSofteners}
+        renderItem={RenderTypeSabricSoftener}
+        keyExtractor={(item, index) => `${item}-${index}`}
+      />
+    </>
+  );
+};
+
+const MoreOptionComponent: FC = (): JSX.Element => {
+  const servicesTypes = [
+    {title: 'Ủi đồ'},
+    {title: 'Vá đồ'},
+    {title: 'Tẩy vết bẩn'},
+    {title: 'Thêm nước giặt/xả'},
+    {title: 'Giặt 2 lần'},
+  ];
+
+  const [servicesChecked, setservicesChecked] = useState<string[]>([]);
+  const [moreServices, setmoreServices] = useState(false);
+  const togglemoreServices = () => {
+    setmoreServices(!moreServices);
+  };
+
+  const toggleservices = (chosen: string) => {
+    setservicesChecked(prevChecked => {
+      if (prevChecked.includes(chosen)) {
+        return prevChecked.filter(item => item !== chosen);
+      } else {
+        return [...prevChecked, chosen];
+      }
+    });
+  };
+
+  type ItemProps = {item: any; index: number};
+
+  const RenderTypeservices = ({item, index}: ItemProps) => {
+    const checkboxColor = servicesChecked.includes(item.title)
+      ? '#91d3fa'
+      : '#999999';
+
+    const style = StyleSheet.create({
+      servicesCheckedStyle: {
+        backgroundColor: servicesChecked.includes(item.title)
+          ? '#8888'
+          : '#353B51',
+        borderColor: servicesChecked.includes(item.title)
+          ? '#91d3fa'
+          : '#999999',
+      },
+    });
+
+    return (
+      <View>
+        <TouchableOpacity
+          key={index}
+          style={{...styles.clothesType, ...style.servicesCheckedStyle}}
+          onPress={() => toggleservices(item.title)}>
+          <Text
+            style={{
+              ...styles.clothesTypeText,
+              color: servicesChecked.includes(item.title) ? '#91d3fa' : '#fff',
+            }}>
+            {item.title}
+          </Text>
+          <MaterialCommunityIcons
+            name={
+              servicesChecked.includes(item.title)
+                ? 'checkbox-marked'
+                : 'checkbox-blank-outline'
+            }
+            size={15}
+            color={checkboxColor}
+          />
+        </TouchableOpacity>
+        {servicesChecked.includes(item.title) && item.title === 'Vá đồ' && (
+          <QuantityDropdown />
+        )}
+      </View>
+    );
+  };
+
+  return (
+    <>
+      <TouchableOpacity
+        onPress={togglemoreServices}
+        style={{
+          width: '100%',
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+        }}>
+        <View style={{...styles.headingTexts, width: 'auto'}}>
+          <Text style={styles.headingText}>Dịch vụ thêm</Text>
+          <Ionicons name="alert-circle" size={18} color={'#91d3fa'} />
+        </View>
+        <Ionicons
+          name={moreServices ? 'chevron-down-sharp' : 'chevron-up-sharp'}
+          size={18}
+          color={'#91d3fa'}
+        />
+      </TouchableOpacity>
+      {moreServices && (
+        <FlatList
+          showsVerticalScrollIndicator={false}
+          data={servicesTypes}
+          renderItem={RenderTypeservices}
+          keyExtractor={(item, index) => `${item.title}-${index}`}
+        />
+      )}
+    </>
+  );
+};
+
 export const AddBookingScreen: FC = (): JSX.Element => {
   const navigation = useNavigation();
+  const NextButton: FC = (): JSX.Element => {
+    return (
+      <TouchableOpacity
+        style={styles.NextButton}
+        onPress={() => navigation.navigate('Trang chủ')}>
+        <Text style={styles.ButtonText}>Tiếp</Text>
+      </TouchableOpacity>
+    );
+  };
   return (
     <KeyboardAvoidingView
-    behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-     style={styles.container}>
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      style={styles.container}>
       <View style={styles.header}>
         <TouchableOpacity style={styles.backicon}>
           <Ionicons name="chevron-back-outline" size={35} color={'white'} />
@@ -262,6 +507,7 @@ export const AddBookingScreen: FC = (): JSX.Element => {
       <View style={styles.mainContent}>
         <TypeClothesComponent />
       </View>
+      <NextButton />
     </KeyboardAvoidingView>
   );
 };
@@ -405,9 +651,26 @@ const styles = StyleSheet.create({
     height: 20,
     textAlign: 'center',
     padding: 0,
+    color: '#91d3fa',
   },
   quantityButton: {
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  NextButton: {
+    height: 40,
+    width: '90%',
+    alignSelf: 'center',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#91d3fa',
+    borderRadius: 10,
+    marginTop: 10,
+    marginBottom: 10,
+  },
+  ButtonText: {
+    fontSize: 20,
+    color: '#353B51',
+    fontWeight: '700',
   },
 });
