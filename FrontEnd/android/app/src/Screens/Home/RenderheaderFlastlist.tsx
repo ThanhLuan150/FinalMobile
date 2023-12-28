@@ -1,4 +1,11 @@
-import {FlatList, Pressable, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {
+  FlatList,
+  Pressable,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import React from 'react';
 import {SlideShowImage} from './components/SlideShowImage';
@@ -6,7 +13,7 @@ import {RenderMiniGame} from './components/RenderMiniGame';
 import {RenderNearLocation} from './components/NearLocation';
 import {Image} from 'react-native';
 import {renderOrder} from './components/Order';
-import {useQueries, useQuery} from '@tanstack/react-query';
+import {useQueries} from '@tanstack/react-query';
 import axios from 'axios';
 export const RenderheaderFlastlist = () => {
   const DATA = [
@@ -27,23 +34,21 @@ export const RenderheaderFlastlist = () => {
     },
   ];
 
-  const [minigame,branch] = useQueries({
+  const [minigame, branch] = useQueries({
     queries: [
       {
         queryKey: ['minigame'],
-        queryFn: async() => 
+        queryFn: async () =>
           axios
             .get('https://e636-14-176-231-248.ngrok-free.app/api/minigame')
-            .then(res=> res.data)
-        
+            .then(res => res.data),
       },
       {
         queryKey: ['branch'],
-        queryFn: async() => 
+        queryFn: async () =>
           axios
             .get('https://e636-14-176-231-248.ngrok-free.app/api/branch')
-            .then(res=> res.data)
-        
+            .then(res => res.data),
       },
     ],
   });
@@ -95,10 +100,11 @@ export const RenderheaderFlastlist = () => {
         />
       </View>
       <Text style={styles.titlemenu}>Bảng giá</Text>
-      <Image
+      <View style={styles.ContainerPriceTableImg}><Image
         style={styles.PriceTableImg}
         source={require('../../Image/pricetable.png')}
-      />
+      /></View>
+      
       <View style={styles.containerViewOrder}>
         <Text style={styles.titleViewOrder}>Các chi nhánh gần bạn</Text>
         <Pressable>
@@ -153,15 +159,15 @@ const styles = StyleSheet.create({
   },
   containerCreateOrder: {
     flexDirection: 'row',
-    marginLeft:20,
-    marginRight:10
+    marginLeft: 20,
+    marginRight: 10,
   },
   PriceTableImg: {
-    width: 300,
+    width: 350,
     height: 200,
     objectFit: 'fill',
     borderRadius: 20,
-    marginTop:10,
+    marginTop: 10,
     marginLeft: 30,
     marginRight: 30,
     marginBottom: 30,
@@ -173,7 +179,10 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 16,
   },
-  FlashlistRenderLocation:{
-    marginRight:10
+  FlashlistRenderLocation: {
+    marginRight: 10,
+  },
+  ContainerPriceTableImg:{
+    alignItems:'center'
   }
 });
