@@ -1,11 +1,10 @@
 <?php
 
 namespace App\Mail;
-
+use Illuminate\Mail\Mailable;
 use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Address;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
@@ -20,9 +19,9 @@ class OTPMail extends Mailable
     /**
      * Create a new message instance.
      */
-    public function __construct(User $phone, string $otp)
+    public function __construct(User $email, string $otp)
     {
-        $this->user=$phone;
+        $this->user= $email;
         $this->otp=$otp;
     }
 
@@ -32,8 +31,8 @@ class OTPMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            from: new Address('luan.le24@student.passerellesnumeriques.org','MoonLight Cinema'),
-            subject: 'email verify account',
+            from: new Address('luan.le24@student.passerellesnumeriques.org','SLHTWashWize'),
+            subject: 'email verify user',
         );
     }
 

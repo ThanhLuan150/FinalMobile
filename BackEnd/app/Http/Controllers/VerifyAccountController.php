@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\OtpRequest;
+use App\Mail\OTPMail;
 use App\Models\User;
-use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Mail;
@@ -14,10 +14,10 @@ class VerifyAccountController extends Controller
     public static  function sendEmailConfirmAccount(User $user, int $otp)
     {
         $expiredAt = Carbon::now()->addMinutes(5);
-        Cache::put(self::OTP_PREFIX. $user->id, $otp, $expiredAt);
+        Cache::put(self::OTP_PREFIX. $user->id_user, $otp, $expiredAt);
 
         $otpMail = new OTPMail($user,$otp);
-        Mail::to($user->phone)->send($otpMail);
+        Mail::to($user->email)->send($otpMail);
 
     }
 
@@ -26,17 +26,17 @@ class VerifyAccountController extends Controller
     }
 
     public  function verifyOtp(OtpRequest $otpRequest){
-        $user = User::firstWhere('phone', $otpRequest->email);
+        $user = User::firstWhere('email', $otpRequest->email);
         if($user['verify']){
             return $this->commonResponse($user,'User existed','500');
         }
 
         if (Cache::get(self::OTP_PREFIX. $user->id_user) == $otpRequest->otp){
-            User::where('phone', $otpRequest->phone)
+            User::where('email', $otpRequest->email)
                 ->update([
                     'verify'=>1
                 ]);
-            Cache::forever(self::OTP_PREFIX,$user->id);
+            Cache::forever(self::OTP_PREFIX,$user->id_user);
             return $this->commonResponse($user,'verify successfully','200');
         }
 

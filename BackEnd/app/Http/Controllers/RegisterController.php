@@ -19,11 +19,15 @@ class RegisterController extends Controller
         $user-> email  = $request->input('email');
         $user-> password = Hash::make($request->input('password'));
         $user->save();
+        
+        VerifyAccountController::sendEmailConfirmAccount($user, VerifyAccountController::generateOtp());
         return response()->json([
             'message' => 'User created successfully',
-            'user' =>  $user,
+            'user' => $user,
+            'additional_info' => $this->commonResponse($user, 'sent otp'),
         ], 201);
-    }
 
+
+    }
     
 }

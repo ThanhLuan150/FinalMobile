@@ -8,17 +8,17 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
-
+use Illuminate\Mail\Mailables\Address;
 class RegisterMail extends Mailable
 {
     use Queueable, SerializesModels;
-
+    private  $data = [];
     /**
      * Create a new message instance.
      */
-    public function __construct()
+    public function __construct($data)
     {
-        //
+        $this->data=$data;
     }
 
     /**
@@ -27,7 +27,8 @@ class RegisterMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Register Mail',
+            from: new Address('luan.le24@student.passerellesnumeriques.org','SLHTWashWize'),
+            subject: $this->data['subject'],
         );
     }
 
@@ -37,7 +38,10 @@ class RegisterMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'view.name',
+            view: 'emails.index',
+            with: [
+                'data'=> $this->data
+            ]
         );
     }
 
