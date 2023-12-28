@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
     container:{
         flexDirection:'row',
         marginLeft:20,
-        marginTop:10
+        marginTop:10,
     },
     image:{
         width:50,
@@ -25,6 +25,7 @@ const styles = StyleSheet.create({
     },
     name:{
         color:'white',
-        width:'70%'
+        fontSize:10,
+        width:'60%'
     }
 });

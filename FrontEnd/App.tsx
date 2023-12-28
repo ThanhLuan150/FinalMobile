@@ -1,6 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import {StyleSheet} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
@@ -24,6 +23,7 @@ import EditRatingScreen from './android/app/src/Screens/Raiting/EditRating';
 import LoginScreen from './android/app/src/Screens/Login/Login';
 import LoginSuccessfullyScreeen from './android/app/src/Screens/Login/LoginSuccessfully';
 import BookScreen from './android/app/src/Screens/Books/OrderIsOnGoing';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 const Stack = createNativeStackNavigator();
 
@@ -63,8 +63,10 @@ const Homestack = () => {
 
 const Tab = createBottomTabNavigator();
 function App(): React.JSX.Element {
+  const queryClient = new QueryClient();
   return (
     <NavigationContainer>
+      <QueryClientProvider client={queryClient}>
       <Stack.Navigator screenOptions={{
         headerShown: false,
        }}>
@@ -150,28 +152,9 @@ function App(): React.JSX.Element {
           />
         <Stack.Screen name="HomeScreen" component={Homestack} />
       </Stack.Navigator>
+      </QueryClientProvider>
     </NavigationContainer>
   );
 }
-const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-  text: {
-    color: 'black',
-  },
-});
+
 export default App;

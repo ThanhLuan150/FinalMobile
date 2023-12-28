@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
+import { Image,StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 export const renderOrder = ({ item }: any) => {
   return (
@@ -15,15 +15,15 @@ export const renderOrder = ({ item }: any) => {
       <View>
         <Text style={styles.IdOrder}>#{item.id}</Text>
         <Text style={styles.IdOrder}>{item.date}</Text>
-        <Pressable >
+        <TouchableOpacity >
             <Text style={styles.title}>Đánh giá </Text>
-        </Pressable>
+        </TouchableOpacity>
       </View>
       <View style={styles.containerButton}>
         <Text style={styles.IdOrder}>{item.price}</Text>
-        <Pressable style={styles.reBuyButton}>
+        <TouchableOpacity style={styles.reBuyButton}>
             <Text style={styles.title}>Đặt lại </Text>
-        </Pressable>
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -48,19 +48,21 @@ const styles = StyleSheet.create({
     backgroundColor: '#5A617B',
     borderRadius: 10,
     alignItems: 'center',
-    padding: 10,
-    marginRight:10
+   padding:2,
+   marginRight:8
   },
   IdOrder: {
     color: 'white',
   },
   reBuyButton:{
     backgroundColor:'#7EB9C1',
-    marginTop:20
+    marginTop:20,
+    borderRadius:10
   },
   title:{
     fontWeight:'bold',
-    padding:10
+    padding:10,
+    color:'white'
   },
   containerButton:{
    
