@@ -11,6 +11,13 @@ use Illuminate\Support\Facades\Mail;
 class VerifyAccountController extends Controller
 {
     const OTP_PREFIX = 'OTP_CODE_';
+    private function commonResponse($data, $message, $statusCode)
+    {
+        return response()->json([
+            'data' => $data,
+            'message' => $message,
+        ], $statusCode);
+    }
     public static  function sendEmailConfirmAccount(User $user, int $otp)
     {
         $expiredAt = Carbon::now()->addMinutes(5);
@@ -31,12 +38,12 @@ class VerifyAccountController extends Controller
             return $this->commonResponse($user,'User existed','500');
         }
 
-        if (Cache::get(self::OTP_PREFIX. $user->id_user) == $otpRequest->otp){
+        if (Cache::get(self::OTP_PREFIX. $user->id) == $otpRequest->otp){
             User::where('email', $otpRequest->email)
                 ->update([
                     'verify'=>1
                 ]);
-            Cache::forever(self::OTP_PREFIX,$user->id_user);
+            Cache::forever(self::OTP_PREFIX,$user->id);
             return $this->commonResponse($user,'verify successfully','200');
         }
 

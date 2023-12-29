@@ -31,7 +31,7 @@ class OTPMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            from: new Address('luan.le24@student.passerellesnumeriques.org','SLHTWashWize'),
+            from: new Address('minh.le24@student.passerellesnumeriques.org','SLHTWashWize'),
             subject: 'email verify user',
         );
     }

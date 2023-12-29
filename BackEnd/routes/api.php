@@ -48,6 +48,7 @@ Route::get('/minigame',[MiniGameController::class,'miniGame']);
 //API User
 Route::get('/user',[RegisterController::class,'getUser']);
 Route::post('/Register',[RegisterController::class,'register']);
-// Route::post('/register', [AuthController::class, 'register']);
 //API Post Verify Account
 Route::post('/Verify',[VerifyAccountController::class,'verifyOtp']);
+//API Login
+Route::post('/Login',[RegisterController::class,'login']);
