@@ -45,8 +45,8 @@ export const HomePage = () => {
         .get('https://e636-14-176-231-248.ngrok-free.app/api/Voucher')
         .then(res => res.data),
   });
-  console.log('vouacher', data);
-
+  console.log('voucher',data);
+  
   return (
     <View style={styles.container}>
       <Header />

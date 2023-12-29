@@ -29,6 +29,8 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 import { OrderTrackingScreen } from './android/app/src/Screens/Books/OrderTracking';
 import { OrderDetail } from './android/app/src/Screens/Books/OrderDetail';
+import { ServicePage } from './android/app/src/Screens/AddOrder/Service';
+
 const Stack = createNativeStackNavigator();
 
 const Homestack = () => {
@@ -58,7 +60,7 @@ const Homestack = () => {
         tabBarHideOnKeyboard: true,
       })}>
       <Tab.Screen name="Trang chủ" component={HomePage} />
-      <Tab.Screen name="Dịch vụ" component={AddBookingScreen} />
+      <Tab.Screen name="Dịch vụ" component={ServicePage} />
       <Tab.Screen name="Đơn giặt" component={BookScreen} />
       <Tab.Screen name="Profile" component={Profile} />
     </Tab.Navigator>
