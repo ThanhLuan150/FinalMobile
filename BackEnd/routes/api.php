@@ -52,3 +52,5 @@ Route::post('/Register',[RegisterController::class,'register']);
 Route::post('/Verify',[VerifyAccountController::class,'verifyOtp']);
 //API Login
 Route::post('/Login',[RegisterController::class,'login']);
+//API checkmail có tồn tại hay chưa
+Route::get('/check-email',[RegisterController::class,'checkEmail']);
