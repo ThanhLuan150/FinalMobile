@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React from 'react';
+import React, { useEffect } from 'react';
 import {FlatList, StyleSheet, View} from 'react-native';
 
 import {Header} from './components/Header';
@@ -42,11 +42,10 @@ export const HomePage = () => {
     queryKey: ['Voucher'],
     queryFn: async () =>
       axios
-        .get('https://e636-14-176-231-248.ngrok-free.app/api/Voucher')
+        .get('https://fakestoreapi.com/products')
         .then(res => res.data),
   });
   console.log('voucher',data);
-  
   return (
     <View style={styles.container}>
       <Header />
