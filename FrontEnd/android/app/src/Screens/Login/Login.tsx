@@ -1,21 +1,12 @@
-// LoginScreen.js
-import React, {useState} from 'react';
-import {
-  View,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  StyleSheet,
-  Image,
-} from 'react-native';
-
-const LoginScreen = ({navigation}) => {
-  const [phoneNumber, setPhoneNumber] = useState('');
-
-  const handleLogin = () => {
-    console.log('Đăng nhập với số điện thoại:', phoneNumber);
-  };
-
+/* eslint-disable @typescript-eslint/no-shadow */
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import React, { useState, useEffect } from 'react';
+import styles from '../../Styles/styleLogin';
+import {View,Text,TextInput,TouchableOpacity,Image,Alert} from 'react-native';
+import useLoginUserObject from '../../Hook/useLogin';
+const LoginScreen = () => {
+  const {email,setEmail,password,setPassword,navigation,saveToken,AsyncStorage,checkToken,Alert,clearFields,handleLogin} = useLoginUserObject();
   return (
     <View style={styles.container}>
       <Text style={styles.header}>Đăng nhập</Text>
@@ -26,72 +17,25 @@ const LoginScreen = ({navigation}) => {
             <Text style={styles.sectionTitle}>WashWizie</Text>
       <TextInput
         style={styles.input}
-        placeholder="Số điện thoại"
+        placeholder="Email"
         placeholderTextColor="white"
-        keyboardType="numeric"
-        onChangeText={text => setPhoneNumber(text)}
+        value={email}
+        onChangeText={text => setEmail(text)}
+      />
+      <TextInput
+        style={styles.input}
+        placeholder="Mật khẩu"
+        placeholderTextColor="white"
+        value={password}
+           secureTextEntry
+        onChangeText={text => setPassword(text)}
       />
       <TouchableOpacity
         style={styles.buttonLogin}
-        onPress={() => navigation.navigate('loginSuccessfullyScreeen')}>
+        onPress={handleLogin}>
         <Text style={styles.buttonText}>Đăng nhập</Text>
       </TouchableOpacity>
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#353B51',
-  },
-  header: {
-    fontSize: 30,
-    color:'white',
-    bottom:50,
-  },
-  sectionTitle: {
-    fontSize: 20,
-    fontWeight: '700',
-    color: 'white',
-    marginTop: '5%',
-    marginBottom :'30%',
-    justifyContent: 'center',
-  },
-  imageLogo: {
-    width: 100,
-    height: 100,
-    resizeMode: 'contain',
-    justifyContent: 'center',
-    top: '1%',
-  },
-  input: {
-    padding: 20,
-    borderRadius: 10,
-    borderWidth: 2,
-    borderColor: '#CCEBFC',
-    width: '90%',
-    color: 'white',
-    marginBottom: 20,
-  },
-  buttonLogin: {
-    padding: 20,
-    marginTop: 20,
-    borderRadius: 10,
-    color: '#CCEBFC',
-    width: '70%',
-    borderWidth: 2,
-    borderColor: 'white',
-    backgroundColor: '#CCEBFC',
-  },
-  buttonText: {
-    color: 'black',
-    fontSize: 18,
-    fontWeight: 'bold',
-    textAlign: 'center',
-  },
-});
-
 export default LoginScreen;

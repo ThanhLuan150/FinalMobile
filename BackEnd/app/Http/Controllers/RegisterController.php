@@ -48,20 +48,20 @@ class RegisterController extends Controller
                 'user' => $user
             ], 401);
         }
-        // $token = $user->createToken('API Token')->plainTextToken;
+        $token = $user->createToken('API Token')->plainTextToken;
         $user_id = $user;
         if ($user->role) {
             return response()->json([
                 'message' => 'Login user successfully',
-                // 'token' => $token,
+                'token' => $token,
                 'id_user' => $user_id,
                 'role' => 1
             ]);
-        }
+        }   
 
         return response()->json([
             'message' => 'Login branch successfully',
-            // 'token' => $token,
+            'token' => $token,
             'id_user' => $user_id,
             'role' => 0
         ]);
