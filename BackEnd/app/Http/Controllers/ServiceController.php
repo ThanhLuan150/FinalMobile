@@ -2,11 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\service;
 use App\Models\Washingliquid;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 class ServiceController extends Controller
 {   
+    public function index(){
+        $service = service::all();
+        return response()->json($service);
+    }
     public function Service($id_branch){
         $services = DB::table('service')
             ->join('branches', 'service.id_branch', '=', 'branches.id_branch')
