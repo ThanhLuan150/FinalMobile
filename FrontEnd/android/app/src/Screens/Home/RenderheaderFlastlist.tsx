@@ -1,4 +1,4 @@
-import {FlatList,Pressable,Text,TouchableOpacity,View,} from 'react-native';
+import {FlatList, Pressable, Text, TouchableOpacity, View} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import React from 'react';
 import {SlideShowImage} from './components/SlideShowImage';
@@ -6,9 +6,9 @@ import {RenderMiniGame} from './components/RenderMiniGame';
 import {RenderNearLocation} from './components/NearLocation';
 import {Image} from 'react-native';
 import {renderOrder} from './components/Order';
-import {useQueries} from '@tanstack/react-query';
-import axios from 'axios';
 import styles from '../../Styles/RenderheaderFlastlist';
+import {useRenderHomePage} from '../../Hook/useRenderHomePage';
+import {useNavigation} from '@react-navigation/native';
 export const RenderheaderFlastlist = () => {
   const DATA = [
     {
@@ -27,28 +27,13 @@ export const RenderheaderFlastlist = () => {
       date: '12/12/2023',
     },
   ];
-
-  const [minigame, branch] = useQueries({
-    queries: [
-      {
-        queryKey: ['minigame'],
-        queryFn: async () =>
-          axios
-            .get('https://b38e-14-176-231-248.ngrok-free.app/api/minigame')
-            .then(res => res.data),
-      },
-      {
-        queryKey: ['branch'],
-        queryFn: async () =>
-          axios
-            .get('https://b38e-14-176-231-248.ngrok-free.app/api/branch')
-            .then(res => res.data),
-      },
-    ],
-  });
-
+  const {minigame, branch} = useRenderHomePage();
+  const navigation = useNavigation();
+  const handleNavigationService = () => {
+    navigation.navigate('Dịch vụ');
+  };
   return (
-    <View style={{ position:'relative' }}>
+    <View style={{position: 'relative'}}>
       <View>{SlideShowImage()}</View>
       <View style={styles.feature}>
         <View>
@@ -93,10 +78,14 @@ export const RenderheaderFlastlist = () => {
         />
       </View>
       <Text style={styles.titlemenu}>Bảng giá</Text>
-      <View style={styles.ContainerPriceTableImg}><Image
-        style={styles.PriceTableImg}
-        source={require('../../Image/pricetable.png')}
-      /></View>
+      <View style={styles.ContainerPriceTableImg}>
+        <TouchableOpacity onPress={handleNavigationService}>
+          <Image
+            style={styles.PriceTableImg}
+            source={require('../../Image/pricetable.png')}
+          />
+        </TouchableOpacity>
+      </View>
       <View style={styles.containerViewOrder}>
         <Text style={styles.titleViewOrder}>Các chi nhánh gần bạn</Text>
         <Pressable>
@@ -121,4 +110,3 @@ export const RenderheaderFlastlist = () => {
     </View>
   );
 };
-
