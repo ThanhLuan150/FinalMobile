@@ -11,7 +11,7 @@ const useSearch = () =>{
       queryKey: ['branch'],
       queryFn: async () =>
         axios
-          .get('https://b9b7-14-176-231-248.ngrok-free.app/api/branch')
+          .get('https://b38e-14-176-231-248.ngrok-free.app/api/branch')
           .then((res) => res.data),
     });
     const handleSearch = (value: string): void => {
