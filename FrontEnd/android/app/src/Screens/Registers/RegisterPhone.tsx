@@ -17,7 +17,7 @@ const RegisterScreen = () => {
   const [name, onChangeName] = React.useState('');
   const [number, onChangeNumber] = React.useState('');
   const [email, onChangeEmail] = React.useState('');
-   const navigation = useNavigation();
+  const navigation = useNavigation();
 
   return (
     <KeyboardAvoidingView

@@ -17,6 +17,9 @@ import {
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 const EditProfile = () => {
+  const [name, onChangeName] = React.useState('');
+  const [number, onChangeNumber] = React.useState('');
+  const [address, onChangeAddress] = React.useState('');
   const navigation = useNavigation();
   const useGoback = () => {
     navigation.goBack();
@@ -35,25 +38,35 @@ const EditProfile = () => {
             </TouchableOpacity>
             <Text style={styles.textVerify}>Thông tin tài khoản</Text>
           </View>
+          <View style={styles.viewImage}>
+            <Image
+              style={styles.images}
+              source={require('../../Image/huongho.jpg')}
+            ></Image>
+          </View>
           <View style={styles.view}>
             <View style={styles.viewEdit}>
               <Text style={styles.textEdit}>Tên người nhận</Text>
               <TextInput
                 style={styles.textInput}
+                value={name}
                 placeholder="Nhập tên người nhận"
                 placeholderTextColor={'#fff'}></TextInput>
+                
             </View>
             <View style={styles.viewEdit}>
               <Text style={styles.textEdit}>Số điện thoại</Text>
               <TextInput
                 style={styles.textInput}
                 placeholder="Nhập số điện thoại"
+                value={number}
                 placeholderTextColor={'#fff'}></TextInput>
             </View>
             <View style={styles.viewEdit}>
               <Text style={styles.textEdit}>Nhập địa chỉ</Text>
               <TextInput
                 style={styles.textInput}
+                value={address}
                 placeholder="Nhập địa chỉ"
                 placeholderTextColor={'#fff'}></TextInput>
             </View>
@@ -84,8 +97,18 @@ const styles = StyleSheet.create({
   viewbanner: {
     flexDirection: 'row',
     gap: 50,
-    // position: 'absolute',
-    // top:30,
+    bottom:'1%',
+  },
+  viewImage: {
+    justifyContent:'center',
+    alignItems:'center',
+  },
+  images: {
+    width: 200,
+    height: 200,
+    borderRadius: 100,  
+    borderWidth: 2,
+    borderColor: 'yellow',
   },
   image: {
     width: 20,
