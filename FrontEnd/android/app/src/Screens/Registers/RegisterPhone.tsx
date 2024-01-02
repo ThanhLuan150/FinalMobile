@@ -1,56 +1,52 @@
-
-import {useNavigation} from '@react-navigation/native';
-import React from 'react';
-import {
-  View,
-  StyleSheet,
-  TextInput,
-  TouchableOpacity,
-  Image,
-  Text,
-  Keyboard,
-  KeyboardAvoidingView,
-  TouchableWithoutFeedback,
-  Platform,
-} from 'react-native';
-const RegisterScreen = () => {
-  const [name, onChangeName] = React.useState('');
-  const [number, onChangeNumber] = React.useState('');
-  const [email, onChangeEmail] = React.useState('');
-   const navigation = useNavigation();
-
+import React, { FC } from 'react';
+import {View,TextInput,TouchableOpacity,Image,Text,Keyboard,KeyboardAvoidingView,TouchableWithoutFeedback,Platform} from 'react-native';
+import useRegisterUserObject from '../../Hook/useRegisterUser';
+import styles from '../../Styles/styleRegister';
+const RegisterScreen: FC = () => {
+  const {username,phone,email,password,errors,onChangeName,onChangeNumber,onChangeEmail,onChangePassword,useNavigationsLogin,handleSignUp} = useRegisterUserObject();
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === 'android' ? 'padding' : 'height'}
-      style={styles.container}>
+      style={styles.container}
+    >
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.sectionContainer}>
           <View style={styles.children}>
-            <Image
-              source={require('../../Image/logo.png')}
-              style={styles.imageLogo}
-            />
+            <Image source={require('../../Image/logo.png')}style={styles.imageLogo}/>
             <Text style={styles.sectionTitle}>WashWizie</Text>
-
+            {errors.includes('Tên đăng nhập phải có ít nhất 4 ký tự') && (
+              <Text style={styles.errorText}>
+                Tên đăng nhập phải có ít nhất 4 ký tự
+              </Text>
+            )}
             <View style={styles.input}>
               <TextInput
                 onChangeText={onChangeName}
-                value={name}
+                value={username}
                 placeholderTextColor="gray"
                 placeholder="Tên đăng nhập"
                 cursorColor={'#CCEBFC'}
                 style={styles.textInput}
               />
             </View>
+            {errors.includes('Số điện thoại phải có đúng 10 ký tự') && (
+              <Text style={styles.errorText}>
+                Số điện thoại phải có đúng 10 ký tự
+              </Text>
+            )}
             <View style={styles.input}>
               <TextInput
                 onChangeText={onChangeNumber}
                 placeholderTextColor="gray"
-                value={number}
+                value={phone}
                 placeholder="Số điện thoại"
                 style={styles.textInput}
+                keyboardType="numeric"
               />
             </View>
+            {errors.includes('Email không hợp lệ') && (
+              <Text style={styles.errorText}>Email không hợp lệ</Text>
+            )}
             <View style={styles.input}>
               <TextInput
                 onChangeText={onChangeEmail}
@@ -61,14 +57,34 @@ const RegisterScreen = () => {
                 style={styles.textInput}
               />
             </View>
-            <TouchableOpacity style={styles.buttonRegister} onPress={() => navigation.navigate('VerificationCodeScreen')}>
-
+            {errors.includes(
+              'Mật khẩu phải có ít nhất 5 ký tự và chứa ít nhất một ký tự đặc biệt',
+            ) && (
+              <Text style={styles.errorText}>
+                Mật khẩu phải có ít nhất 5 ký tự và chứa ít nhất một ký tự đặc
+                biệt
+              </Text>
+            )}
+            <View style={styles.input}>
+              <TextInput
+                onChangeText={onChangePassword}
+                value={password}
+                placeholderTextColor="gray"
+                placeholder="Nhập mật khẩu"
+                secureTextEntry
+                style={styles.textInput}
+              />
+            </View>
+            <TouchableOpacity
+              style={styles.buttonRegister}
+              onPress={handleSignUp}
+            >
               <Text style={styles.buttonText}>Tạo tài khoản</Text>
             </TouchableOpacity>
 
             <Text style={styles.termsText}>
               Bạn đã có tài khoản{' '}
-              <TouchableOpacity onPress={() => navigation.navigate('LoginScreen')}>
+              <TouchableOpacity onPress={useNavigationsLogin}>
                 <Text style={styles.TextLogin}>Đăng nhập</Text>
               </TouchableOpacity>
             </Text>
@@ -78,76 +94,4 @@ const RegisterScreen = () => {
     </KeyboardAvoidingView>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  sectionContainer: {
-    width: '100%',
-    backgroundColor: '#353B51',
-    padding: 24,
-    flex: 1,
-    justifyContent: 'space-around',
-    gap: 10,
-    alignItems: 'center',
-  },
-  children: {
-    width: '100%',
-    alignItems: 'center',
-  },
-  sectionTitle: {
-    fontSize: 20,
-    fontWeight: '700',
-    color: 'white',
-    marginBottom: '10%',
-    justifyContent: 'center',
-  },
-  imageLogo: {
-    width: 100,
-    height: 100,
-    resizeMode: 'contain',
-    justifyContent: 'center',
-    marginTop: '30%',
-  },
-  input: {
-    padding: 5,
-    paddingLeft: '5%',
-    borderRadius: 10,
-    borderWidth: 2,
-    borderColor: '#CCEBFC',
-    width: '100%',
-    color: 'white',
-    marginBottom: 30,
-  },
-  textInput: {
-    color: 'white',
-  },
-  buttonRegister: {
-    padding: 20,
-    marginTop: 10,
-    borderRadius: 10,
-    color: '#CCEBFC',
-    width: '70%',
-    borderWidth: 2,
-    borderColor: 'white',
-    backgroundColor: '#CCEBFC',
-  },
-  buttonText: {
-    color: 'black',
-    fontSize: 18,
-    fontWeight: 'bold',
-    textAlign: 'center',
-  },
-  termsText: {
-    color: '#CCEBFC',
-    padding: 20,
-  },
-  TextLogin: {
-    color: 'white',
-    top: 4,
-    fontWeight: '700',
-  },
-});
-
 export default RegisterScreen;
