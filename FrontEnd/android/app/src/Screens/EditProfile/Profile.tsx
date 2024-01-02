@@ -141,7 +141,7 @@ const Profile: FC = (): JSX.Element => {
             }}
           >
             <Ionicons color={'#fff'} name="volume-high" size={30} />
-            <Text style={styles.text}>Âm thanh hoặc Rung</Text>
+            <Text style={styles.text}>Âm thanh hoặc rung</Text>
           </View>
           <Ionicons
             color={'#fff'}

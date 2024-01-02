@@ -1,33 +1,9 @@
-<<<<<<< HEAD
-
-import {useNavigation} from '@react-navigation/native';
-import React from 'react';
-import {
-  View,
-  StyleSheet,
-  TextInput,
-  TouchableOpacity,
-  Image,
-  Text,
-  Keyboard,
-  KeyboardAvoidingView,
-  TouchableWithoutFeedback,
-  Platform,
-} from 'react-native';
-const RegisterScreen = () => {
-  const [name, onChangeName] = React.useState('');
-  const [number, onChangeNumber] = React.useState('');
-  const [email, onChangeEmail] = React.useState('');
-  const navigation = useNavigation();
-
-=======
 import React, { FC } from 'react';
 import {View,TextInput,TouchableOpacity,Image,Text,Keyboard,KeyboardAvoidingView,TouchableWithoutFeedback,Platform} from 'react-native';
 import useRegisterUserObject from '../../Hook/useRegisterUser';
 import styles from '../../Styles/styleRegister';
 const RegisterScreen: FC = () => {
   const {username,phone,email,password,errors,onChangeName,onChangeNumber,onChangeEmail,onChangePassword,useNavigationsLogin,handleSignUp} = useRegisterUserObject();
->>>>>>> 9127d9d87e1a23476493b570cfea790261739cd0
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === 'android' ? 'padding' : 'height'}

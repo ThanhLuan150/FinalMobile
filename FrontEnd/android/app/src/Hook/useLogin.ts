@@ -52,7 +52,7 @@ const useLogin = () =>{
         const registeredPassword = await AsyncStorage.getItem('registeredPassword');
         if (registeredEmail && registeredPassword) {
           // Send login request with registration information
-          const response = await axios.post('https://b936-2402-9d80-458-dfa5-1cd6-169-fc7b-e541.ngrok-free.app/api/Login', {
+          const response = await axios.post('https://b38e-14-176-231-248.ngrok-free.app/api/Login', {
             email: registeredEmail,
             password: registeredPassword,
           });
