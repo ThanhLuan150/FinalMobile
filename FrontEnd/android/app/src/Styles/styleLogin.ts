@@ -52,6 +52,9 @@ const styles = StyleSheet.create({
       fontWeight: 'bold',
       textAlign: 'center',
     },
+    errorText:{
+      color:'#fff',
+    }
   });
 // eslint-disable-next-line eol-last
 export default styles;
