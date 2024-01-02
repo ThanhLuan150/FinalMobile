@@ -52,7 +52,7 @@ export const RenderheaderFlastlist = () => {
       },
     ],
   });
-  console.log('dataminigame', branch.data);
+
 
   return (
     <View>
