@@ -34,14 +34,14 @@ export const RenderheaderFlastlist = () => {
         queryKey: ['minigame'],
         queryFn: async () =>
           axios
-            .get('https://b9b7-14-176-231-248.ngrok-free.app/api/minigame')
+            .get('https://b38e-14-176-231-248.ngrok-free.app/api/minigame')
             .then(res => res.data),
       },
       {
         queryKey: ['branch'],
         queryFn: async () =>
           axios
-            .get('https://b9b7-14-176-231-248.ngrok-free.app/api/branch')
+            .get('https://b38e-14-176-231-248.ngrok-free.app/api/branch')
             .then(res => res.data),
       },
     ],

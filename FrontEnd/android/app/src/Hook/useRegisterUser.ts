@@ -72,7 +72,7 @@ const useRegisterUser = (): RegisterHook => {
       password,
     };
     axios
-      .post('https://b9b7-14-176-231-248.ngrok-free.app/api/Register', user)
+      .post('https://b38e-14-176-231-248.ngrok-free.app/api/Register', user)
       .then(response => {
         console.log('User registered:', response.data);
         Alert.alert('Đăng ký thành công');
