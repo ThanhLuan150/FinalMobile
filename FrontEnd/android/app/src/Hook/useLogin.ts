@@ -1,87 +1,86 @@
-import { useState, useEffect } from 'react';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { CommonActions, useNavigation } from '@react-navigation/native';
-import { Alert } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import axios from 'axios';
-const useLogin = () =>{
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const navigation = useNavigation();
-    // Kiểm tra xem token có tồn tại khi màn hình được mount
-    useEffect(() => {
-      checkToken();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
-    // Lưu token vào AsyncStorage kèm theo thời gian hết hạn
-    const saveToken = async (token: string) => {
-      const expirationDate = new Date().getTime() + 30 * 24 * 60 * 60 * 1000; // token sẽ tồn tại trong 30 ngày sau 30 ngày nó sẽ tự động xóa và yêu cầu người dùng phải Login laij
-      await AsyncStorage.setItem('token', token);
-      await AsyncStorage.setItem('tokenExpiration', expirationDate.toString());
-    };
-    // Kiểm tra xem token có hợp lệ trong AsyncStorage hay không
-    const checkToken = async () => {
-      const token = await AsyncStorage.getItem('token');
-      const expirationDate = await AsyncStorage.getItem('tokenExpiration');
-      if (token && expirationDate) {
-        // Kiểm tra xem token có hợp lệ dựa trên thời gian hết hạn
-        if (new Date().getTime() < parseInt(expirationDate)) {
-          Alert.alert('Đăng nhập thành công!');
-          navigation.navigate('HomeScreen');
-        } else {
-           // Xóa token đã hết hạn và quay về màn hình LoginScreen
-          await AsyncStorage.removeItem('token');
-          await AsyncStorage.removeItem('tokenExpiration');
-          Alert.alert('Phiên đăng nhập hết hạn, vui lòng đăng nhập lại.');
-          navigation.dispatch(
-            CommonActions.reset({
-              index: 0,
-              routes: [{ name: 'LoginScreen' }],
-            })
-          );
-        }
-      }
-    };
+import { useState } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Alert } from 'react-native';
+
+interface LoginData {
+  email: string;
+  password: string;
+}
+
+interface LoginHook {
+  email: string;
+  password: string;
+  errors: string[];
+  onChangeEmail: (email: string) => void;
+  onChangePassword: (password: string) => void;
+  navigation: any;
+  handleLogin: () => void;
+  AsyncStorage: any;
+}
+
+const useLoginUser = (): LoginHook => {
+  const [email, onChangeEmail] = useState<string>('');
+  const [password, onChangePassword] = useState<string>('');
+  const [errors, setErrors] = useState<string[]>([]);
+  const navigation = useNavigation();
+
+  const handleLogin = () => {
+    const newErrors: string[] = [];
     const clearFields = () => {
-      setEmail('');
-      setPassword('');
+      onChangeEmail('');
+      onChangePassword('');
     };
-    const handleLogin = async () => {
-      try {
-        // Get registration information from AsyncStorage
-        const registeredEmail = await AsyncStorage.getItem('registeredEmail');
-        const registeredPassword = await AsyncStorage.getItem('registeredPassword');
-        if (registeredEmail && registeredPassword) {
-          // Send login request with registration information
-          const response = await axios.post('https://b38e-14-176-231-248.ngrok-free.app/api/Login', {
-            email: registeredEmail,
-            password: registeredPassword,
-          });
-          console.log('API Response:', response.data);
-          const {token} = response.data;
-            await AsyncStorage.setItem('token', token);// Lưu token nhận được vào AsyncStorage
-            console.log('Đăng nhập thành công');
-            Alert.alert('Đăng nhập thành công !');
-            navigation.navigate('HomeScreen');
-          }
-        }
-      catch (error) {
-        console.log('Đăng nhập thất bại',error);
-      }
+    const emailRegex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
+    if (!emailRegex.test(email)) {
+      newErrors.push('Email không hợp lệ');
+    }
+    if (password.length < 5 || !/[!@#$%^&*(),.?":{}|<>]/.test(password)) {
+      newErrors.push(
+        'Mật khẩu phải có ít nhất 5 ký tự và chứa ít nhất một ký tự đặc biệt',
+      );
+    }
+
+    if (newErrors.length > 0) {
+      setErrors(newErrors);
+      return;
+    }
+
+    const user: LoginData = {
+      email,
+      password,
     };
-    return {
-        email,
-        setEmail,
-        password,
-        setPassword,
-        navigation,
-        saveToken,
-        AsyncStorage,
-        checkToken,
-        Alert,
-        clearFields,
-        handleLogin,
-    };
+
+    axios
+      .post('https://ef75-2402-9d80-456-7df4-90c8-4f68-1d2a-39b0.ngrok-free.app/api/Login', user)
+      .then(response => {
+        console.log('User logged in:', response.data);
+        Alert.alert('Đăng nhập thành công');
+         // Xóa danh sách lỗi
+         clearFields();
+         // Xóa danh sách
+      setErrors([]);
+        AsyncStorage.setItem('token', response.data.token);
+        navigation.navigate('HomeScreen');
+      })
+      .catch(error => {
+        console.error('Đăng nhập thất bại:', error);
+        Alert.alert('Đăng nhập không thành công');
+      });
+  };
+
+  return {
+    email,
+    password,
+    errors,
+    onChangeEmail,
+    onChangePassword,
+    navigation,
+    handleLogin,
+    AsyncStorage,
+  };
 };
 
-const useLoginUserObject = useLogin;
+const useLoginUserObject = useLoginUser;
 export default useLoginUserObject;

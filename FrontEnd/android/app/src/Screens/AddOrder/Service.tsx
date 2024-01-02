@@ -72,10 +72,10 @@
 //     marginBottom: 3,
 //   },
 //   subheading: {},
+
 import {FlatList, StyleSheet} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {RenderHeaderFlastKindOf} from './RenderHeaderFlastKindOf';
-import {useQuery} from '@tanstack/react-query';
 import axios from 'axios';
 import {RenderItemKindOf} from './Components/RenderItemKindOf';
 import {View} from 'react-native';
@@ -90,7 +90,7 @@ export const ServicePage = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `https://b38e-14-176-231-248.ngrok-free.app/api/Typeoflaundries/${idKindOf}`,
+          `https://ef75-2402-9d80-456-7df4-90c8-4f68-1d2a-39b0.ngrok-free.app/api/Typeoflaundries/${idKindOf}`
         );
         setData(response.data);
       } catch (error) {

@@ -2,6 +2,10 @@
 /* eslint-disable no-trailing-spaces */
 /* eslint-disable react/self-closing-comp */
 /* eslint-disable react-native/no-inline-styles */
+import React, {FC} from 'react';
+import {useState} from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useNavigation } from '@react-navigation/native';
 import React, { FC } from 'react';
 import { useState } from 'react';
 import {
@@ -16,7 +20,6 @@ import {
 import { useNavigation } from '@react-navigation/native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-
 const Profile: FC = (): JSX.Element => {
   const navigation = useNavigation();
   const useNavigationVerifyEmail = () => {
@@ -26,6 +29,17 @@ const Profile: FC = (): JSX.Element => {
     navigation.navigate('SetUpAccount');
   };
   const [isEnabled, setIsEnabled] = useState(false);
+  const toggleSwitch = () => setIsEnabled(previousState => !previousState);
+  const useNavigationRating =() =>{
+    navigation.navigate('RatingScreen')
+  }
+  const handleLogout = async () => {
+    try {
+      await AsyncStorage.removeItem('token');
+      navigation.navigate('LoginScreen'); 
+    } catch (error) {
+      console.error('Error logging out:', error);
+    }
   const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
   const useNavigationRating = () => {
     navigation.navigate('RatingScreen');
@@ -250,6 +264,14 @@ const Profile: FC = (): JSX.Element => {
           <View style={{ flexDirection: 'row', gap: 10, alignItems: 'center' }}>
             <Ionicons color={'#fff'} name="star" size={30} />
             <Text style={styles.text}>Đánh giá của tôi</Text>
+          </View>
+          <Ionicons color={'#fff'} name="chevron-forward-outline" size={35} />
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.viewInfomation} onPress={handleLogout}>
+          <View style={{flexDirection: 'row', gap: 10, alignItems: 'center'}}>
+            <Ionicons color={'#fff'} name="star" size={30} />
+            <Text style={styles.text}>Đăng xuất</Text>
           </View>
           <Ionicons color={'#fff'} name="chevron-forward-outline" size={35} />
         </TouchableOpacity>

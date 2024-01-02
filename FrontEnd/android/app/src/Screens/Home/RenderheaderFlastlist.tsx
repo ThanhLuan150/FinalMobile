@@ -27,11 +27,30 @@ export const RenderheaderFlastlist = () => {
       date: '12/12/2023',
     },
   ];
+  const [minigame, branch] = useQueries({
+    queries: [
+      {
+        queryKey: ['minigame'],
+        queryFn: async () =>
+          axios
+            .get('https://ef75-2402-9d80-456-7df4-90c8-4f68-1d2a-39b0.ngrok-free.app/api/minigame')
+            .then(res => res.data),
+      },
+      {
+        queryKey: ['branch'],
+        queryFn: async () =>
+          axios
+            .get('https://ef75-2402-9d80-456-7df4-90c8-4f68-1d2a-39b0.ngrok-free.app/api/branch')
+            .then(res => res.data),
+      },
+    ],
+  });
   const {minigame, branch} = useRenderHomePage();
   const navigation = useNavigation();
   const handleNavigationService = () => {
     navigation.navigate('Dịch vụ');
   };
+
   return (
     <View style={{position: 'relative'}}>
       <View>{SlideShowImage()}</View>
