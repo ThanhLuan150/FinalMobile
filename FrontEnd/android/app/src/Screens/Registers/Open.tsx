@@ -1,7 +1,7 @@
 import React from 'react';
-import {Image, StyleSheet, Text, TouchableOpacity} from 'react-native';
+import {Image,Text, TouchableOpacity} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
-
+import styles from '../../Styles/styleOpen';
 export function OpenScreen(): React.JSX.Element {
   const navigation = useNavigation();
   return (
@@ -16,24 +16,3 @@ export function OpenScreen(): React.JSX.Element {
     </TouchableOpacity>
   );
 }
-
-const styles = StyleSheet.create({
-  sectionContainer: {
-    backgroundColor: '#353B51',
-    height: '100%',
-    justifyContent: 'center',
-    alignItems: 'center',
-    flex: 1,
-  },
-  openTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-    color: 'white',
-    marginTop: 20,
-  },
-  imageStyle: {
-    width: 200,
-    height: 200,
-    resizeMode: 'contain',
-  },
-});
