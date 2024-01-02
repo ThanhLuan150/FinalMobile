@@ -8,7 +8,7 @@ import {View} from 'react-native';
 
 export const ServicePage = () => {
   const [idKindOf, setidKindOf] = useState(1);
-  const [data,setData]=useState([])
+  const [data, setData] = useState([]);
   const handleDropdownChange = (selectedValue: any) => {
     setidKindOf(selectedValue);
   };
@@ -16,16 +16,15 @@ export const ServicePage = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `https://e636-14-176-231-248.ngrok-free.app/api/Typeoflaundries/${idKindOf}`
+          `https://b38e-14-176-231-248.ngrok-free.app/api/Typeoflaundries/${idKindOf}`,
         );
-        setData(response.data)
+        setData(response.data);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
     };
-    fetchData(); 
+    fetchData();
   }, [idKindOf]);
-
 
   return (
     <View style={styles.container}>
