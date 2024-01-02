@@ -14,7 +14,7 @@ const useLogin = () =>{
     }, []);
     // Lưu token vào AsyncStorage kèm theo thời gian hết hạn
     const saveToken = async (token: string) => {
-      const expirationDate = new Date().getTime() + 30 * 24 * 60 * 60 * 1000; // 30 days from now
+      const expirationDate = new Date().getTime() + 30 * 24 * 60 * 60 * 1000; // token sẽ tồn tại trong 30 ngày sau 30 ngày nó sẽ tự động xóa và yêu cầu người dùng phải Login laij
       await AsyncStorage.setItem('token', token);
       await AsyncStorage.setItem('tokenExpiration', expirationDate.toString());
     };
@@ -52,7 +52,7 @@ const useLogin = () =>{
         const registeredPassword = await AsyncStorage.getItem('registeredPassword');
         if (registeredEmail && registeredPassword) {
           // Send login request with registration information
-          const response = await axios.post('https://b936-2402-9d80-458-dfa5-1cd6-169-fc7b-e541.ngrok-free.app/api/Login', {
+          const response = await axios.post('https://b9b7-14-176-231-248.ngrok-free.app/api/Login', {
             email: registeredEmail,
             password: registeredPassword,
           });
@@ -68,7 +68,6 @@ const useLogin = () =>{
         console.log('Đăng nhập thất bại',error);
       }
     };
-
     return {
         email,
         setEmail,
