@@ -22,7 +22,7 @@ const useVerifycationUser = (): UseVerificationUserProps => {
     const enteredOTP = otp.join('');
     AsyncStorage.getItem('registeredEmail').then((email: string | null) => {
       axios
-        .post('https://b936-2402-9d80-458-dfa5-1cd6-169-fc7b-e541.ngrok-free.app/api/Verify', {
+        .post('https://b38e-14-176-231-248.ngrok-free.app/api/Verify', {
           email,
           otp: enteredOTP,
         })

@@ -1,4 +1,3 @@
-/* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {NavigationContainer} from '@react-navigation/native';
@@ -22,14 +21,12 @@ import RatingSucessfullyScreen from './android/app/src/Screens/Raiting/RaitingSu
 import EditRatingScreen from './android/app/src/Screens/Raiting/EditRating';
 import LoginScreen from './android/app/src/Screens/Login/Login';
 import BookScreen from './android/app/src/Screens/Books/OrderIsOnGoing';
-
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-
-
 import { OrderTrackingScreen } from './android/app/src/Screens/Books/OrderTracking';
 import { OrderDetail } from './android/app/src/Screens/Books/OrderDetail';
 import { ServicesScreen } from './android/app/src/Screens/AddOrder/Service';
 import { ServicePage } from './android/app/src/Screens/AddOrder/Service';
+import SearchScreen from './android/app/src/Screens/Home/Search';
 
 const Stack = createNativeStackNavigator();
 
@@ -164,6 +161,11 @@ function App(): React.JSX.Element {
           <Stack.Screen
             name="OrderDetail"
             component={OrderDetail}
+            options={{headerShown: false}}
+          />
+           <Stack.Screen
+            name="SearchScreen"
+            component={SearchScreen}
             options={{headerShown: false}}
           />
         <Stack.Screen name="HomeScreen" component={Homestack} />
