@@ -25,6 +25,7 @@ import LoginSuccessfullyScreeen from './android/app/src/Screens/Login/LoginSucce
 import BookScreen from './android/app/src/Screens/Books/OrderIsOnGoing';
 import { OrderTrackingScreen } from './android/app/src/Screens/Books/OrderTracking';
 import { OrderDetail } from './android/app/src/Screens/Books/OrderDetail';
+import { ServicesScreen } from './android/app/src/Screens/AddOrder/Service';
 const Stack = createNativeStackNavigator();
 
 const Homestack = () => {
@@ -68,6 +69,11 @@ function App(): React.JSX.Element {
       <Stack.Navigator screenOptions={{
         headerShown: false,
        }}>
+        {/* <Stack.Screen
+          name="Services"
+          component={ServicesScreen}
+          options={{headerShown: false}}
+        /> */}
         <Stack.Screen
           name="Open"
           component={OpenScreen}
