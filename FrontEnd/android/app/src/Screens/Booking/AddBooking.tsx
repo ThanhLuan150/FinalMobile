@@ -466,7 +466,7 @@ const MoreOptionComponent: FC = (): JSX.Element => {
           <Ionicons name="alert-circle" size={18} color={'#91d3fa'} />
         </View>
         <Ionicons
-          name={moreServices ? 'chevron-down-sharp' : 'chevron-up-sharp'}
+          name={moreServices ? 'chevron-up-sharp' : 'chevron-down-sharp'}
           size={18}
           color={'#91d3fa'}
         />

@@ -6,6 +6,8 @@ import React, {FC} from 'react';
 import {useState} from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
+import React, { FC } from 'react';
+import { useState } from 'react';
 import {
   ScrollView,
   StyleSheet,
@@ -15,9 +17,9 @@ import {
   TouchableOpacity,
   Switch,
 } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-
 const Profile: FC = (): JSX.Element => {
   const navigation = useNavigation();
   const useNavigationVerifyEmail = () => {
@@ -38,22 +40,26 @@ const Profile: FC = (): JSX.Element => {
     } catch (error) {
       console.error('Error logging out:', error);
     }
+  const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
+  const useNavigationRating = () => {
+    navigation.navigate('RatingScreen');
   };
   return (
     <ScrollView style={styles.container}>
       <View style={styles.viewNotification}>
         <Text style={styles.textNotification}>WashWish</Text>
         <Image
-          style={{width: 30, height: 30}}
+          style={{ width: 30, height: 30 }}
           source={require('../../Image/notification1.png')}
         />
       </View>
-      <View style={{paddingTop: 20}}>
+      <View style={{ paddingTop: 20 }}>
         <View style={styles.viewbannerProfile}>
           <View style={styles.viewImage}>
             <Image
               style={styles.images}
-              source={require('../../Image/huongho.jpg')}></Image>
+              source={require('../../Image/huongho.jpg')}
+            ></Image>
           </View>
           <View style={styles.viewInformation}>
             <Text style={styles.testname}>Hồ Thị Hương</Text>
@@ -61,23 +67,37 @@ const Profile: FC = (): JSX.Element => {
               <Text style={styles.textRank}>Hạng Vàng</Text>
               <Image
                 style={styles.icon}
-                source={require('../../Image/star.png')}></Image>
+                source={require('../../Image/star.png')}
+              ></Image>
             </View>
           </View>
-          <Image
+          <TouchableOpacity
+            onPress={() => navigation.navigate('EditProfile')}
             style={styles.iconstar}
-            source={require('../../Image/edit.png')}></Image>
+          >
+            <Image
+              style={styles.Image}
+              source={require('../../Image/edit.png')}
+            ></Image>
+          </TouchableOpacity>
         </View>
       </View>
-      <View style={{paddingTop: 10, paddingBottom: 20}}>
+      <View style={{ paddingTop: 10, paddingBottom: 20 }}>
         <View style={styles.viewVerify}>
           <Text style={styles.textVerify}>
             Xác thực tài khoản giúp tài khoản bảo mật tốt hơn
           </Text>
-          <View style={{paddingTop: 10, paddingBottom: 8, paddingRight: 10}}>
+          <View
+            style={{
+              paddingTop: 10,
+              paddingBottom: 8,
+              paddingRight: 10,
+            }}
+          >
             <TouchableOpacity
               style={styles.Button}
-              onPress={useNavigationVerifyEmail}>
+              onPress={useNavigationVerifyEmail}
+            >
               <Text style={styles.textButton}>Xác thực</Text>
             </TouchableOpacity>
           </View>
@@ -94,7 +114,8 @@ const Profile: FC = (): JSX.Element => {
         <View style={styles.viewStarUser}>
           <Image
             style={styles.imageStar}
-            source={require('../../Image/voucherss.png')}></Image>
+            source={require('../../Image/voucherss.png')}
+          ></Image>
           <View style={styles.viewQuatityStar}>
             <Text style={styles.testStar}>Voucher</Text>
             <Text style={styles.textAllStar}>20 Voucher </Text>
@@ -104,22 +125,65 @@ const Profile: FC = (): JSX.Element => {
       <View style={styles.setupInformation}>
         <TouchableOpacity
           onPress={useNavigationSetUpAccount}
-          style={styles.viewInfomation}>
-          <View style={{flexDirection: 'row', gap: 10, alignItems: 'center'}}>
+          style={styles.viewInfomation}
+        >
+          <View
+            style={{
+              flexDirection: 'row',
+              gap: 10,
+              alignItems: 'center',
+            }}
+          >
             <Ionicons color={'#fff'} name="person" size={30} />
             <Text style={styles.text}>Thiết lập tài khoản</Text>
           </View>
-          <Ionicons color={'#fff'} name="chevron-forward-outline" size={35} />
+          <Ionicons
+            color={'#fff'}
+            name="chevron-forward-outline"
+            size={35}
+          />
+        </TouchableOpacity>
+        <TouchableOpacity
+          //   onPress={}
+          style={styles.viewInfomation}
+        >
+          <View
+            style={{
+              flexDirection: 'row',
+              gap: 10,
+              alignItems: 'center',
+            }}
+          >
+            <Ionicons color={'#fff'} name="volume-high" size={30} />
+            <Text style={styles.text}>Âm thanh hoặc rung</Text>
+          </View>
+          <Ionicons
+            color={'#fff'}
+            name="chevron-forward-outline"
+            size={35}
+          />
         </TouchableOpacity>
         <View style={styles.viewInfomation}>
-          <View style={{flexDirection: 'row', gap: 10, alignItems: 'center'}}>
+          <View
+            style={{
+              flexDirection: 'row',
+              gap: 10,
+              alignItems: 'center',
+            }}
+          >
             <Ionicons color={'#fff'} name="moon" size={30} />
             <Text style={styles.text}>Chế độ tối</Text>
           </View>
-          <View style={{flexDirection: 'row', gap: 10, alignItems: 'center'}}>
-            <Text style={{color: '#fff', marginTop: 3}}>Tắt</Text>
+          <View
+            style={{
+              flexDirection: 'row',
+              gap: 10,
+              alignItems: 'center',
+            }}
+          >
+            <Text style={{ color: '#fff', marginTop: 3 }}>Tắt</Text>
             <Switch
-              trackColor={{false: '#767577', true: '#81b0ff'}}
+              trackColor={{ false: '#767577', true: '#81b0ff' }}
               thumbColor={isEnabled ? '#f5dd4b' : '#f4f3f4'}
               ios_backgroundColor="#3e3e3e"
               onValueChange={toggleSwitch}
@@ -129,38 +193,75 @@ const Profile: FC = (): JSX.Element => {
         </View>
         <TouchableOpacity
           //   onPress={}
-          style={styles.viewInfomation}>
-          <View style={{flexDirection: 'row', gap: 10, alignItems: 'center'}}>
+          style={styles.viewInfomation}
+        >
+          <View
+            style={{
+              flexDirection: 'row',
+              gap: 10,
+              alignItems: 'center',
+            }}
+          >
             <Ionicons color={'#fff'} name="volume-high" size={30} />
             <Text style={styles.text}>Âm thanh hoặc Rung</Text>
           </View>
-          <Ionicons color={'#fff'} name="chevron-forward-outline" size={35} />
+          <Ionicons
+            color={'#fff'}
+            name="chevron-forward-outline"
+            size={35}
+          />
         </TouchableOpacity>
         <TouchableOpacity
           //   onPress={}
-          style={styles.viewInfomation}>
-          <View style={{flexDirection: 'row', gap: 10, alignItems: 'center'}}>
+          style={styles.viewInfomation}
+        >
+          <View
+            style={{
+              flexDirection: 'row',
+              gap: 10,
+              alignItems: 'center',
+            }}
+          >
             <Ionicons color={'#fff'} name="language" size={30} />
             <Text style={styles.text}>Ngôn ngữ</Text>
           </View>
-          <View style={{flexDirection: 'row', gap: 10, alignItems: 'center'}}>
+          <View
+            style={{
+              flexDirection: 'row',
+              gap: 10,
+              alignItems: 'center',
+            }}
+          >
             <Text>Tiếng Việt</Text>
-            <Ionicons color={'#fff'} name="chevron-forward-outline" size={35} />
+            <Ionicons
+              color={'#fff'}
+              name="chevron-forward-outline"
+              size={35}
+            />
           </View>
         </TouchableOpacity>
         <TouchableOpacity
           //   onPress={}
-          style={styles.viewInfomation}>
-          <View style={{flexDirection: 'row', gap: 10, alignItems: 'center'}}>
-            <MaterialCommunityIcons color={'#fff'} name="history" size={30} />
-            <Text style={styles.text}>Lịch sử giao dịch</Text>
+          style={styles.viewInfomation}
+        >
+          <View
+            style={{
+              flexDirection: 'row',
+              gap: 10,
+              alignItems: 'center',
+            }}
+          >
+            <Ionicons color={'#fff'} name="volume-high" size={30} />
+            <Text style={styles.text}>Âm thanh hoặc Rung</Text>
           </View>
-          <Ionicons color={'#fff'} name="chevron-forward-outline" size={35} />
+          <Ionicons
+            color={'#fff'}
+            name="chevron-forward-outline"
+            size={35}
+          />
         </TouchableOpacity>
-        <TouchableOpacity
-            onPress={useNavigationRating}
-          style={styles.viewInfomation}>
-          <View style={{flexDirection: 'row', gap: 10, alignItems: 'center'}}>
+        <TouchableOpacity onPress={useNavigationRating} style={styles.viewInfomation}>
+          <View style={{ flexDirection: 'row', gap: 10, alignItems: 'center' }}>
             <Ionicons color={'#fff'} name="star" size={30} />
             <Text style={styles.text}>Đánh giá của tôi</Text>
           </View>

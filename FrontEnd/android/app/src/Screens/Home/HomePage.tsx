@@ -3,11 +3,10 @@ import React from 'react';
 import {FlatList, View} from 'react-native';
 
 import {Header} from './components/Header';
-import {useQuery} from '@tanstack/react-query';
-import axios from 'axios';
-import { RenderVoucher } from './components/Voucher';
-import { RenderheaderFlastlist } from './RenderheaderFlastlist';
+import {RenderVoucher} from './components/Voucher';
+import {RenderheaderFlastlist} from './RenderheaderFlastlist';
 import styles from '../../Styles/HomePage';
+import {useRenderHomePage} from '../../Hook/useRenderHomePage';
 export const HomePage = () => {
   const {data} = useQuery({
     queryKey: ['Voucher'],
@@ -17,11 +16,13 @@ export const HomePage = () => {
         .then(res => res.data),
   });
   console.log('voucher',data); 
+  const {voucher} = useRenderHomePage();
+
   return (
     <View style={styles.container}>
       <Header />
       <FlatList
-        data={data}
+        data={voucher.data}
         ListHeaderComponent={RenderheaderFlastlist}
         renderItem={RenderVoucher}
         keyExtractor={item => item.id_voucher}

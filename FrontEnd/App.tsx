@@ -24,6 +24,7 @@ import BookScreen from './android/app/src/Screens/Books/OrderIsOnGoing';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { OrderTrackingScreen } from './android/app/src/Screens/Books/OrderTracking';
 import { OrderDetail } from './android/app/src/Screens/Books/OrderDetail';
+import { ServicesScreen } from './android/app/src/Screens/AddOrder/Service';
 import { ServicePage } from './android/app/src/Screens/AddOrder/Service';
 import SearchScreen from './android/app/src/Screens/Home/Search';
 
@@ -72,6 +73,11 @@ function App(): React.JSX.Element {
       <Stack.Navigator screenOptions={{
         headerShown: false,
        }}>
+        {/* <Stack.Screen
+          name="Services"
+          component={ServicesScreen}
+          options={{headerShown: false}}
+        /> */}
         <Stack.Screen
           name="Open"
           component={OpenScreen}
