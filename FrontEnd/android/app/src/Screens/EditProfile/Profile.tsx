@@ -1,13 +1,5 @@
-/* eslint-disable eol-last */
-/* eslint-disable no-trailing-spaces */
-/* eslint-disable react/self-closing-comp */
-/* eslint-disable react-native/no-inline-styles */
-import React, {FC} from 'react';
-import {useState} from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useNavigation } from '@react-navigation/native';
-import React, { FC } from 'react';
-import { useState } from 'react';
+import React, { FC, useState } from 'react';
 import {
   ScrollView,
   StyleSheet,
@@ -20,29 +12,27 @@ import {
 import { useNavigation } from '@react-navigation/native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+
 const Profile: FC = (): JSX.Element => {
   const navigation = useNavigation();
-  const useNavigationVerifyEmail = () => {
+  const useNavigationVerifyEmail = (): void => {
     navigation.navigate('VerifyEmail');
   };
-  const useNavigationSetUpAccount = () => {
+  const useNavigationSetUpAccount = (): void => {
     navigation.navigate('SetUpAccount');
   };
-  const [isEnabled, setIsEnabled] = useState(false);
-  const toggleSwitch = () => setIsEnabled(previousState => !previousState);
-  const useNavigationRating =() =>{
-    navigation.navigate('RatingScreen')
-  }
-  const handleLogout = async () => {
+  const [isEnabled, setIsEnabled] = useState<boolean>(false);
+  const toggleSwitch = (): void => setIsEnabled((previousState) => !previousState);
+  const useNavigationRating = (): void => {
+    navigation.navigate('RatingScreen');
+  };
+  const handleLogout = async (): Promise<void> => {
     try {
       await AsyncStorage.removeItem('token');
-      navigation.navigate('LoginScreen'); 
+      navigation.navigate('LoginScreen');
     } catch (error) {
       console.error('Error logging out:', error);
     }
-  const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
-  const useNavigationRating = () => {
-    navigation.navigate('RatingScreen');
   };
   return (
     <ScrollView style={styles.container}>
@@ -136,26 +126,6 @@ const Profile: FC = (): JSX.Element => {
           >
             <Ionicons color={'#fff'} name="person" size={30} />
             <Text style={styles.text}>Thiết lập tài khoản</Text>
-          </View>
-          <Ionicons
-            color={'#fff'}
-            name="chevron-forward-outline"
-            size={35}
-          />
-        </TouchableOpacity>
-        <TouchableOpacity
-          //   onPress={}
-          style={styles.viewInfomation}
-        >
-          <View
-            style={{
-              flexDirection: 'row',
-              gap: 10,
-              alignItems: 'center',
-            }}
-          >
-            <Ionicons color={'#fff'} name="volume-high" size={30} />
-            <Text style={styles.text}>Âm thanh hoặc rung</Text>
           </View>
           <Ionicons
             color={'#fff'}
@@ -268,8 +238,10 @@ const Profile: FC = (): JSX.Element => {
           <Ionicons color={'#fff'} name="chevron-forward-outline" size={35} />
         </TouchableOpacity>
         <TouchableOpacity
-          style={styles.viewInfomation} onPress={handleLogout}>
-          <View style={{flexDirection: 'row', gap: 10, alignItems: 'center'}}>
+          style={styles.viewInfomation}
+          onPress={handleLogout}
+        >
+          <View style={{ flexDirection: 'row', gap: 10, alignItems: 'center' }}>
             <Ionicons color={'#fff'} name="star" size={30} />
             <Text style={styles.text}>Đăng xuất</Text>
           </View>
@@ -421,5 +393,4 @@ const styles = StyleSheet.create({
     marginTop: 4,
   },
 });
-
 export default Profile;

@@ -81,6 +81,7 @@ const EditProfile = () => {
                 style={styles.textInput}
                 value={name}
                 onChangeText={onChangeName}
+                placeholder="Nhập tên "
                 placeholderTextColor={'#fff'}
               />
             </View>
