@@ -29,6 +29,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get('/branch', [BranchController::class,'index']);
 //API DetailBranch
 Route::get('/detailBranch/{id_branch}',[BranchController::class,'DetailsBranch']);
+//API Service 
+Route::get('/service',[ServiceController::class,'index']);
 //API Service trong Branch đó.
 Route::get('/Service/{id_branch}',[ServiceController::class,'Service']);
 //API  Typeoflaundries trong Branch đó.

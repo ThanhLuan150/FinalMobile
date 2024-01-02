@@ -1,5 +1,7 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, {useState, useRef, useEffect} from 'react';
 import { Dimensions } from 'react-native';
+import styles from '../../../Styles/SlideShowImage';
 import {Image, StyleSheet, View, FlatList} from 'react-native';
 const ImageSlide = [
   require('../../../Image/slideShow1.png'),
@@ -39,21 +41,3 @@ export const SlideShowImage = () => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  imageSlide: {
-    width: 350,
-    height: 200,
-    borderRadius:20,
-    objectFit:'fill'
-  },
-  SlideShow: {
-    marginLeft:30,
-    marginRight:30,
-    marginBottom:30,
-    alignItems:'center',
-  },
-  FlastlistSlide:{
-    width:350,
-  }
-});

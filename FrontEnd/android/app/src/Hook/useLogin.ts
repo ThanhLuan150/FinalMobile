@@ -14,7 +14,7 @@ const useLogin = () =>{
     }, []);
     // Lưu token vào AsyncStorage kèm theo thời gian hết hạn
     const saveToken = async (token: string) => {
-      const expirationDate = new Date().getTime() + 30 * 24 * 60 * 60 * 1000; // 30 days from now
+      const expirationDate = new Date().getTime() + 30 * 24 * 60 * 60 * 1000; // token sẽ tồn tại trong 30 ngày sau 30 ngày nó sẽ tự động xóa và yêu cầu người dùng phải Login laij
       await AsyncStorage.setItem('token', token);
       await AsyncStorage.setItem('tokenExpiration', expirationDate.toString());
     };
@@ -68,7 +68,6 @@ const useLogin = () =>{
         console.log('Đăng nhập thất bại',error);
       }
     };
-
     return {
         email,
         setEmail,
