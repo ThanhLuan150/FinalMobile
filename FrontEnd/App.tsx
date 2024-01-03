@@ -24,7 +24,6 @@ import BookScreen from './android/app/src/Screens/Books/OrderIsOnGoing';
 import {QueryClient, QueryClientProvider} from '@tanstack/react-query';
 import {OrderTrackingScreen} from './android/app/src/Screens/Books/OrderTracking';
 import {OrderDetail} from './android/app/src/Screens/Books/OrderDetail';
-import {ServicesScreen} from './android/app/src/Screens/AddOrder/Service';
 import {ServicePage} from './android/app/src/Screens/AddOrder/Service';
 import SearchScreen from './android/app/src/Screens/Home/Search';
 import { BranchDetail } from './android/app/src/Screens/AddOrder/BranchDetail';
@@ -75,11 +74,6 @@ function App(): React.JSX.Element {
           screenOptions={{
             headerShown: false,
           }}>
-          {/* <Stack.Screen
-          name="Services"
-          component={ServicesScreen}
-          options={{headerShown: false}}
-        /> */}
           <Stack.Screen
             name="Open"
             component={OpenScreen}
@@ -175,17 +169,13 @@ function App(): React.JSX.Element {
             component={BranchDetail}
             options={{headerShown: false}}
           />
-        <Stack.Screen name="HomeScreen" component={Homestack} />
-      </Stack.Navigator>
-
-          <Stack.Screen
-            name="Addbooking"
-            component={AddBookingScreen}
-            options={{headerShown: false}}
-          />
+            <Stack.Screen
+              name="Addbooking"
+              component={AddBookingScreen}
+              options={{headerShown: false}}
+            />
           <Stack.Screen name="HomeScreen" component={Homestack} />
         </Stack.Navigator>
-
       </QueryClientProvider>
     </NavigationContainer>
   );
