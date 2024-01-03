@@ -4,7 +4,6 @@ import React, {FC} from 'react';
 import {useState} from 'react';
 
 import {
-  StyleSheet,
   Text,
   View,
   Image,
@@ -12,12 +11,14 @@ import {
   FlatList,
   TextInput,
   Platform,
+  StyleSheet,
   KeyboardAvoidingView,
 } from 'react-native';
 
 import {useNavigation} from '@react-navigation/native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import {styles} from './AddBookingStyle';
 
 const ChooseLocationComponent: FC = (): JSX.Element => {
   const defaultTextColor = 'white';
@@ -495,11 +496,14 @@ export const AddBookingScreen: FC = (): JSX.Element => {
     );
   };
   return (
-    <KeyboardAvoidingView
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-      style={styles.container}>
+    // <KeyboardAvoidingView
+    //   behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+    //   style={styles.container}>
+    <View style={styles.container}>
       <View style={styles.header}>
-        <TouchableOpacity style={styles.backicon}>
+        <TouchableOpacity
+          style={styles.backicon}
+          onPress={() => navigation.goBack()}>
           <Ionicons name="chevron-back-outline" size={35} color={'white'} />
         </TouchableOpacity>
         <Text style={styles.headertext}>Đơn mới</Text>
@@ -508,169 +512,8 @@ export const AddBookingScreen: FC = (): JSX.Element => {
         <TypeClothesComponent />
       </View>
       <NextButton />
-    </KeyboardAvoidingView>
+    </View>
+    // </KeyboardAvoidingView>
   );
 };
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: '#353B51',
-    height: '100%',
-  },
-  mainContent: {
-    width: '90%',
-    alignSelf: 'center',
-    flex: 1,
-  },
-  header: {
-    height: 50,
-    alignItems: 'center',
-    justifyContent: 'center',
-    flexDirection: 'row',
-  },
-  backicon: {
-    position: 'absolute',
-    left: 10,
-  },
-  headertext: {
-    fontSize: 20,
-    color: 'white',
-  },
-  mapslink: {
-    fontSize: 12,
-    color: '#91d3fa',
-    textDecorationLine: 'underline',
-  },
-  headingText: {
-    fontWeight: '700',
-    color: '#91d3fa',
-    marginBottom: 15,
-  },
-  locationtexts: {
-    marginTop: 15,
-    width: '100%',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  chooselocation: {
-    width: '100%',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  locationdetail: {
-    width: '100%',
-    height: 80,
-    backgroundColor: '#999999',
-    borderRadius: 15,
-    padding: 12,
-    flexDirection: 'row',
-  },
-  locationImage: {
-    height: '100%',
-    width: '19%',
-    marginRight: 10,
-  },
-  locationCardTexts: {
-    flex: 1,
-    justifyContent: 'space-between',
-    marginRight: 10,
-  },
-  rateAndSpace: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-  locationDetailTexts: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    color: 'white',
-  },
-  textLocation: {
-    fontSize: 12,
-    color: 'white',
-  },
-  headingTexts: {
-    width: '100%',
-    marginTop: 20,
-    flexDirection: 'row',
-    gap: 10,
-  },
-  serviceTypes: {
-    height: 150,
-    width: '100%',
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-  },
-  serviceType: {
-    height: '100%',
-    width: 150,
-    backgroundColor: '#8888',
-    borderRadius: 15,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  serviceTypeFocus: {
-    height: '100%',
-    width: 150,
-    backgroundColor: '#91d3fa',
-    borderRadius: 15,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  clothesType: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    padding: 10,
-    justifyContent: 'space-between',
-    fontSize: 20,
-    borderWidth: 2,
-    borderRadius: 10,
-    marginBottom: 5,
-  },
-  clothesTypeText: {
-    fontSize: 15,
-    fontWeight: '600',
-  },
-  dropdownQuantity: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: '#8888',
-    padding: 10,
-    paddingTop: 8,
-    paddingBottom: 8,
-    borderRadius: 10,
-    marginBottom: 5,
-    marginLeft: '50%',
-    justifyContent: 'space-between',
-  },
-  quantityContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 5,
-  },
-  quantityInput: {
-    height: 20,
-    textAlign: 'center',
-    padding: 0,
-    color: '#91d3fa',
-  },
-  quantityButton: {
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  NextButton: {
-    height: 40,
-    width: '90%',
-    alignSelf: 'center',
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#91d3fa',
-    borderRadius: 10,
-    marginTop: 10,
-    marginBottom: 10,
-  },
-  ButtonText: {
-    fontSize: 20,
-    color: '#353B51',
-    fontWeight: '700',
-  },
-});
+
