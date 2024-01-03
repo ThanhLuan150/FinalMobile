@@ -38,43 +38,34 @@ class RegisterController extends Controller
         ], 201);
     }
     public function login(Request $request)
-{
-    $email = $request->input('email');
-    $password = $request->input('password');
-    $user = User::where('email', $email)->first();
+    {
+        $email = $request->input('email');
+        $password = $request->input('password');
+        $user = User::where('email', $email)->first();
+        if (!$user || !Hash::check($password, $user->password)) {
+            return response()->json([
+                'message' => 'Invalid email or password',
+                'user' => $user
+            ], 401);
+        }
+        $token = $user->createToken('API Token')->plainTextToken;
+        $user_id = $user;
+        if ($user->role) {
+            return response()->json([
+                'message' => 'Login user successfully',
+                'token' => $token,
+                'id_user' => $user_id,
+                'role' => 1
+            ]);
+        }
 
-    if (!$user || !Hash::check($password, $user->password)) {
         return response()->json([
-            'message' => 'Invalid email or password',
-            'user' => $user
-        ], 401);
-    }
-
-    if (!$user->verify) {
-        return response()->json([
-            'message' => 'Account not verified'
-        ], 401);
-    }
-
-    $token = $user->createToken('API Token')->plainTextToken;
-    $user_id = $user;
-
-    if ($user->role) {
-        return response()->json([
-            'message' => 'Login user successfully',
+            'message' => 'Login branch successfully',
             'token' => $token,
             'id_user' => $user_id,
-            'role' => 1
+            'role' => 0
         ]);
     }
-
-    return response()->json([
-        'message' => 'Login branch successfully',
-        'token' => $token,
-        'id_user' => $user_id,
-        'role' => 0
-    ]);
-}
     public function checkEmail(Request $request)
     {
         $email = $request->input('email');
