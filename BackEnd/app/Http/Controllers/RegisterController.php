@@ -24,10 +24,10 @@ class RegisterController extends Controller
     public function register(Request $request)
     {
         $user = new User();
-        $user-> username = $request->input('username');
-        $user-> phone = $request->input('phone');
-        $user-> email  = $request->input('email');
-        $user-> password = Hash::make($request->input('password'));
+        $user->username = $request->input('username');
+        $user->phone = $request->input('phone');
+        $user->email  = $request->input('email');
+        $user->password = Hash::make($request->input('password'));
         $user->save();
 
         VerifyAccountController::sendEmailConfirmAccount($user, VerifyAccountController::generateOtp());
@@ -57,7 +57,7 @@ class RegisterController extends Controller
                 'id_user' => $user_id,
                 'role' => 1
             ]);
-        }   
+        }
 
         return response()->json([
             'message' => 'Login branch successfully',
@@ -69,9 +69,9 @@ class RegisterController extends Controller
     public function checkEmail(Request $request)
     {
         $email = $request->input('email');
-    
+
         $user = User::where('email', $email)->first();
-    
+
         return response()->json([
             'exists' => $user ? true : false,
         ]);
@@ -118,4 +118,5 @@ public function deleteUser($id_user)
         'message' => 'User deleted successfully',
     ], 200);
 }
+
 }
