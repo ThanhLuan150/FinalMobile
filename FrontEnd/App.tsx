@@ -12,8 +12,8 @@ import RegisterScreen from './android/app/src/Screens/Registers/RegisterPhone';
 import Profile from './android/app/src/Screens/EditProfile/Profile';
 import VerifyEmail from './android/app/src/Screens/EditProfile/VerifyEmail';
 import SetUpAccount from './android/app/src/Screens/EditProfile/SetUpAccount';
-// import { AddBookingScreen } from './android/app/src/Screens/Booking/AddBooking';
-import { HomePage } from './android/app/src/Screens/Home/HomePage';
+import {AddBookingScreen} from './android/app/src/Screens/Booking/AddBooking';
+import {HomePage} from './android/app/src/Screens/Home/HomePage';
 import VerificationCodeScreen from './android/app/src/Screens/Registers/VerificationCode';
 import KeyboardAvoidingComponent from './android/app/src/Screens/EditProfile/EditProfile';
 import RatingScreen from './android/app/src/Screens/Raiting/Raiting';
@@ -21,11 +21,11 @@ import RatingSucessfullyScreen from './android/app/src/Screens/Raiting/RaitingSu
 import EditRatingScreen from './android/app/src/Screens/Raiting/EditRating';
 import LoginScreen from './android/app/src/Screens/Login/Login';
 import BookScreen from './android/app/src/Screens/Books/OrderIsOnGoing';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { OrderTrackingScreen } from './android/app/src/Screens/Books/OrderTracking';
-import { OrderDetail } from './android/app/src/Screens/Books/OrderDetail';
-import { ServicesScreen } from './android/app/src/Screens/AddOrder/Service';
-import { ServicePage } from './android/app/src/Screens/AddOrder/Service';
+import {QueryClient, QueryClientProvider} from '@tanstack/react-query';
+import {OrderTrackingScreen} from './android/app/src/Screens/Books/OrderTracking';
+import {OrderDetail} from './android/app/src/Screens/Books/OrderDetail';
+import {ServicesScreen} from './android/app/src/Screens/AddOrder/Service';
+import {ServicePage} from './android/app/src/Screens/AddOrder/Service';
 import SearchScreen from './android/app/src/Screens/Home/Search';
 import { BranchDetail } from './android/app/src/Screens/AddOrder/BranchDetail';
 
@@ -71,70 +71,71 @@ function App(): React.JSX.Element {
   return (
     <NavigationContainer>
       <QueryClientProvider client={queryClient}>
-      <Stack.Navigator screenOptions={{
-        headerShown: false,
-       }}>
-        {/* <Stack.Screen
+        <Stack.Navigator
+          screenOptions={{
+            headerShown: false,
+          }}>
+          {/* <Stack.Screen
           name="Services"
           component={ServicesScreen}
           options={{headerShown: false}}
         /> */}
-        <Stack.Screen
-          name="Open"
-          component={OpenScreen}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="Register"
-          component={RegisterInformationScreen}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="RegisterScreen"
-          component={RegisterScreen}
-          options={{headerShown: false}}
-        />
-         <Stack.Screen
-          name="VerificationCodeScreen"
-          component={VerificationCodeScreen}
-          options={{headerShown: false}}
-        />
-         <Stack.Screen
-          name="LoginScreen"
-          component={LoginScreen}
-          options={{headerShown: false}}
-        />
-         <Stack.Screen
-          name="VerifyEmail"
-          component={VerifyEmail}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="SetUpAccount"
-          component={SetUpAccount}
-          options={{headerShown: false}}
-        />
-         <Stack.Screen
-          name="EditProfile"
-          component={KeyboardAvoidingComponent}
-          options={{headerShown: false}}
-        />
           <Stack.Screen
-          name="RatingScreen"
-          component={RatingScreen}
-          options={{headerShown: false}}
-        />
-         <Stack.Screen
-          name="RatingSucessfullyScreen"
-          component={RatingSucessfullyScreen}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="EditRatingScreen"
-          component={EditRatingScreen}
-          options={{headerShown: false}}
-        />
-         <Stack.Screen
+            name="Open"
+            component={OpenScreen}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen
+            name="Register"
+            component={RegisterInformationScreen}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen
+            name="RegisterScreen"
+            component={RegisterScreen}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen
+            name="VerificationCodeScreen"
+            component={VerificationCodeScreen}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen
+            name="LoginScreen"
+            component={LoginScreen}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen
+            name="VerifyEmail"
+            component={VerifyEmail}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen
+            name="SetUpAccount"
+            component={SetUpAccount}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen
+            name="EditProfile"
+            component={KeyboardAvoidingComponent}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen
+            name="RatingScreen"
+            component={RatingScreen}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen
+            name="RatingSucessfullyScreen"
+            component={RatingSucessfullyScreen}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen
+            name="EditRatingScreen"
+            component={EditRatingScreen}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen
             name="Notification"
             component={Notification}
             options={{headerShown: false}}
@@ -164,7 +165,7 @@ function App(): React.JSX.Element {
             component={OrderDetail}
             options={{headerShown: false}}
           />
-           <Stack.Screen
+          <Stack.Screen
             name="SearchScreen"
             component={SearchScreen}
             options={{headerShown: false}}
@@ -176,6 +177,15 @@ function App(): React.JSX.Element {
           />
         <Stack.Screen name="HomeScreen" component={Homestack} />
       </Stack.Navigator>
+
+          <Stack.Screen
+            name="Addbooking"
+            component={AddBookingScreen}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen name="HomeScreen" component={Homestack} />
+        </Stack.Navigator>
+
       </QueryClientProvider>
     </NavigationContainer>
   );

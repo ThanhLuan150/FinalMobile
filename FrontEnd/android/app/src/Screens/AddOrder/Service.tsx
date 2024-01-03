@@ -90,7 +90,11 @@ export const ServicePage = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
+<<<<<<< HEAD
+          `https://b38e-14-176-231-248.ngrok-free.app/api/Typeoflaundries/${idKindOf}`,
+=======
           `https://ef75-2402-9d80-456-7df4-90c8-4f68-1d2a-39b0.ngrok-free.app/api/Typeoflaundries/${idKindOf}`
+>>>>>>> 520419e51a7ef91f8b3ff324bdf5a46f99db792b
         );
         setData(response.data);
       } catch (error) {

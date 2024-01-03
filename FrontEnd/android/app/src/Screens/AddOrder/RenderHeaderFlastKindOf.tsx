@@ -2,7 +2,9 @@ import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React, {useState} from 'react';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {Dropdown} from 'react-native-element-dropdown';
+import { useNavigation } from '@react-navigation/native';
 export const RenderHeaderFlastKindOf = ({onDropdownChange}) => {
+  const navigation = useNavigation();
   const data = [
     {label: 'Giá giặt sấy', value: 1},
     {label: 'Giá giặt hấp', value: 2},
@@ -12,7 +14,7 @@ export const RenderHeaderFlastKindOf = ({onDropdownChange}) => {
 
   return (
     <View>
-      <TouchableOpacity style={styles.squareCreateOrder}>
+      <TouchableOpacity style={styles.squareCreateOrder} onPress={() => {navigation.navigate("Addbooking")}}>
         <Ionicons style={{color: 'lightblue'}} size={30} name="add-circle" />
         <Text style={{color: 'white'}}>Đơn giặt mới</Text>
       </TouchableOpacity>
