@@ -53,7 +53,7 @@ const useLoginUser = (): LoginHook => {
     };
 
     axios
-      .post('https://8dd3-14-176-231-248.ngrok-free.app/api/api/Login', user)
+      .post('https://8dd3-14-176-231-248.ngrok-free.app/api/Login', user)
       .then(response => {
         console.log('User logged in:', response.data);
         Alert.alert('Đăng nhập thành công');
