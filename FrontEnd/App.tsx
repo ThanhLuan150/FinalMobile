@@ -27,6 +27,7 @@ import { OrderDetail } from './android/app/src/Screens/Books/OrderDetail';
 import { ServicesScreen } from './android/app/src/Screens/AddOrder/Service';
 import { ServicePage } from './android/app/src/Screens/AddOrder/Service';
 import SearchScreen from './android/app/src/Screens/Home/Search';
+import { BranchDetail } from './android/app/src/Screens/AddOrder/BranchDetail';
 
 const Stack = createNativeStackNavigator();
 
@@ -166,6 +167,11 @@ function App(): React.JSX.Element {
            <Stack.Screen
             name="SearchScreen"
             component={SearchScreen}
+            options={{headerShown: false}}
+          />
+            <Stack.Screen
+            name="BranchDetail"
+            component={BranchDetail}
             options={{headerShown: false}}
           />
         <Stack.Screen name="HomeScreen" component={Homestack} />

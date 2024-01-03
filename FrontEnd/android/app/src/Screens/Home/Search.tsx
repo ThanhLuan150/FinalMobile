@@ -6,14 +6,16 @@ import styles from '../../Styles/Search';
 import { useQuery } from '@tanstack/react-query';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import axios from 'axios';
-import { FlatList, Text, TextInput, View } from 'react-native';
+import { FlatList, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { useNavigation } from '@react-navigation/native'; // Import useNavigation từ React Navigation
+
 import useSearchs from '../../Hook/useSearch';
 interface Branch {
   name: string;
   address: string;
 }
 const SearchScreen = (): JSX.Element => {
-  const { searchValue,handleSearch,filteredData} = useSearchs();
+  const { searchValue,handleSearch,filteredData,navigateToDetail,} = useSearchs();
   return (
     <View style={styles.viewsearch}>
       <View style={styles.view}>
@@ -45,7 +47,7 @@ const SearchScreen = (): JSX.Element => {
           data={filteredData}
           contentContainerStyle={{ gap: 10, paddingTop: 20, paddingBottom: 20 }}
           renderItem={({ item, index }) => (
-            <View style={styles.viewbranch}>
+            <TouchableOpacity style={styles.viewbranch}  onPress={() => navigateToDetail(item)}>
               <View style={styles.showItem}>
                 <View style={styles.viewlocation}>
                   <Ionicons color={'#B3E0FB'} name="location" size={25} />
@@ -56,7 +58,7 @@ const SearchScreen = (): JSX.Element => {
                 </View>
               </View>
               <View style={styles.viewborder} />
-            </View>
+            </TouchableOpacity>
           )}
         />
       )}
