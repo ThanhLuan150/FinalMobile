@@ -56,3 +56,7 @@ Route::post('/Verify',[VerifyAccountController::class,'verifyOtp']);
 Route::post('/Login',[RegisterController::class,'login']);
 //API checkmail có tồn tại hay chưa
 Route::get('/check-email',[RegisterController::class,'checkEmail']);
+//API sửa user 
+Route::put('/userr/{id_user}', [RegisterController::class, 'updateUser']);
+//API xóa user
+Route::delete('/userss/{id_user}', [RegisterController::class, 'deleteUser']);
