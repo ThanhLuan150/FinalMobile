@@ -3,13 +3,8 @@
 /* eslint-disable react/self-closing-comp */
 /* eslint-disable react-native/no-inline-styles */
 import React, {FC} from 'react';
-import {
-  ScrollView,
-  StyleSheet,
-  Text,
-  View,
-  TouchableOpacity,
-} from 'react-native';
+import {ScrollView,Text,View,TouchableOpacity} from 'react-native';
+import styles from '../../Styles/RatingSucessfully';
 import {useNavigation} from '@react-navigation/native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 const RatingSucessfullyScreen: FC = (): JSX.Element => {
@@ -79,83 +74,4 @@ const RatingSucessfullyScreen: FC = (): JSX.Element => {
         </ScrollView>
     );
 };
-const styles = StyleSheet.create({
-    container:{
-        flex:1,
-        backgroundColor:'#353B51',
-    },
-    view:{
-        flexDirection:'column',
-        gap:10,
-        justifyContent:'center',
-        alignItems:'center',
-        paddingTop:50,
-    },
-    textThanks:{
-        color:'#fff',
-    },
-    textsucessfully:{
-        color:'#fff',
-        fontSize:37,
-    },
-    viewBill:{
-        padding:20,
-    },
-    bill:{
-        backgroundColor: '#808080',
-        borderRadius:15,
-        paddingTop:20,
-        paddingLeft:15,
-        paddingRight:15,
-        paddingBottom:20,
-    },
-    text:{
-        color:'#fff',
-        textAlign:'center',
-    },
-    bills:{
-        flexDirection:'row',
-        justifyContent: 'space-between',
-    },
-    textbill:{
-        fontSize:16,
-        color:'#fff',
-    },
-    textRev:{
-        color:'#fff',
-        fontSize:17,
-        textAlign:'center',
-        padding:10,
-    },
-    viewIcon:{
-        paddingTop:10,
-        flexDirection:'row',
-        justifyContent:'center',
-        alignItems:'center',
-        gap:10,
-    },
-    viewreview:{
-        flexDirection:'column',
-        justifyContent:'flex-start',
-        padding:20,
-    },
-    textreview:{
-        color:'#fff',
-        fontSize:12,
-    },
-    viewButtonreview:{
-        padding:20,
-    },
-    buttonreview:{
-        backgroundColor:'#1D7CA1',
-        padding:20,
-        borderRadius:15,
-    },
-    textReview:{
-        color:'#fff',
-        textAlign:'center',
-        fontSize:15,
-        fontWeight:'600',
-    },
-});
 export  default RatingSucessfullyScreen;

@@ -45,7 +45,7 @@ export const RenderHeaderDetailBranch = () => {
 
       <View style={styles.containerRating}>
         <View style={styles.containerStar}>
-          <Text style={styles.titleItem}>Đánh giá(89 đánh giá)</Text>
+          <Text style={styles.titleItem}>Đánh giá(2 đánh giá)</Text>
           <View style={styles.containerItemStar}>
             <View style={styles.containerStarItem}>
               <Text style={styles.numberOfStar}>

@@ -11,7 +11,7 @@ export const useRenderBranch = () => {
     queryFn: async () =>
       axios
         .get(
-          'https://b38e-14-176-231-248.ngrok-free.app/api/detailBranch/1',
+          'https://ef75-2402-9d80-456-7df4-90c8-4f68-1d2a-39b0.ngrok-free.app/api/detailBranch/1',
         )
         .then(res => res.data),
   });
@@ -43,9 +43,7 @@ export const useRenderBranch = () => {
   }
   if (isError) {
     return 'Error';
-  }
-
-  
+  } 
   return {
     data,
     user: user || [],
