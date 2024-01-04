@@ -24,10 +24,10 @@ class RegisterController extends Controller
     public function register(Request $request)
     {
         $user = new User();
-        $user-> username = $request->input('username');
-        $user-> phone = $request->input('phone');
-        $user-> email  = $request->input('email');
-        $user-> password = Hash::make($request->input('password'));
+        $user->username = $request->input('username');
+        $user->phone = $request->input('phone');
+        $user->email  = $request->input('email');
+        $user->password = Hash::make($request->input('password'));
         $user->save();
 
         VerifyAccountController::sendEmailConfirmAccount($user, VerifyAccountController::generateOtp());
@@ -57,7 +57,7 @@ class RegisterController extends Controller
                 'id_user' => $user_id,
                 'role' => 1
             ]);
-        }   
+        }
 
         return response()->json([
             'message' => 'Login branch successfully',
@@ -69,11 +69,62 @@ class RegisterController extends Controller
     public function checkEmail(Request $request)
     {
         $email = $request->input('email');
-    
+
         $user = User::where('email', $email)->first();
-    
+
         return response()->json([
             'exists' => $user ? true : false,
         ]);
     }
+    public function logout(Request $request) {
+        $user = $request->user(); // Lấy thông tin người dùng từ request
+        $user->tokens()->delete(); // Xóa tất cả token của người dùng
+        return response()->json([
+            'message' => 'Logged out successfully',
+        ], 200);
+    }
+    public function updateUser(Request $request, $id_user)
+{
+    $user = User::find( $id_user);
+    if (!$user) {
+        return response()->json([
+            'message' => 'User not found',
+        ], 404);
+    }
+    $user = User::find( $id_user);
+    $user->username = $request->input('username');
+    $user->phone = $request->input('phone');
+    $user->email = $request->input('email');
+    $password = $request->input('password');
+    if ($password) {
+        // Hash the password before saving
+        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+        $user->password = $hashedPassword;
+    }
+    $user->save();
+
+    return response()->json([
+        'message' => 'User updated successfully',
+        'user' => $user,
+    ], 200);
+}
+
+public function deleteUser($id_user)
+{
+    $user = User::find($id_user);
+    if (!$user) {
+        return response()->json([
+            'message' => 'User not found',
+        ], 404);
+    }
+
+    $user->delete();
+
+    return response()->json([
+        'message' => 'User deleted successfully',
+    ], 200);
+}
+
+
+
 }

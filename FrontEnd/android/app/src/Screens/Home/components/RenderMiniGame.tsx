@@ -1,7 +1,7 @@
 import React from 'react';
 import {Text} from 'react-native';
-import {Image, StyleSheet, View} from 'react-native';
-
+import {Image, View} from 'react-native';
+import styles from '../../../Styles/RenderMiniGame';
 export const RenderMiniGame = ({item}:any) => {
   return (
     <View style={styles.container}>
@@ -12,20 +12,3 @@ export const RenderMiniGame = ({item}:any) => {
     </View>
   );
 };
-const styles = StyleSheet.create({
-    container:{
-        flexDirection:'row',
-        marginLeft:20,
-        marginTop:10,
-    },
-    image:{
-        width:50,
-        height:50,
-        borderRadius:10
-    },
-    name:{
-        color:'white',
-        fontSize:10,
-        width:'60%'
-    }
-});

@@ -1,11 +1,4 @@
-import {
-  FlatList,
-  Pressable,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import {FlatList, Pressable, Text, TouchableOpacity, View} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import React from 'react';
 import {SlideShowImage} from './components/SlideShowImage';
@@ -13,8 +6,9 @@ import {RenderMiniGame} from './components/RenderMiniGame';
 import {RenderNearLocation} from './components/NearLocation';
 import {Image} from 'react-native';
 import {renderOrder} from './components/Order';
-import {useQueries} from '@tanstack/react-query';
-import axios from 'axios';
+import styles from '../../Styles/RenderheaderFlastlist';
+import {useRenderHomePage} from '../../Hook/useRenderHomePage';
+import {useNavigation} from '@react-navigation/native';
 export const RenderheaderFlastlist = () => {
   const DATA = [
     {
@@ -33,29 +27,14 @@ export const RenderheaderFlastlist = () => {
       date: '12/12/2023',
     },
   ];
-
-  const [minigame, branch] = useQueries({
-    queries: [
-      {
-        queryKey: ['minigame'],
-        queryFn: async () =>
-          axios
-            .get('https://e636-14-176-231-248.ngrok-free.app/api/minigame')
-            .then(res => res.data),
-      },
-      {
-        queryKey: ['branch'],
-        queryFn: async () =>
-          axios
-            .get('https://e636-14-176-231-248.ngrok-free.app/api/branch')
-            .then(res => res.data),
-      },
-    ],
-  });
-
+  const {minigame, branch} = useRenderHomePage();
+  const navigation = useNavigation();
+  const handleNavigationService = () => {
+    navigation.navigate('Dịch vụ');
+  };
 
   return (
-    <View>
+    <View style={{position: 'relative'}}>
       <View>{SlideShowImage()}</View>
       <View style={styles.feature}>
         <View>
@@ -100,11 +79,14 @@ export const RenderheaderFlastlist = () => {
         />
       </View>
       <Text style={styles.titlemenu}>Bảng giá</Text>
-      <View style={styles.ContainerPriceTableImg}><Image
-        style={styles.PriceTableImg}
-        source={require('../../Image/pricetable.png')}
-      /></View>
-      
+      <View style={styles.ContainerPriceTableImg}>
+        <TouchableOpacity onPress={handleNavigationService}>
+          <Image
+            style={styles.PriceTableImg}
+            source={require('../../Image/pricetable.png')}
+          />
+        </TouchableOpacity>
+      </View>
       <View style={styles.containerViewOrder}>
         <Text style={styles.titleViewOrder}>Các chi nhánh gần bạn</Text>
         <Pressable>
@@ -129,60 +111,3 @@ export const RenderheaderFlastlist = () => {
     </View>
   );
 };
-const styles = StyleSheet.create({
-  feature: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    marginLeft: 30,
-  },
-  titleFeature: {
-    color: 'white',
-    fontWeight: 'bold',
-    width: '65%',
-  },
-  containerViewOrder: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    margin: 20,
-  },
-  titleViewOrder: {
-    color: 'white',
-    fontWeight: 'bold',
-    fontSize: 16,
-  },
-  squareCreateOrder: {
-    alignItems: 'center',
-    padding: 12,
-    borderRadius: 20,
-    backgroundColor: '#656b7f',
-    marginRight: 10,
-  },
-  containerCreateOrder: {
-    flexDirection: 'row',
-    marginLeft: 20,
-    marginRight: 10,
-  },
-  PriceTableImg: {
-    width: 350,
-    height: 200,
-    objectFit: 'fill',
-    borderRadius: 20,
-    marginTop: 10,
-    marginLeft: 30,
-    marginRight: 30,
-    marginBottom: 30,
-  },
-  titlemenu: {
-    marginLeft: 20,
-    marginTop: 10,
-    color: 'white',
-    fontWeight: 'bold',
-    fontSize: 16,
-  },
-  FlashlistRenderLocation: {
-    marginRight: 10,
-  },
-  ContainerPriceTableImg:{
-    alignItems:'center'
-  }
-});

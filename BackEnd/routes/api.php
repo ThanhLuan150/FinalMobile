@@ -29,6 +29,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get('/branch', [BranchController::class,'index']);
 //API DetailBranch
 Route::get('/detailBranch/{id_branch}',[BranchController::class,'DetailsBranch']);
+//API Service 
+Route::get('/service',[ServiceController::class,'index']);
 //API Service trong Branch đó.
 Route::get('/Service/{id_branch}',[ServiceController::class,'Service']);
 //API  Typeoflaundries trong Branch đó.
@@ -54,3 +56,7 @@ Route::post('/Verify',[VerifyAccountController::class,'verifyOtp']);
 Route::post('/Login',[RegisterController::class,'login']);
 //API checkmail có tồn tại hay chưa
 Route::get('/check-email',[RegisterController::class,'checkEmail']);
+//API sửa user 
+Route::put('/userr/{id_user}', [RegisterController::class, 'updateUser']);
+//API xóa user
+Route::delete('/userss/{id_user}', [RegisterController::class, 'deleteUser']);

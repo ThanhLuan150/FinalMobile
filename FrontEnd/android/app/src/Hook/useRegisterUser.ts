@@ -72,19 +72,22 @@ const useRegisterUser = (): RegisterHook => {
       password,
     };
     axios
-      .post('https://b38e-14-176-231-248.ngrok-free.app/api/Register', user)
+      .post('https://11b8-2402-9d80-41c-2e10-8c41-b1d9-1301-ee09.ngrok-free.app/api/Register', user)
       .then(response => {
         console.log('User registered:', response.data);
         Alert.alert('Đăng ký thành công');
         AsyncStorage.setItem('registeredEmail', email);
         AsyncStorage.setItem('registeredPassword', password);
+        clearFields();
+         // Xóa danh sách lỗi
+        setErrors([]);
         navigation.navigate('VerificationCodeScreen');
       })
       .catch(error => {
         console.error('Đăng ký thất bại:', error);
         Alert.alert('Đăng ký không thành công');
       });
-  }
+  };
   return {
     username,
     phone,
