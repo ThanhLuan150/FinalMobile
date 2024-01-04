@@ -3,10 +3,12 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BranchController;
 use App\Http\Controllers\MiniGameController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\VerifyAccountController;
 use App\Http\Controllers\VoucherController;
+use App\Models\Order;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Route;
@@ -60,3 +62,7 @@ Route::get('/check-email',[RegisterController::class,'checkEmail']);
 Route::put('/userr/{id_user}', [RegisterController::class, 'updateUser']);
 //API xóa user
 Route::delete('/userss/{id_user}', [RegisterController::class, 'deleteUser']);
+//API show danh sách order
+Route::get('/order',[OrderController::class,'order']);
+Route::post('/orders',[OrderController::class,'createOrder']);
+Route::get('/OrderDetails/{id_order}',[OrderController::class,'viewOrderDetails']);
