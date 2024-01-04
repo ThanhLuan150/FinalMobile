@@ -6,14 +6,13 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import axios from 'axios';
 import styles from '../../Styles/Profile';
 
-
 interface UserData {
+  user: UserData;
   id_user: number;
   username: string;
-  phone:number,
-  image: string,
-  email:string,
-  password:string,
+  phone: number;
+  image: string;
+  email: string;
 }
 
 const Profile: React.FC = (): JSX.Element => {
@@ -45,13 +44,14 @@ const Profile: React.FC = (): JSX.Element => {
     }
   };
   const [userData, setUserData] = useState<UserData | null>(null);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
         const token = await AsyncStorage.getItem('token');
         if (token !== null) {
-          const response = await axios.get<UserData[]>(
-            'https://11b8-2402-9d80-41c-2e10-8c41-b1d9-1301-ee09.ngrok-free.app/api/user',
+          const response = await axios.get<UserData>(
+            'https://11b8-2402-9d80-41c-2e10-8c41-b1d9-1301-ee09.ngrok-free.app/api/userprofile',
             {
               headers: {
                 Authorization: `Bearer ${token}`, // Đặt header Authorization với giá trị token để xác thực
@@ -59,21 +59,19 @@ const Profile: React.FC = (): JSX.Element => {
             },
           );
           console.log(token);
-          const fetchedUsers: UserData[] = response.data; // Trích xuất dữ liệu người dùng từ phản hồi API
-          console.log(fetchedUsers);
-          const currentUser = fetchedUsers.find((user: UserData) => user.id_user.toString() === token); // Tìm người dùng hiện tại dựa trên token
+          const currentUser: UserData = response.data.user; // Lấy dữ liệu người dùng từ phản hồi API
           if (currentUser) {
             setUserData(currentUser);
+            console.log(currentUser);
           }
-          console.log(currentUser);
         }
       } catch (error) {
         console.error('Lỗi khi lấy token:', error);
       }
     };
     fetchData(); // Gọi hàm fetchData để lấy dữ liệu người dùng khi component được render lần đầu tiên
-  }, [userData]);
-
+  }, []);
+  
   useEffect(() => {
     if (userData) {
       navigation.setOptions({ title: `Profile - ${userData.username}` }); // Đặt tiêu đề trang Profile với tên người dùng
@@ -95,7 +93,7 @@ const Profile: React.FC = (): JSX.Element => {
             {userData?.image ? (
               <Image style={styles.images} source={{uri: userData.image}} />
             ) : (
-              <Text>No image</Text>
+              <Image style={styles.images} source={require('../../Image/th.jpg')}></Image>
             )}
           </View>
           <View style={styles.viewInformation}>
@@ -107,6 +105,7 @@ const Profile: React.FC = (): JSX.Element => {
                 source={require('../../Image/star.png')}
               />
             </View>
+            <Text style={styles.testname}>{userData?.phone}</Text>
           </View>
           <TouchableOpacity
             onPress={() => navigation.navigate('EditProfile')}
