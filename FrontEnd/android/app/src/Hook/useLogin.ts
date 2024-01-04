@@ -61,8 +61,8 @@ const useLoginUser = (): LoginHook => {
          clearFields();
          // Xóa danh sách
       setErrors([]);
-        AsyncStorage.setItem('token', response.data.token);
-        AsyncStorage.setItem('user', JSON.stringify(response.data.user));
+       const token = AsyncStorage.setItem('token', response.data.token);
+        console.log(token);
         navigation.navigate('HomeScreen');
       })
       .catch(error => {
