@@ -1,97 +1,65 @@
-// LoginScreen.js
-import React, {useState} from 'react';
+/* eslint-disable @typescript-eslint/no-shadow */
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import React, {useState, useEffect} from 'react';
+import styles from '../../Styles/styleLogin';
 import {
   View,
   Text,
   TextInput,
   TouchableOpacity,
-  StyleSheet,
   Image,
+ 
 } from 'react-native';
-
-const LoginScreen = ({navigation}) => {
-  const [phoneNumber, setPhoneNumber] = useState('');
-
-  const handleLogin = () => {
-    console.log('Đăng nhập với số điện thoại:', phoneNumber);
-  };
-
+import useLoginUserObject from '../../Hook/useLogin';
+const LoginScreen = () => {
+  const {
+    email,
+    password,
+    errors,
+    onChangeEmail,
+    onChangePassword,
+    navigation,
+    handleLogin,
+    AsyncStorage,
+  } = useLoginUserObject();
   return (
     <View style={styles.container}>
       <Text style={styles.header}>Đăng nhập</Text>
       <Image
-              source={require('../../Image/logo.png')}
-              style={styles.imageLogo}
-            />
-            <Text style={styles.sectionTitle}>WashWizie</Text>
+        source={require('../../Image/logo.png')}
+        style={styles.imageLogo}
+      />
+      <Text style={styles.sectionTitle}>WashWizie</Text>
+      {errors.includes('Email không hợp lệ') && (
+        <Text style={styles.errorText}>
+          Email không hợp lệ
+        </Text>
+      )}
       <TextInput
         style={styles.input}
-        placeholder="Số điện thoại"
+        placeholder="Email"
         placeholderTextColor="white"
-        keyboardType="numeric"
-        onChangeText={text => setPhoneNumber(text)}
+        value={email}
+        onChangeText={text => onChangeEmail(text)}
       />
-      <TouchableOpacity
-        style={styles.buttonLogin}
-        onPress={() => navigation.navigate('loginSuccessfullyScreeen')}>
+      {errors.includes('Mật khẩu phải có ít nhất 5 ký tự và chứa ít nhất một ký tự đặc biệt') && (
+        <Text style={styles.errorText}>
+         Mật khẩu phải có ít nhất 5 ký tự và chứa ít nhất một ký tự đặc biệt
+        </Text>
+      )}
+      <TextInput
+        style={styles.input}
+        placeholder="Mật khẩu"
+        placeholderTextColor="white"
+        value={password}
+        secureTextEntry
+        onChangeText={text => onChangePassword(text)}
+      />
+      <TouchableOpacity style={styles.buttonLogin} onPress={handleLogin}>
         <Text style={styles.buttonText}>Đăng nhập</Text>
       </TouchableOpacity>
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#353B51',
-  },
-  header: {
-    fontSize: 30,
-    color:'white',
-    bottom:50,
-  },
-  sectionTitle: {
-    fontSize: 20,
-    fontWeight: '700',
-    color: 'white',
-    marginTop: '5%',
-    marginBottom :'30%',
-    justifyContent: 'center',
-  },
-  imageLogo: {
-    width: 100,
-    height: 100,
-    resizeMode: 'contain',
-    justifyContent: 'center',
-    top: '1%',
-  },
-  input: {
-    padding: 20,
-    borderRadius: 10,
-    borderWidth: 2,
-    borderColor: '#CCEBFC',
-    width: '90%',
-    color: 'white',
-    marginBottom: 20,
-  },
-  buttonLogin: {
-    padding: 20,
-    marginTop: 20,
-    borderRadius: 10,
-    color: '#CCEBFC',
-    width: '70%',
-    borderWidth: 2,
-    borderColor: 'white',
-    backgroundColor: '#CCEBFC',
-  },
-  buttonText: {
-    color: 'black',
-    fontSize: 18,
-    fontWeight: 'bold',
-    textAlign: 'center',
-  },
-});
-
 export default LoginScreen;

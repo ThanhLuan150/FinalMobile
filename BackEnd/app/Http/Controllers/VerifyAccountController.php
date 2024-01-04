@@ -32,21 +32,27 @@ class VerifyAccountController extends Controller
         return rand(100000,999999);
     }
 
-    public  function verifyOtp(OtpRequest $otpRequest){
+    public function verifyOtp(OtpRequest $otpRequest)
+    {
         $user = User::firstWhere('email', $otpRequest->email);
-        if($user['verify']){
-            return $this->commonResponse($user,'User existed','500');
+    
+        if (!$user) {
+            return $this->commonResponse([], 'User not found', 404);
         }
-
-        if (Cache::get(self::OTP_PREFIX. $user->id) == $otpRequest->otp){
-            User::where('email', $otpRequest->email)
-                ->update([
-                    'verify'=>1
-                ]);
-            Cache::forever(self::OTP_PREFIX,$user->id);
-            return $this->commonResponse($user,'verify successfully','200');
+    
+        if ($user->verify) {
+            return $this->commonResponse($user, 'User already existed', 500);
         }
-
-        return $this->commonResponse([],'Your otp is wrong or  has been expired',401);
+    
+        if (Cache::get(self::OTP_PREFIX . $user->id_user) == $otpRequest->otp) {
+            $user->verify = 1; // Update the verify status
+            $user->save(); // Save the updated user
+    
+            Cache::forget(self::OTP_PREFIX . $user->id_user);
+    
+            return $this->commonResponse($user, 'Verification successful', 200);
+        }
+    
+        return $this->commonResponse([], 'Your OTP is incorrect or has expired', 401);
     }
 }

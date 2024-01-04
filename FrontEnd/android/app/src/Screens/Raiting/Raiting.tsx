@@ -3,18 +3,8 @@
 /* eslint-disable react/self-closing-comp */
 /* eslint-disable react-native/no-inline-styles */
 import React, {FC} from 'react';
-import {
-  ScrollView,
-  StyleSheet,
-  Text,
-  View,
-  Image,
-  TouchableOpacity,
-  TextInput,
-  KeyboardAvoidingView,
-  TouchableWithoutFeedback,
-  Keyboard,
-} from 'react-native';
+import {ScrollView,Text,View,Image,TouchableOpacity,TextInput,KeyboardAvoidingView,TouchableWithoutFeedback,Keyboard,} from 'react-native';
+import styles from '../../Styles/Raiting';
 import {useNavigation} from '@react-navigation/native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 const RatingScreen: FC = (): JSX.Element => {
@@ -86,100 +76,5 @@ const RatingScreen: FC = (): JSX.Element => {
         </TouchableWithoutFeedback>
       </KeyboardAvoidingView>
     );
-}
-const styles = StyleSheet.create({
-    container:{
-        flex:1,
-        backgroundColor:'#353B51',
-    },
-    view:{
-        flexDirection:'row',
-        justifyContent:'center',
-        alignItems:'center',
-        paddingTop:40,
-    },
-    viewIcon:{
-        paddingTop:10,
-        flexDirection:'row',
-        justifyContent:'center',
-        alignItems:'center',
-        gap:10,
-    },
-    viewreview:{
-        flexDirection:'column',
-        justifyContent:'flex-start',
-        padding:20,
-    },
-    textreview:{
-        color:'#fff',
-        fontSize:12,
-    },
-    viewrevieww:{
-        paddingTop:10,
-        paddingLeft:20,
-        paddingRight:20,
-        flexDirection: 'row',
-        gap:40,
-    },
-    viewbutton:{
-        backgroundColor:'#353B51',
-        borderWidth:1,
-        borderColor:'#FFF',
-        borderRadius:15,
-        paddingTop:10,
-        paddingBottom:10,
-        paddingLeft:20, 
-        paddingRight:20,
-    },
-    text:{
-        color:'#fff',
-        textAlign:'center',
-    },
-    viewTextInput:{
-        padding:20, 
-    },
-    TextInput:{
-        backgroundColor: '#808080',
-        borderRadius:15,
-        paddingTop:10,
-        paddingLeft:10,
-        paddingBottom:100,
-    },
-    viewButtonreview:{
-        padding:20,
-    },
-    buttonreview:{
-        backgroundColor:'#1D7CA1',
-        padding:20,
-        borderRadius:15,
-    },
-    textReview:{
-        color:'#fff',
-        textAlign:'center',
-        fontSize:15,
-        fontWeight:'600',
-    },
-    viewupload:{
-        paddingLeft:10,
-        paddingRight:20,
-        flexDirection:'row',
-        gap:10,
-    },
-    button:{
-        borderWidth:1,
-        borderRadius:5,
-        borderColor:'#1D7CA1',
-        flexDirection:'row',
-        gap:5,
-        width:'50%',
-        paddingTop:10,
-        paddingBottom:10,
-        paddingLeft:20,
-        paddingRight:20,
-    },
-    textupload:{
-        color:'#1D7CA1',
-        marginTop:6,
-    },
-});
+};
 export  default RatingScreen;
