@@ -53,7 +53,7 @@ const useLoginUser = (): LoginHook => {
     };
 
     axios
-      .post('https://8dd3-14-176-231-248.ngrok-free.app/api/api/Login', user)
+      .post('https://11b8-2402-9d80-41c-2e10-8c41-b1d9-1301-ee09.ngrok-free.app/api/Login', user)
       .then(response => {
         console.log('User logged in:', response.data);
         Alert.alert('Đăng nhập thành công');
@@ -62,6 +62,7 @@ const useLoginUser = (): LoginHook => {
          // Xóa danh sách
       setErrors([]);
         AsyncStorage.setItem('token', response.data.token);
+        AsyncStorage.setItem('user', JSON.stringify(response.data.user));
         navigation.navigate('HomeScreen');
       })
       .catch(error => {

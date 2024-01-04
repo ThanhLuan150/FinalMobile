@@ -1,48 +1,57 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import React, {FC, useState, useEffect} from 'react';
-import {ScrollView, Text, View, Image, TouchableOpacity,Switch} from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {ScrollView, Text, View, Image, TouchableOpacity,Switch, Alert} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import axios from 'axios';
 import styles from '../../Styles/Profile';
 
+
 interface UserData {
   id_user: number;
-  image: string;
   username: string;
+  phone:number,
+  image: string,
+  email:string,
+  password:string,
 }
-const Profile: FC = (): JSX.Element => {
+
+const Profile: React.FC = (): JSX.Element => {
   const navigation = useNavigation();
+
   const useNavigationVerifyEmail = (): void => {
     navigation.navigate('VerifyEmail');
   };
+
   const useNavigationSetUpAccount = (): void => {
     navigation.navigate('SetUpAccount');
   };
-  const [isEnabled, setIsEnabled] = useState<boolean>(false);
-  const toggleSwitch = (): void =>
-    setIsEnabled(previousState => !previousState);
+
   const useNavigationRating = (): void => {
     navigation.navigate('RatingScreen');
   };
+
+  const [isEnabled, setIsEnabled] = useState<boolean>(false);
+  const toggleSwitch = (): void => setIsEnabled((previousState) => !previousState);
+
   const handleLogout = async (): Promise<void> => {
     try {
       await AsyncStorage.removeItem('token');
-      navigation.navigate('LoginScreen');
+      Alert.alert('Đăng xuất thành công!');
+      console.log('Đăng xuất thành công, xóa token thành công!')
+      navigation.navigate('Open');
     } catch (error) {
       console.error('Error logging out:', error);
     }
   };
-
   const [userData, setUserData] = useState<UserData | null>(null);
-  console.log(userData);
   useEffect(() => {
     const fetchData = async () => {
       try {
         const token = await AsyncStorage.getItem('token');
         if (token !== null) {
           const response = await axios.get<UserData[]>(
-            'https://ef75-2402-9d80-456-7df4-90c8-4f68-1d2a-39b0.ngrok-free.app/api/user',
+            'https://11b8-2402-9d80-41c-2e10-8c41-b1d9-1301-ee09.ngrok-free.app/api/user',
             {
               headers: {
                 Authorization: `Bearer ${token}`, // Đặt header Authorization với giá trị token để xác thực
@@ -51,19 +60,26 @@ const Profile: FC = (): JSX.Element => {
           );
           console.log(token);
           const fetchedUsers: UserData[] = response.data; // Trích xuất dữ liệu người dùng từ phản hồi API
-          const currentUser = fetchedUsers.find((user: UserData) => user.id_user.toString() === token);// Tìm người dùng hiện tại dựa trên token
-          console.log(currentUser);
+          console.log(fetchedUsers);
+          const currentUser = fetchedUsers.find((user: UserData) => user.id_user.toString() === token); // Tìm người dùng hiện tại dựa trên token
           if (currentUser) {
-            setUserData(currentUser); 
+            setUserData(currentUser);
           }
+          console.log(currentUser);
         }
       } catch (error) {
-        console.error('Lỗi khi lấy token:', error); 
+        console.error('Lỗi khi lấy token:', error);
       }
     };
     fetchData(); // Gọi hàm fetchData để lấy dữ liệu người dùng khi component được render lần đầu tiên
-  }, []);
+  }, [userData]);
 
+  useEffect(() => {
+    if (userData) {
+      navigation.setOptions({ title: `Profile - ${userData.username}` }); // Đặt tiêu đề trang Profile với tên người dùng
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [userData]);
   return (
     <ScrollView style={styles.container}>
       <View style={styles.viewNotification}>
