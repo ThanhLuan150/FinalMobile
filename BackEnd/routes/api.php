@@ -58,7 +58,6 @@ Route::post('/Verify',[VerifyAccountController::class,'verifyOtp']);
 Route::post('/Login',[RegisterController::class,'login']);
 //API checkmail có tồn tại hay chưa
 Route::get('/check-email',[RegisterController::class,'checkEmail']);
-
 //api check token để get id_user
 Route::get('/userprofile', [RegisterController::class, 'getCurrentUserId']);
 //API sửa user 

@@ -27,7 +27,7 @@ class BranchController extends Controller
             ->select(
                 'branches.id_branch', 'branches.name', 'branches.address', 'branches.location', 'branches.machineisempty', 'branches.created_at', 'branches.updated_at',
                 'ratings.id_rating', 'ratings.rating', 'ratings.comment',
-                'users.id_user', 'users.username', 'users.phone', 'users.email', 'users.password', 'users.verify', 'users.role',
+                'users.id_user', 'users.username','users.image', 'users.phone', 'users.email', 'users.password', 'users.verify', 'users.role',
                 'orders.id_order', 'orders.id_service', 'orders.id_typeoflaundries', 'orders.id_transports', 'orders.id_washingliquids', 'orders.id_fabricsofteners', 'orders.id_extraservices', 'orders.id_voucher', 'orders.delivery_time', 'orders.note', 'orders.total_price'
             )
             ->where('branches.id_branch', '=', $id_branch)
@@ -50,6 +50,7 @@ class BranchController extends Controller
                         'id_user' => $item->id_user,
                         'username' => $item->username,
                         'phone' => $item->phone,
+                        'image' => $item->image,
                         'email' => $item->email,
                         'password' => $item->password,
                         'verify' => $item->verify,

@@ -42,10 +42,6 @@ class RegisterController extends Controller
             'additional_info' => $this->commonResponse($user, 'sent otp'),
         ], 201);
     }
-
-
-
-
     public function login(Request $request)
     {
         $credentials = $request->only('email', 'password');

@@ -3,16 +3,14 @@ import { useState, useEffect } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import axios from 'axios';
 import { Alert } from 'react-native';
-
 interface UserData {
+  user: UserData;
   id_user: number;
   username: string;
   phone: number;
   image: string;
   email: string;
-  password: string;
 }
-
 const useProfile = (): {
   navigation: any;
   useNavigationVerifyEmail: () => void;
@@ -25,7 +23,6 @@ const useProfile = (): {
   setUserData: React.Dispatch<React.SetStateAction<UserData | null>>;
 } => {
   const navigation = useNavigation();
-
   const useNavigationVerifyEmail = (): void => {
     navigation.navigate('VerifyEmail');
   };
@@ -49,39 +46,36 @@ const useProfile = (): {
   };
   const [userData, setUserData] = useState<UserData | null>(null);
   useEffect(() => {
-    const fetchData = async (): Promise<void> => {
+    const fetchData = async () => {
       try {
         const token = await AsyncStorage.getItem('token');
         if (token !== null) {
-          const response = await axios.get<UserData[]>(
-            'https://11b8-2402-9d80-41c-2e10-8c41-b1d9-1301-ee09.ngrok-free.app/api/user',
+          const response = await axios.get<UserData>(
+            'https://11b8-2402-9d80-41c-2e10-8c41-b1d9-1301-ee09.ngrok-free.app/api/userprofile',
             {
               headers: {
                 Authorization: `Bearer ${token}`, // Đặt header Authorization với giá trị token để xác thực
               },
-            }
+            },
           );
           console.log(token);
-          const fetchedUsers: UserData[] = response.data; // Trích xuất dữ liệu người dùng từ phản hồi API
-          console.log('Fetched Users:', fetchedUsers);
-          const currentUser = fetchedUsers.reduce((_foundUser, user) => {
-            if (user.id_user.toString() === token) {
-              return user;
-            }
-            setUserData(user);
-          }, null);
+          const currentUser: UserData = response.data.user; // Lấy dữ liệu người dùng từ phản hồi API
+          if (currentUser) {
+            setUserData(currentUser);
+            console.log(currentUser);
+          }
         }
       } catch (error) {
         console.error('Lỗi khi lấy token:', error);
       }
     };
-    fetchData();
+    fetchData(); // Gọi hàm fetchData để lấy dữ liệu người dùng khi component được render lần đầu tiên
   }, []);
   useEffect(() => {
     if (userData) {
       navigation.setOptions({ title: `Profile - ${userData.username}` }); // Đặt tiêu đề trang Profile với tên người dùng
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userData]);
   return {
     navigation,
@@ -95,7 +89,5 @@ const useProfile = (): {
     setUserData,
   };
 };
-
 const useProfiles = useProfile;
-
 export default useProfiles;
