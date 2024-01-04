@@ -76,7 +76,13 @@ class RegisterController extends Controller
             'exists' => $user ? true : false,
         ]);
     }
-
+    public function logout(Request $request) {
+        $user = $request->user(); // Lấy thông tin người dùng từ request
+        $user->tokens()->delete(); // Xóa tất cả token của người dùng
+        return response()->json([
+            'message' => 'Logged out successfully',
+        ], 200);
+    }
     public function updateUser(Request $request, $id_user)
 {
     $user = User::find( $id_user);
@@ -118,5 +124,7 @@ public function deleteUser($id_user)
         'message' => 'User deleted successfully',
     ], 200);
 }
+
+
 
 }
