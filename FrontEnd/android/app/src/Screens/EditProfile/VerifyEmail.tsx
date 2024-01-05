@@ -3,7 +3,6 @@
 /* eslint-disable react/self-closing-comp */
 /* eslint-disable react-native/no-inline-styles */
 import React, { FC } from 'react';
-import { useState } from 'react';
 import {  StyleSheet, Text, View, Image,TouchableOpacity, KeyboardAvoidingView, TextInput} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 const VerifyEmail: FC = (): JSX.Element => {
@@ -14,7 +13,7 @@ const VerifyEmail: FC = (): JSX.Element => {
     return (
         <View style={styles.container}>
             <View style= {styles.viewbanner}>
-                <TouchableOpacity style={{ marginTop:5, }}  onPress={useGoback}>
+                <TouchableOpacity style={{ marginTop:5 }}  onPress={useGoback}>
                     <Image style={styles.image} source={require('../../Image/goback.png')}></Image> 
                 </TouchableOpacity>
                 <Text style={styles.textVerify}>Xác thực Email</Text>
