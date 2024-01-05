@@ -37,6 +37,7 @@ const useProfile = (): {
   const useNavigationRating = (): void => {
     navigation.navigate('RatingScreen');
   };
+
   const handleLogout = async (): Promise<void> => {
     try {
       await AsyncStorage.removeItem('token');
@@ -47,6 +48,7 @@ const useProfile = (): {
       console.error('Error logging out:', error);
     }
   };
+
   const [userData, setUserData] = useState<UserData | null>(null);
   useEffect(() => {
     const fetchData = async (): Promise<void> => {
@@ -61,11 +63,12 @@ const useProfile = (): {
               },
             }
           );
-          console.log(token);
+        //   console.log(token);
           const fetchedUsers: UserData[] = response.data; // Trích xuất dữ liệu người dùng từ phản hồi API
-          console.log('Fetched Users:', fetchedUsers);
+        //   console.log('Fetched Users:', fetchedUsers);
           const currentUser = fetchedUsers.reduce((_foundUser, user) => {
             if (user.id_user.toString() === token) {
+                console.log("ID Users: ",user.id_user);
               return user;
             }
             setUserData(user);
