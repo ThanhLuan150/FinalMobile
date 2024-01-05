@@ -1,6 +1,7 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import { Text, View} from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import styles from '../../../Styles/BranchInfor';
 interface propsRenderItemInfor {
   nameIcon: string;
   title: string;
@@ -24,28 +25,4 @@ export const RenderItemInfor = ({nameIcon, title,location}: propsRenderItemInfor
     </>
   );
 };
-const styles = StyleSheet.create({
-  itemContainer: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginLeft: 50,
-  },
-  containerIcon: {
-    flex: 1,
-  },
-  containerTitle: {
-    flex: 6,
-  },
-  line: {
-    backgroundColor: 'white',
-    width: 200,
-    height: 2,
-    margin: 10,
-  },
-  title: {
-    color: 'white',
-    marginLeft: 5,
-    padding: 5,
-  },
-});
+

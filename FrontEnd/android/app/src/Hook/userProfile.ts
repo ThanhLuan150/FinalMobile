@@ -100,5 +100,4 @@ const useProfile = (): {
 };
 
 const useProfiles = useProfile;
-
 export default useProfiles;
