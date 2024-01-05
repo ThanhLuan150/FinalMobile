@@ -1,69 +1,12 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import React, {FC, useState, useEffect} from 'react';
-import {ScrollView, Text, View, Image, TouchableOpacity,Switch} from 'react-native';
-import {useNavigation} from '@react-navigation/native';
+/* eslint-disable react/self-closing-comp */
+/* eslint-disable react-native/no-inline-styles */
+import React from 'react';
+import {ScrollView,Text,View,Image,TouchableOpacity,Switch} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import axios from 'axios';
 import styles from '../../Styles/Profile';
-
-interface UserData {
-  id_user: number;
-  image: string;
-  username: string;
-}
-const Profile: FC = (): JSX.Element => {
-  const navigation = useNavigation();
-  const useNavigationVerifyEmail = (): void => {
-    navigation.navigate('VerifyEmail');
-  };
-  const useNavigationSetUpAccount = (): void => {
-    navigation.navigate('SetUpAccount');
-  };
-  const [isEnabled, setIsEnabled] = useState<boolean>(false);
-  const toggleSwitch = (): void =>
-    setIsEnabled(previousState => !previousState);
-  const useNavigationRating = (): void => {
-    navigation.navigate('RatingScreen');
-  };
-  const handleLogout = async (): Promise<void> => {
-    try {
-      await AsyncStorage.removeItem('token');
-      navigation.navigate('LoginScreen');
-    } catch (error) {
-      console.error('Error logging out:', error);
-    }
-  };
-
-  const [userData, setUserData] = useState<UserData | null>(null);
-  console.log(userData);
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const token = await AsyncStorage.getItem('token');
-        if (token !== null) {
-          const response = await axios.get<UserData[]>(
-            'https://ef75-2402-9d80-456-7df4-90c8-4f68-1d2a-39b0.ngrok-free.app/api/user',
-            {
-              headers: {
-                Authorization: `Bearer ${token}`, // Đặt header Authorization với giá trị token để xác thực
-              },
-            },
-          );
-          console.log(token);
-          const fetchedUsers: UserData[] = response.data; // Trích xuất dữ liệu người dùng từ phản hồi API
-          const currentUser = fetchedUsers.find((user: UserData) => user.id_user.toString() === token);// Tìm người dùng hiện tại dựa trên token
-          console.log(currentUser);
-          if (currentUser) {
-            setUserData(currentUser); 
-          }
-        }
-      } catch (error) {
-        console.error('Lỗi khi lấy token:', error); 
-      }
-    };
-    fetchData(); // Gọi hàm fetchData để lấy dữ liệu người dùng khi component được render lần đầu tiên
-  }, []);
-
+import useProfiles from '../../Hook/userProfile';
+const Profile: React.FC = (): JSX.Element => {
+  const {navigation,useNavigationVerifyEmail,useNavigationSetUpAccount,isEnabled,toggleSwitch,useNavigationRating,handleLogout,userData,} = useProfiles();
   return (
     <ScrollView style={styles.container}>
       <View style={styles.viewNotification}>
@@ -79,7 +22,9 @@ const Profile: FC = (): JSX.Element => {
             {userData?.image ? (
               <Image style={styles.images} source={{uri: userData.image}} />
             ) : (
-              <Text>No image</Text>
+              <Image
+                style={styles.images}
+                source={require('../../Image/th.jpg')}></Image>
             )}
           </View>
           <View style={styles.viewInformation}>
@@ -91,6 +36,7 @@ const Profile: FC = (): JSX.Element => {
                 source={require('../../Image/star.png')}
               />
             </View>
+            <Text style={styles.testname}>{userData?.phone}</Text>
           </View>
           <TouchableOpacity
             onPress={() => navigation.navigate('EditProfile')}
@@ -257,5 +203,4 @@ const Profile: FC = (): JSX.Element => {
     </ScrollView>
   );
 };
-
 export default Profile;

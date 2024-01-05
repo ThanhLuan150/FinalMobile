@@ -2,10 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-
+use Exception;
+use Tymon\JWTAuth\Facades\JWTAuth;
+use Tymon\JWTAuth\Exceptions\TokenExpiredException;
+use Tymon\JWTAuth\Exceptions\TokenInvalidException;
+use Tymon\JWTAuth\Exceptions\JWTException;
 class RegisterController extends Controller
 {
 
@@ -39,33 +44,54 @@ class RegisterController extends Controller
     }
     public function login(Request $request)
     {
-        $email = $request->input('email');
-        $password = $request->input('password');
-        $user = User::where('email', $email)->first();
-        if (!$user || !Hash::check($password, $user->password)) {
+        $credentials = $request->only('email', 'password');
+
+        if (Auth::attempt($credentials)) {
+            $user = Auth::user();
+            $token = JWTAuth::fromUser($user);
+            $role = $user->role; // Lấy vai trò của người dùng
+
             return response()->json([
-                'message' => 'Invalid email or password',
-                'user' => $user
-            ], 401);
-        }
-        $token = $user->createToken('API Token')->plainTextToken;
-        $user_id = $user;
-        if ($user->role) {
-            return response()->json([
-                'message' => 'Login user successfully',
+                'message' => 'Login successful',
                 'token' => $token,
-                'id_user' => $user_id,
-                'role' => 1
+                'user' => $user,
+                'role' => $role // Trả về vai trò trong phản hồi
             ]);
         }
 
         return response()->json([
-            'message' => 'Login branch successfully',
-            'token' => $token,
-            'id_user' => $user_id,
-            'role' => 0
-        ]);
+            'message' => 'Invalid email or password',
+        ], 401);
     }
+    public function getCurrentUserId()
+    {
+        try {
+            $token = JWTAuth::parseToken();
+            $user = $token->authenticate();
+            
+            if ($user) {
+                return response()->json([
+                    'user' => $user
+                ]);
+            }
+            return response()->json([
+                'error' => 'User not found'
+            ], 404);
+        } catch (TokenExpiredException $e) {
+            return response()->json([
+                'error' => 'Token expired'
+            ], 401);
+        } catch (TokenInvalidException $e) {
+            return response()->json([
+                'error' => 'Invalid token'
+            ], 401);
+        } catch (JWTException $e) {
+            return response()->json([
+                'error' => 'JWT exception'
+            ], 500);
+        }
+    }
+
     public function checkEmail(Request $request)
     {
         $email = $request->input('email');
@@ -76,6 +102,16 @@ class RegisterController extends Controller
             'exists' => $user ? true : false,
         ]);
     }
+
+    public function logout(Request $request)
+    {
+        $user = $request->user(); // Lấy thông tin người dùng từ request
+        $user->tokens()->delete(); // Xóa tất cả token của người dùng
+        return response()->json([
+            'message' => 'Logged out successfully',
+        ], 200);
+    }
+
     public function updateUser(Request $request, $id_user)
     {
         $user = User::find($id_user);

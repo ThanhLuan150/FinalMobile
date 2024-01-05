@@ -3,12 +3,10 @@ import axios from 'axios';
 import { useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Alert } from 'react-native';
-
 interface LoginData {
   email: string;
   password: string;
 }
-
 interface LoginHook {
   email: string;
   password: string;
@@ -19,13 +17,11 @@ interface LoginHook {
   handleLogin: () => void;
   AsyncStorage: any;
 }
-
 const useLoginUser = (): LoginHook => {
   const [email, onChangeEmail] = useState<string>('');
   const [password, onChangePassword] = useState<string>('');
   const [errors, setErrors] = useState<string[]>([]);
   const navigation = useNavigation();
-
   const handleLogin = () => {
     const newErrors: string[] = [];
     const clearFields = () => {
@@ -41,19 +37,16 @@ const useLoginUser = (): LoginHook => {
         'Mật khẩu phải có ít nhất 5 ký tự và chứa ít nhất một ký tự đặc biệt',
       );
     }
-
     if (newErrors.length > 0) {
       setErrors(newErrors);
       return;
     }
-
     const user: LoginData = {
       email,
       password,
     };
-
     axios
-      .post('https://ef75-2402-9d80-456-7df4-90c8-4f68-1d2a-39b0.ngrok-free.app/api/Login', user)
+      .post('https://11b8-2402-9d80-41c-2e10-8c41-b1d9-1301-ee09.ngrok-free.app/api/Login', user)
       .then(response => {
         console.log('User logged in:', response.data);
         Alert.alert('Đăng nhập thành công');
@@ -61,7 +54,8 @@ const useLoginUser = (): LoginHook => {
          clearFields();
          // Xóa danh sách
       setErrors([]);
-        AsyncStorage.setItem('token', response.data.token);
+       const token = AsyncStorage.setItem('token', response.data.token);
+        console.log(token);
         navigation.navigate('HomeScreen');
       })
       .catch(error => {
@@ -69,7 +63,6 @@ const useLoginUser = (): LoginHook => {
         Alert.alert('Đăng nhập không thành công');
       });
   };
-
   return {
     email,
     password,
@@ -81,6 +74,5 @@ const useLoginUser = (): LoginHook => {
     AsyncStorage,
   };
 };
-
 const useLoginUserObject = useLoginUser;
 export default useLoginUserObject;
