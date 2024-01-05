@@ -5,6 +5,8 @@ import {ScrollView,Text,View,Image,TouchableOpacity,Switch} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import styles from '../../Styles/Profile';
 import useProfiles from '../../Hook/userProfile';
+
+
 const Profile: React.FC = (): JSX.Element => {
   const {navigation,useNavigationVerifyEmail,useNavigationSetUpAccount,isEnabled,toggleSwitch,useNavigationRating,handleLogout,userData,} = useProfiles();
   return (

@@ -15,20 +15,19 @@ import {
   TouchableOpacity,
   Image,
 } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+//tạo biến lưu giá trị thay đổi, tạo function update api put sự thay đổi đó lên api 
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import useProfiles from '../../Hook/userProfile';
 
-const EditProfile = () => {
+const EditProfile: React.FC = (): JSX.Element => {
+  const {
+    navigation,
+    userData,
+  } = useProfiles();
   const [name, onChangeName] = useState('');
-  const [number, onChangeNumber] = useState('');
-  const [address, onChangeAddress] = useState('');
-  const navigation = useNavigation();
-
-  useEffect(() => {
-    // Load saved profile information when component mounts
-    loadProfile();
-  }, []);
-
+  const [phone] = useState('');
+  const [email, onChangeAddress] = useState('');
+  const [password] = useState('');
   const goBack = () => {
     navigation.goBack();
   };
@@ -36,26 +35,11 @@ const EditProfile = () => {
   const saveProfile = async () => {
     try {
       // Save profile information to AsyncStorage
-      const profileData = { name, number, address };
+      const profileData = { name, phone, email };
       await AsyncStorage.setItem('profileData', JSON.stringify(profileData));
       console.log('Profile saved:', profileData);
     } catch (error) {
       console.error('Error saving profile:', error);
-    }
-  };
-
-  const loadProfile = async () => {
-    try {
-      // Load profile information from AsyncStorage
-      const storedProfile = await AsyncStorage.getItem('profileData');
-      if (storedProfile) {
-        const { name: storedName, number: storedNumber, address: storedAddress } = JSON.parse(storedProfile);
-        onChangeName(storedName);
-        onChangeNumber(storedNumber);
-        onChangeAddress(storedAddress);
-      }
-    } catch (error) {
-      console.error('Error loading profile:', error);
     }
   };
 
@@ -72,16 +56,17 @@ const EditProfile = () => {
             <Text style={styles.textVerify}>Thông tin tài khoản</Text>
           </View>
           <View style={styles.viewImage}>
-            <Image style={styles.images} source={require('../../Image/huongho.jpg')}></Image>
+            {userData && userData.image && (
+              <Image style={styles.images} source={{ uri: userData.image }} />
+            )}
           </View>
           <View style={styles.view}>
             <View style={styles.viewEdit}>
               <Text style={styles.textEdit}>Tên người nhận</Text>
               <TextInput
                 style={styles.textInput}
-                value={name}
+                value={userData?.username || ''}
                 onChangeText={onChangeName}
-                placeholder="Nhập tên "
                 placeholderTextColor={'#fff'}
               />
             </View>
@@ -89,9 +74,7 @@ const EditProfile = () => {
               <Text style={styles.textEdit}>Số điện thoại</Text>
               <TextInput
                 style={styles.textInput}
-                placeholder="Nhập số điện thoại"
-                value={number}
-                onChangeText={onChangeNumber}
+                value={userData?.phone}
                 placeholderTextColor={'#fff'}
               />
             </View>
@@ -99,9 +82,17 @@ const EditProfile = () => {
               <Text style={styles.textEdit}>Nhập địa chỉ</Text>
               <TextInput
                 style={styles.textInput}
-                value={address}
+                value={userData?.email || ''}
                 onChangeText={onChangeAddress}
-                placeholder="Nhập địa chỉ"
+                placeholderTextColor={'#fff'}
+              />
+            </View>
+            <View style={styles.viewEdit}>
+              <Text style={styles.textEdit}>Nhập password</Text>
+              <TextInput
+                style={styles.textInput}
+                value={userData?.password || ''}
+                onChangeText={onChangeAddress}
                 placeholderTextColor={'#fff'}
               />
             </View>
@@ -187,5 +178,4 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
 });
-
 export default EditProfile;
