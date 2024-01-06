@@ -13,7 +13,7 @@ export const useRenderBranch = ({id_branch}:propuseRenderBranch) => {
     queryFn: async () =>
       axios
         .get(
-          `https://bcbc-14-176-231-248.ngrok-free.app/api/detailBranch/${id_branch}`,
+          `https://11b8-2402-9d80-41c-2e10-8c41-b1d9-1301-ee09.ngrok-free.app/api/detailBranch/${id_branch}`,
         )
         .then(res => res.data),
   });
