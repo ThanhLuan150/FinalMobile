@@ -46,7 +46,7 @@ const useLoginUser = (): LoginHook => {
       password,
     };
     axios
-      .post('https://86df-113-176-99-140.ngrok-free.app/api/Login', user)
+      .post('https://62bf-14-176-231-248.ngrok-free.app/api/Login', user)
       .then(response => {
         console.log('User logged in:', response.data);
         Alert.alert('Đăng nhập thành công');
