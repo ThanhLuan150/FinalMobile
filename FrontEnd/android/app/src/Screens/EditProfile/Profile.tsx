@@ -1,14 +1,15 @@
-/* eslint-disable react/self-closing-comp */
 /* eslint-disable react-native/no-inline-styles */
+/* eslint-disable react/self-closing-comp */
 import React from 'react';
 import {ScrollView,Text,View,Image,TouchableOpacity,Switch} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import styles from '../../Styles/Profile';
+import userEditUsers from '../../Hook/useEditProfile';
 import useProfiles from '../../Hook/userProfile';
 
 
 const Profile: React.FC = (): JSX.Element => {
-  const {navigation,useNavigationVerifyEmail,useNavigationSetUpAccount,isEnabled,toggleSwitch,useNavigationRating,handleLogout,userData,} = useProfiles();
+  const {navigation,useNavigationVerifyEmail,useNavigationSetUpAccount,isEnabled,toggleSwitch,useNavigationRating,handleLogout,userData} = useProfiles();
   return (
     <ScrollView style={styles.container}>
       <View style={styles.viewNotification}>
@@ -129,7 +130,6 @@ const Profile: React.FC = (): JSX.Element => {
             </View>
           </View>
           <TouchableOpacity
-            //   onPress={}
             style={styles.viewInfomation}>
             <View
               style={{
@@ -143,7 +143,6 @@ const Profile: React.FC = (): JSX.Element => {
             <Ionicons color={'#fff'} name="chevron-forward-outline" size={35} />
           </TouchableOpacity>
           <TouchableOpacity
-            //   onPress={}
             style={styles.viewInfomation}>
             <View
               style={{
@@ -169,7 +168,6 @@ const Profile: React.FC = (): JSX.Element => {
             </View>
           </TouchableOpacity>
           <TouchableOpacity
-            //   onPress={}
             style={styles.viewInfomation}>
             <View
               style={{
