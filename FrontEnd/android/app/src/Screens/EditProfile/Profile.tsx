@@ -1,5 +1,5 @@
-/* eslint-disable react/self-closing-comp */
 /* eslint-disable react-native/no-inline-styles */
+/* eslint-disable react/self-closing-comp */
 import React from 'react';
 import {ScrollView,Text,View,Image,TouchableOpacity,Switch} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -127,7 +127,6 @@ const Profile: React.FC = (): JSX.Element => {
             </View>
           </View>
           <TouchableOpacity
-            //   onPress={}
             style={styles.viewInfomation}>
             <View
               style={{
@@ -141,7 +140,6 @@ const Profile: React.FC = (): JSX.Element => {
             <Ionicons color={'#fff'} name="chevron-forward-outline" size={35} />
           </TouchableOpacity>
           <TouchableOpacity
-            //   onPress={}
             style={styles.viewInfomation}>
             <View
               style={{
@@ -167,7 +165,6 @@ const Profile: React.FC = (): JSX.Element => {
             </View>
           </TouchableOpacity>
           <TouchableOpacity
-            //   onPress={}
             style={styles.viewInfomation}>
             <View
               style={{

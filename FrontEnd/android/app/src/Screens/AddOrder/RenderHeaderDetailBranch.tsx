@@ -4,10 +4,10 @@ import {RenderItemInfor} from './Components/BranchInfor';
 import {StraightLineRating} from './Components/StraightLineRating';
 import Stars from 'react-native-stars';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { useRenderBranch } from '../../Hook/useRenderBranch';
+import { propuseRenderBranch, useRenderBranch } from '../../Hook/useRenderBranch';
 
-export const RenderHeaderDetailBranch = () => {
-  const {isLoading, isError, data,numberOfRating,forceRerender}:any = useRenderBranch();
+export const RenderHeaderDetailBranch = ({id_branch}:propuseRenderBranch) => {
+  const {isLoading, isError, data,numberOfRating,forceRerender}:any = useRenderBranch({id_branch:id_branch});
   if (isLoading) {
     return (
       <View style={styles.containerStatus}>

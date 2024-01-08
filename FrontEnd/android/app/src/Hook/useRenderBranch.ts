@@ -1,8 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import {useEffect, useState} from 'react';
-
-export const useRenderBranch = () => {
+export interface propuseRenderBranch{
+  id_branch?:number
+}
+export const useRenderBranch = ({id_branch}:propuseRenderBranch) => {
   const [numberOfRating, setTotalNumberOfRating] = useState(0);
   const [user, setUser] = useState([]);
   const [forceRerender, setForceRerender] = useState(false);
@@ -11,7 +13,7 @@ export const useRenderBranch = () => {
     queryFn: async () =>
       axios
         .get(
-          'https://11b8-2402-9d80-41c-2e10-8c41-b1d9-1301-ee09.ngrok-free.app/api/detailBranch/1',
+          `https://62bf-14-176-231-248.ngrok-free.app/api/detailBranch/${id_branch}`,
         )
         .then(res => res.data),
   });
