@@ -32,6 +32,9 @@ export const RenderheaderFlastlist = () => {
   const handleNavigationService = () => {
     navigation.navigate('Dịch vụ');
   };
+  const handleNavigationSupport= () => {
+    navigation.navigate('DetailChat');
+  };
 
   return (
     <View style={{position: 'relative'}}>
@@ -53,10 +56,10 @@ export const RenderheaderFlastlist = () => {
           <Ionicons style={{color: '#88cbd1'}} size={40} name="mail-unread" />
           <Text style={styles.titleFeature}>Góp ý khiếu nại</Text>
         </View>
-        <View>
+        <TouchableOpacity onPress={handleNavigationSupport}>
           <Ionicons style={{color: '#88cbd1'}} size={40} name="people" />
           <Text style={styles.titleFeature}>Hỗ trợ tư vấn</Text>
-        </View>
+        </TouchableOpacity>
       </View>
 
       <View style={styles.containerViewOrder}>
