@@ -39,7 +39,7 @@ const useEditUser = (): EditUserProps => {
         const token = await AsyncStorage.getItem('token');
         if (token !== null) {
           const response = await axios.get(
-            'https://86df-113-176-99-140.ngrok-free.app/api/userprofile',
+            'https://62bf-14-176-231-248.ngrok-free.app/api/userprofile',
             {
               headers: {
                 Authorization: `Bearer ${token}`,
@@ -70,7 +70,7 @@ const useEditUser = (): EditUserProps => {
       const token = await AsyncStorage.getItem('token');
       if (token !== null) {
         const response = await axios.put(
-          `https://86df-113-176-99-140.ngrok-free.app/api/userr/${userData?.id_user}`,
+          `https://62bf-14-176-231-248.ngrok-free.app/api/userr/${userData?.id_user}`,
           {
             username,
             phone: parseInt(phone, 10),
