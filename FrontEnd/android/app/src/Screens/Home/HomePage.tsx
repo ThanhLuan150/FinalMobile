@@ -7,7 +7,7 @@ import {RenderVoucher} from './components/Voucher';
 import {RenderheaderFlastlist} from './RenderheaderFlastlist';
 import styles from '../../Styles/HomePage';
 import {useRenderHomePage} from '../../Hook/useRenderHomePage';
-import { useQuery } from 'react-query';
+import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 export const HomePage = () => {
   const {data} = useQuery({

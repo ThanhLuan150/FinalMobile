@@ -9,7 +9,22 @@ use Illuminate\Http\Request;
 class Order extends Model
 {
     use HasFactory;
-    protected $fillable=['id_user','id_branch','id_service','id_typeoflaundries','	id_transports','id_washingliquids ','	id_fabricsofteners','id_extraservices ','	id_voucher','delivery_time','address','note','total_price'];
+    protected $fillable = [
+        'id_user',
+        'id_branch',
+        'id_service',
+        'id_typeoflaundries',
+        'id_transports',
+        'id_washingliquids',
+        'id_fabricsofteners',
+        'id_extraservices',
+        'id_voucher',
+        'delivery_time',
+        'address',
+        'note',
+        'total_price'
+    ];
+    
     public function user()
     {
         return $this->belongsTo(User::class, 'id_user'); 
@@ -63,6 +78,7 @@ class Order extends Model
         $order->note = $request->input('note');
         $order->total_price = $request->input('total_price');
         $order->save();
+
         event(new OrderCreated($order));
     
         return response()->json(['message' => 'Order created successfully', 'data' => $order], 201);

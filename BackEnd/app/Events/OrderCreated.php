@@ -15,16 +15,16 @@ class OrderCreated
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    /**
-     * Create a new event instance.
-     */
     public $order;
 
-    public function __construct(Order $order)
+    public function __construct($id_order)
     {
-        $this->order = $order;
+        $this->order = $id_order;
     }
-
+    public function getOrder()
+    {
+        return $this->order;
+    }
     /**
      * Get the channels the event should broadcast on.
      *
