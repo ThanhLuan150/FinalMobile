@@ -10,9 +10,7 @@ import {
   TouchableOpacity,
   FlatList,
   TextInput,
-  Platform,
   StyleSheet,
-  KeyboardAvoidingView,
 } from 'react-native';
 
 import {useNavigation} from '@react-navigation/native';
@@ -22,11 +20,12 @@ import {styles} from './AddBookingStyle';
 
 const ChooseLocationComponent: FC = (): JSX.Element => {
   const defaultTextColor = 'white';
+  const navigation = useNavigation();
   return (
     <View style={styles.chooselocation}>
       <View style={styles.locationtexts}>
         <Text style={styles.headingText}>Chi nhánh giặt:</Text>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate('Maps')}>
           <Text style={styles.mapslink}>Thay đổi</Text>
         </TouchableOpacity>
       </View>
@@ -516,4 +515,3 @@ export const AddBookingScreen: FC = (): JSX.Element => {
     // </KeyboardAvoidingView>
   );
 };
-
