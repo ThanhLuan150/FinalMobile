@@ -76,15 +76,15 @@ function App(): React.JSX.Element {
     <NavigationContainer>
       <QueryClientProvider client={queryClient}>
         <Stack.Navigator
-          // initialRouteName="AddAddress"
+          initialRouteName= {authenticated === true ? 'HomeScreen' : 'Open'}
           screenOptions={{
             headerShown: false,
           }}>
-          <Stack.Screen
+          {/* <Stack.Screen
             name="ScreenCheck"
-            component={authenticated === true ? Homestack : OpenScreen}
+            component={Homestack}
             options={{headerShown: false}}
-          />
+          /> */}
           <Stack.Screen
             name="Open"
             component={OpenScreen}
