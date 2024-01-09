@@ -9,7 +9,6 @@ const ImageSlide = [
 ];
 
 export const useRenderHomePage = () => {
- 
   const [minigame, branch,voucher] = useQueries({
     queries: [
       {

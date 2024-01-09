@@ -2,9 +2,10 @@
 
 namespace App\Models;
 
+use App\Events\OrderCreated;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Http\Request;
 class Order extends Model
 {
     use HasFactory;
@@ -44,5 +45,26 @@ class Order extends Model
     public function voucher ()
     {
         return $this->belongsTo(Voucher::class, 'id_evoucher '); 
+    }
+    public function createOrder(Request $request)
+    {
+        $order = new Order;
+        $order->id_user = $request->input('id_user');
+        $order->id_branch = $request->input('id_branch');
+        $order->id_service = $request->input('id_service');
+        $order->id_typeoflaundries = $request->input('id_typeoflaundries');
+        $order->id_transports = $request->input('id_transports');
+        $order->id_washingliquids = $request->input('id_washingliquids');
+        $order->id_fabricsofteners = $request->input('id_fabricsofteners');
+        $order->id_extraservices = $request->input('id_extraservices');
+        $order->id_voucher = $request->input('id_voucher');
+        $order->delivery_time = $request->input('delivery_time');
+        $order->address = $request->input('address');
+        $order->note = $request->input('note');
+        $order->total_price = $request->input('total_price');
+        $order->save();
+        event(new OrderCreated($order));
+    
+        return response()->json(['message' => 'Order created successfully', 'data' => $order], 201);
     }
 }
