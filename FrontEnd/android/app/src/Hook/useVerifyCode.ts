@@ -32,7 +32,7 @@ const useVerifycationUser = (): UseVerificationUserProps => {
           navigation.navigate('LoginScreen');
         })
         .catch((error) => {
-          Alert.alert('Xác thực không thành công!');
+          Alert.alert('Xác thực không thành công');
           console.error('Verification failed:', error);
         });
     });
