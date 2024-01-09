@@ -14,7 +14,7 @@ export const HomePage = () => {
     queryKey: ['Voucher'],
     queryFn: async () =>
       axios
-        .get('https://97ff-14-176-231-248.ngrok-free.app/api/Voucher')
+        .get('https://be1d-14-176-231-248.ngrok-free.app/api/Voucher')
         .then(res => res.data),
   });
   console.log('voucher',data); 
