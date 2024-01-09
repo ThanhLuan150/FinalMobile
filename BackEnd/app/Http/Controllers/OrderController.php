@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\OrderCreated;
 use App\Models\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -28,6 +29,7 @@ class OrderController extends Controller
         $order->note = $request->input('note');
         $order->total_price = $request->input('total_price');
         $order->save();
+        event(new OrderCreated($order->id_order));
     
         return response()->json(['message' => 'Order created successfully', 'data' => $order], 201);
     }
