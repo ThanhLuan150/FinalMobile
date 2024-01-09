@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BranchController;
 use App\Http\Controllers\MiniGameController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ServiceController;
@@ -66,5 +67,7 @@ Route::put('/userr/{id_user}', [RegisterController::class, 'updateUser']);
 Route::delete('/userss/{id_user}', [RegisterController::class, 'deleteUser']);
 //API show danh sách order
 Route::get('/order',[OrderController::class,'order']);
-Route::post('/orders',[OrderController::class,'createOrder']);
+Route::post('/orders',[Order::class,'createOrder']);
 Route::get('/OrderDetails/{id_order}',[OrderController::class,'viewOrderDetails']);
+//API Notification 
+Route::get('/Notification',[NotificationController::class,'notification']);

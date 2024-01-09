@@ -2,15 +2,10 @@
 import React, {FC} from 'react';
 import styles from '../../Styles/DetailChat';
 import {
-  ScrollView,
   Text,
   View,
   Image,
   Pressable,
-  TouchableWithoutFeedback,
-  Keyboard,
-  KeyboardAvoidingView,
-  TextInput,
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {WebView} from 'react-native-webview';

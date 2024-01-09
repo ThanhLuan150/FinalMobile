@@ -27,6 +27,8 @@ import {OrderDetail} from './android/app/src/Screens/Books/OrderDetail';
 import {ServicePage} from './android/app/src/Screens/AddOrder/Service';
 import SearchScreen from './android/app/src/Screens/Home/Search';
 import {BranchDetail} from './android/app/src/Screens/AddOrder/BranchDetail';
+import {useCheckAuth} from './android/app/src/Hook/useCheckAuth';
+
 import {MapsScreen} from './android/app/src/Screens/Booking/Address';
 import {NextAddBookingScreen} from './android/app/src/Screens/Booking/NextAddBooking';
 
@@ -69,6 +71,7 @@ const Homestack = () => {
 const Tab = createBottomTabNavigator();
 function App(): React.JSX.Element {
   const queryClient = new QueryClient();
+  const authenticated = useCheckAuth();
   return (
     <NavigationContainer>
       <QueryClientProvider client={queryClient}>
@@ -77,6 +80,11 @@ function App(): React.JSX.Element {
           screenOptions={{
             headerShown: false,
           }}>
+          <Stack.Screen
+            name="ScreenCheck"
+            component={authenticated === true ? Homestack : OpenScreen}
+            options={{headerShown: false}}
+          />
           <Stack.Screen
             name="Open"
             component={OpenScreen}

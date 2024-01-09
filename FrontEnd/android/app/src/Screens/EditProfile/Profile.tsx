@@ -16,7 +16,7 @@ const Profile: React.FC = (): JSX.Element => {
           source={require('../../Image/notification1.png')}
         />
       </View>
-      <View style={{paddingTop: 20}}>
+      <View style={{paddingTop: 10,marginBottom:20}}>
         <View style={styles.viewbannerProfile}>
           <View style={styles.viewImage}>
             {userData?.image ? (
