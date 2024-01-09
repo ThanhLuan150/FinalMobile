@@ -110,7 +110,7 @@ const TypeClothesComponent: FC = (): JSX.Element => {
     {title: 'Cặp/ Balo'},
   ];
 
-  const [clothesChecked, setClothesChecked] = useState<string[]>([]);
+  const [clothesChecked, setClothesChecked] = useState<string[]>(['Đồ bình thường']);
 
   const toggleClothes = (chosen: string) => {
     setClothesChecked(prevChecked => {
@@ -489,15 +489,12 @@ export const AddBookingScreen: FC = (): JSX.Element => {
     return (
       <TouchableOpacity
         style={styles.NextButton}
-        onPress={() => navigation.navigate('Trang chủ')}>
+        onPress={() => navigation.navigate('NextAddBooking')}>
         <Text style={styles.ButtonText}>Tiếp</Text>
       </TouchableOpacity>
     );
   };
   return (
-    // <KeyboardAvoidingView
-    //   behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-    //   style={styles.container}>
     <View style={styles.container}>
       <View style={styles.header}>
         <TouchableOpacity
@@ -512,6 +509,5 @@ export const AddBookingScreen: FC = (): JSX.Element => {
       </View>
       <NextButton />
     </View>
-    // </KeyboardAvoidingView>
   );
 };

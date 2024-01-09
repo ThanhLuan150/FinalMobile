@@ -28,6 +28,7 @@ import {ServicePage} from './android/app/src/Screens/AddOrder/Service';
 import SearchScreen from './android/app/src/Screens/Home/Search';
 import {BranchDetail} from './android/app/src/Screens/AddOrder/BranchDetail';
 import {MapsScreen} from './android/app/src/Screens/Booking/Address';
+import {NextAddBookingScreen} from './android/app/src/Screens/Booking/NextAddBooking';
 
 const Stack = createNativeStackNavigator();
 
@@ -72,7 +73,7 @@ function App(): React.JSX.Element {
     <NavigationContainer>
       <QueryClientProvider client={queryClient}>
         <Stack.Navigator
-          // initialRouteName="Maps"
+          // initialRouteName="AddAddress"
           screenOptions={{
             headerShown: false,
           }}>
@@ -179,6 +180,11 @@ function App(): React.JSX.Element {
           <Stack.Screen
             name="Maps"
             component={MapsScreen}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen
+            name="NextAddBooking"
+            component={NextAddBookingScreen}
             options={{headerShown: false}}
           />
           <Stack.Screen name="HomeScreen" component={Homestack} />
