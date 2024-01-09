@@ -25,7 +25,7 @@ interface UserData {
             const token = await AsyncStorage.getItem('token');
             if (token !== null) {
               const response = await axios.get(
-                'https://62bf-14-176-231-248.ngrok-free.app/api/userprofile',
+                'https://97ff-14-176-231-248.ngrok-free.app/api/userprofile',
                 {
                   headers: {
                     Authorization: `Bearer ${token}`,

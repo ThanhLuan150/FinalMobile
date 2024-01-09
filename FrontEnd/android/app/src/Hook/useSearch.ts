@@ -13,7 +13,7 @@ const useSearch = () =>{
       queryKey: ['branch'],
       queryFn: async () =>
         axios
-          .get('https://62bf-14-176-231-248.ngrok-free.app/api/branch')
+          .get('https://97ff-14-176-231-248.ngrok-free.app/api/branch')
           .then((res) => res.data),
     });
     const handleSearch = (value: string): void => {
