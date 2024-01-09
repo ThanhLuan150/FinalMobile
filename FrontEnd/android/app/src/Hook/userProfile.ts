@@ -51,7 +51,7 @@ const useProfile = (): {
         const token = await AsyncStorage.getItem('token');
         if (token !== null) {
           const response = await axios.get<UserData>(
-            'https://be1d-14-176-231-248.ngrok-free.app/api/userprofile',
+            'https://29b4-2405-4802-6078-8b80-d92f-1066-9ee6-a231.ngrok-free.app/api/userprofile',
             {
               headers: {
                 Authorization: `Bearer ${token}`, // Đặt header Authorization với giá trị token để xác thực
