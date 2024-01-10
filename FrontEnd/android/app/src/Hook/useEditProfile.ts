@@ -1,9 +1,8 @@
 import {useState, useEffect} from 'react';
 import {useNavigation} from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {Alert} from 'react-native';
 import axios from 'axios';
-import { QueryClient, useMutation, useQuery } from '@tanstack/react-query';
+import {useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 interface UserData {
   id_user: number;
@@ -31,12 +30,13 @@ interface EditUserProps {
   handleSubmit: () => void;
 }
 
-const getUser = async () => {
+export const getUser = async () => {
   try {
     const token = await AsyncStorage.getItem('token');
+    console.log('token', token);
     if (token !== null) {
           const response = await axios.get(
-            'https://62bf-14-176-231-248.ngrok-free.app/api/userprofile',
+            'https://29b4-2405-4802-6078-8b80-d92f-1066-9ee6-a231.ngrok-free.app/api/userprofile',
             {
               headers: {
                 Authorization: `Bearer ${token}`,
@@ -58,20 +58,21 @@ const useEditUser = (): EditUserProps => {
   const {data} = useGetUser();
   const navigation = useNavigation();
   const [userData, setUserData] = useState<UserData | null>(null);
+  const queryClient = useQueryClient();
   // const [newData, setNewData] = useState<UserData | null>(null);
   const [isSaving, setIsSaving] = useState<boolean>(false);
-  const queryClient = new QueryClient();
+ 
   useEffect(() => {
     if (data) {
       setUserData(data);
     }
   },[data]);
 
-  const {mutateAsync}= useMutation({
+  const updateUser= useMutation({
     mutationFn: async (data: UserData) => {
       const token = await AsyncStorage.getItem('token');
       const res = await axios.put(
-        `https://62bf-14-176-231-248.ngrok-free.app/api/userr/${userData?.id_user}`,
+        `https://29b4-2405-4802-6078-8b80-d92f-1066-9ee6-a231.ngrok-free.app/api/userr/${userData?.id_user}`,
         data,
         {
           headers: {
@@ -81,9 +82,11 @@ const useEditUser = (): EditUserProps => {
       );
       return res.data;
     },
-    onSettled: async () => {
-      return await queryClient.invalidateQueries({ queryKey: ['getUser'] })
-    },
+
+    onSettled: () => {
+      console.log('vao day get');
+      queryClient.invalidateQueries({queryKey: ['getUser']});
+    }
   });
 
   const handleOnChange = (key: string, value: string) => {
@@ -94,49 +97,15 @@ const useEditUser = (): EditUserProps => {
   };
 
   const handleSubmit = () => {
-    mutateAsync(userData);
-    setIsSaving(true)
+    updateUser.mutate(userData);
     navigation.navigate('Profile');
   };
-
-  // const { data: currentUser } = useQuery('userProfile', async () => {
-  //   const token = await AsyncStorage.getItem('token');
-  //   if (token !== null) {
-  //     const response = await axios.get(
-  //       'https://62bf-14-176-231-248.ngrok-free.app/api/userprofile',
-  //       {
-  //         headers: {
-  //           Authorization: `Bearer ${token}`,
-  //         },
-  //       },
-  //     );
-  //     return response.data.user;
-  //   }
-  // });
-
-
-  // useEffect(() => {
-  //   console.log(data);
-  //   if (data) {
-  //     setUserData(data);
-  //     onChangeUserName(data.username);
-  //     onChangePhone(data.phone.toString());
-  //     onChangeEmail(data.email);
-  //   }
-  // }, [data, setUserData]);
 
   const goBack = (): void => {
     navigation.goBack();
   };
-
-
+  
   return {
-    // username,
-    // onChangeUserName,
-    // phone,
-    // onChangePhone,
-    // email,
-    // onChangeEmail,
     handleOnChange,
     handleSubmit,
     navigation,

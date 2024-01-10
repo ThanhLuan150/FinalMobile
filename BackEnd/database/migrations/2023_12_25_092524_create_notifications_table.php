@@ -15,6 +15,8 @@ return new class extends Migration
             $table->increments('id_notification');
             $table->integer('id_user')->unsigned();
             $table->foreign('id_user')->references('id_user')->on('users')->onDelete('cascade');
+            $table->integer('id_order')->unsigned();
+            $table->foreign('id_order')->references('id_order')->on('orders')->onDelete('cascade');
             $table->text('content');
             $table->timestamps();
         });

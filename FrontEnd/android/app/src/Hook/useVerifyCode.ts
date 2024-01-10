@@ -22,7 +22,7 @@ const useVerifycationUser = (): UseVerificationUserProps => {
     const enteredOTP = otp.join('');
     AsyncStorage.getItem('registeredEmail').then((email: string | null) => {
       axios
-        .post('https://62bf-14-176-231-248.ngrok-free.app/api/Verify', {
+        .post('https://29b4-2405-4802-6078-8b80-d92f-1066-9ee6-a231.ngrok-free.app/api/Verify', {
           email,
           otp: enteredOTP,
         })
@@ -32,7 +32,7 @@ const useVerifycationUser = (): UseVerificationUserProps => {
           navigation.navigate('LoginScreen');
         })
         .catch((error) => {
-          Alert.alert('Xác thực không thành công!');
+          Alert.alert('Xác thực không thành công');
           console.error('Verification failed:', error);
         });
     });

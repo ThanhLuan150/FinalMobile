@@ -9,7 +9,7 @@ import userEditUsers from '../../Hook/useEditProfile';
 
 const Profile: React.FC = (): JSX.Element => {
   const {navigation, userData} = userEditUsers();
-  console.log(userData);
+  console.log('userData', userData)
   const {
     useNavigationVerifyEmail,
     useNavigationSetUpAccount,

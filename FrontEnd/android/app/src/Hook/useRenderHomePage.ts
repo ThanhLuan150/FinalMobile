@@ -9,28 +9,27 @@ const ImageSlide = [
 ];
 
 export const useRenderHomePage = () => {
- 
   const [minigame, branch,voucher] = useQueries({
     queries: [
       {
         queryKey: ['minigame'],
         queryFn: async () =>
           axios
-            .get('https://62bf-14-176-231-248.ngrok-free.app/api/minigame')
+            .get('https://29b4-2405-4802-6078-8b80-d92f-1066-9ee6-a231.ngrok-free.app/api/minigame')
             .then(res => res.data),
       },
       {
         queryKey: ['branch'],
         queryFn: async () =>
           axios
-            .get('https://62bf-14-176-231-248.ngrok-free.app/api/branch')
+            .get('https://29b4-2405-4802-6078-8b80-d92f-1066-9ee6-a231.ngrok-free.app/api/branch')
             .then(res => res.data),
       },
       {
         queryKey: ['voucher'],
         queryFn: async () =>
           axios
-            .get('https://62bf-14-176-231-248.ngrok-free.app/api/Voucher')
+            .get('https://29b4-2405-4802-6078-8b80-d92f-1066-9ee6-a231.ngrok-free.app/api/Voucher')
             .then(res => res.data),
       },
     ],

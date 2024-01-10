@@ -10,9 +10,7 @@ import {
   TouchableOpacity,
   FlatList,
   TextInput,
-  Platform,
   StyleSheet,
-  KeyboardAvoidingView,
 } from 'react-native';
 
 import {useNavigation} from '@react-navigation/native';
@@ -22,11 +20,12 @@ import {styles} from './AddBookingStyle';
 
 const ChooseLocationComponent: FC = (): JSX.Element => {
   const defaultTextColor = 'white';
+  const navigation = useNavigation();
   return (
     <View style={styles.chooselocation}>
       <View style={styles.locationtexts}>
         <Text style={styles.headingText}>Chi nhánh giặt:</Text>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate('Maps')}>
           <Text style={styles.mapslink}>Thay đổi</Text>
         </TouchableOpacity>
       </View>
@@ -111,7 +110,7 @@ const TypeClothesComponent: FC = (): JSX.Element => {
     {title: 'Cặp/ Balo'},
   ];
 
-  const [clothesChecked, setClothesChecked] = useState<string[]>([]);
+  const [clothesChecked, setClothesChecked] = useState<string[]>(['Đồ bình thường']);
 
   const toggleClothes = (chosen: string) => {
     setClothesChecked(prevChecked => {
@@ -490,15 +489,12 @@ export const AddBookingScreen: FC = (): JSX.Element => {
     return (
       <TouchableOpacity
         style={styles.NextButton}
-        onPress={() => navigation.navigate('Trang chủ')}>
+        onPress={() => navigation.navigate('NextAddBooking')}>
         <Text style={styles.ButtonText}>Tiếp</Text>
       </TouchableOpacity>
     );
   };
   return (
-    // <KeyboardAvoidingView
-    //   behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-    //   style={styles.container}>
     <View style={styles.container}>
       <View style={styles.header}>
         <TouchableOpacity
@@ -513,7 +509,5 @@ export const AddBookingScreen: FC = (): JSX.Element => {
       </View>
       <NextButton />
     </View>
-    // </KeyboardAvoidingView>
   );
 };
-

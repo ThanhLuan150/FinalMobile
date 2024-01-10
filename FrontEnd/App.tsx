@@ -27,6 +27,10 @@ import {OrderDetail} from './android/app/src/Screens/Books/OrderDetail';
 import {ServicePage} from './android/app/src/Screens/AddOrder/Service';
 import SearchScreen from './android/app/src/Screens/Home/Search';
 import {BranchDetail} from './android/app/src/Screens/AddOrder/BranchDetail';
+import {useCheckAuth} from './android/app/src/Hook/useCheckAuth';
+
+import {MapsScreen} from './android/app/src/Screens/Booking/Address';
+import {NextAddBookingScreen} from './android/app/src/Screens/Booking/NextAddBooking';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -66,13 +70,21 @@ const Homestack = () => {
 
 const queryClient = new QueryClient();
 function App(): React.JSX.Element {
+  const queryClient = new QueryClient();
+  const authenticated = useCheckAuth();
   return (
     <QueryClientProvider client={queryClient}>
       <NavigationContainer>
         <Stack.Navigator
+          // initialRouteName="AddAddress"
           screenOptions={{
             headerShown: false,
           }}>
+          <Stack.Screen
+            name="ScreenCheck"
+            component={authenticated === true ? Homestack : OpenScreen}
+            options={{headerShown: false}}
+          />
           <Stack.Screen
             name="Open"
             component={OpenScreen}
@@ -171,6 +183,16 @@ function App(): React.JSX.Element {
           <Stack.Screen
             name="Addbooking"
             component={AddBookingScreen}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen
+            name="Maps"
+            component={MapsScreen}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen
+            name="NextAddBooking"
+            component={NextAddBookingScreen}
             options={{headerShown: false}}
           />
           <Stack.Screen name="HomeScreen" component={Homestack} />

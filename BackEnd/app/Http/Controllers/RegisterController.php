@@ -105,8 +105,8 @@ class RegisterController extends Controller
 
     public function logout(Request $request)
     {
-        $user = $request->user(); // Lấy thông tin người dùng từ request
-        $user->tokens()->delete(); // Xóa tất cả token của người dùng
+        $user = $request->user(); 
+        $user->tokens()->delete(); 
         return response()->json([
             'message' => 'Logged out successfully',
         ], 200);
