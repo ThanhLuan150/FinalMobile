@@ -1,12 +1,7 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {FC} from 'react';
 import styles from '../../Styles/DetailChat';
-import {
-  Text,
-  View,
-  Image,
-  Pressable,
-} from 'react-native';
+import {Text,View,Image,Pressable,} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {WebView} from 'react-native-webview';
 const DetailChat: FC = (): JSX.Element => {
