@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Alert } from 'react-native';
+import { APIlink } from './API';
 interface RegisterData {
   username: string;
   phone: string;
@@ -72,7 +73,7 @@ const useRegisterUser = (): RegisterHook => {
       password,
     };
     axios
-      .post('https://29b4-2405-4802-6078-8b80-d92f-1066-9ee6-a231.ngrok-free.app/api/Register', user)
+      .post(`${APIlink}/api/Register`, user)
       .then(response => {
         console.log('User registered:', response.data);
         Alert.alert('Đăng ký thành công');

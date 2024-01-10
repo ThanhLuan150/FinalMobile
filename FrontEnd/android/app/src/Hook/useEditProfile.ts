@@ -3,6 +3,7 @@ import {useNavigation} from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 import {useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { APIlink } from './API';
 
 interface UserData {
   id_user: number;
@@ -72,7 +73,7 @@ const useEditUser = (): EditUserProps => {
     mutationFn: async (data: UserData) => {
       const token = await AsyncStorage.getItem('token');
       const res = await axios.put(
-        `https://29b4-2405-4802-6078-8b80-d92f-1066-9ee6-a231.ngrok-free.app/api/userr/${userData?.id_user}`,
+        `${APIlink}/api/userr/${userData?.id_user}`,
         data,
         {
           headers: {

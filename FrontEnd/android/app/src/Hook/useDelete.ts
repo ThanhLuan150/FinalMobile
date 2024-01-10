@@ -3,6 +3,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 import { useNavigation } from '@react-navigation/native';
 import { Alert } from 'react-native';
+import { APIlink } from './API';
 interface UserData {
     id_user: number;
     username: string;
@@ -25,7 +26,7 @@ interface UserData {
             const token = await AsyncStorage.getItem('token');
             if (token !== null) {
               const response = await axios.get(
-                'https://29b4-2405-4802-6078-8b80-d92f-1066-9ee6-a231.ngrok-free.app/api/userprofile',
+                `${APIlink}/api/userprofile`,
                 {
                   headers: {
                     Authorization: `Bearer ${token}`,
@@ -48,7 +49,7 @@ interface UserData {
           const token = await AsyncStorage.getItem('token');
           if (token !== null) {
             const response = await axios.delete(
-              `https://62bf-14-176-231-248.ngrok-free.app/api/userss/${userData?.id_user}`,
+              `${APIlink}/api/userss/${userData?.id_user}`,
               {
                 headers: {
                   Authorization: `Bearer ${token}`,

@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import {useEffect, useState} from 'react';
+import { APIlink } from './API';
 export interface propuseRenderBranch{
   id_branch?:number
 }
@@ -13,7 +14,7 @@ export const useRenderBranch = ({id_branch}:propuseRenderBranch) => {
     queryFn: async () =>
       axios
         .get(
-          `https://29b4-2405-4802-6078-8b80-d92f-1066-9ee6-a231.ngrok-free.app/api/detailBranch/${id_branch}`,
+          `${APIlink}/api/detailBranch/${id_branch}`,
         )
         .then(res => res.data),
   });

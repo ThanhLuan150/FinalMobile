@@ -3,6 +3,7 @@ import React, { useState, useRef } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import axios from 'axios';
 import { Alert } from "react-native";
+import { APIlink } from './API';
 
 interface UseVerificationUserProps {
   otp: string[];
@@ -22,7 +23,7 @@ const useVerifycationUser = (): UseVerificationUserProps => {
     const enteredOTP = otp.join('');
     AsyncStorage.getItem('registeredEmail').then((email: string | null) => {
       axios
-        .post('https://29b4-2405-4802-6078-8b80-d92f-1066-9ee6-a231.ngrok-free.app/api/Verify', {
+        .post(`${APIlink}/api/Verify`, {
           email,
           otp: enteredOTP,
         })

@@ -2,6 +2,7 @@ import {useQueries} from '@tanstack/react-query';
 import axios from 'axios';
 import { useEffect, useRef, useState } from 'react';
 import { FlatList } from 'react-native';
+import { APIlink } from './API';
 const ImageSlide = [
   require('../Image/slideShow1.png'),
   require('../Image/slideShow2.png'),
@@ -15,21 +16,21 @@ export const useRenderHomePage = () => {
         queryKey: ['minigame'],
         queryFn: async () =>
           axios
-            .get('https://29b4-2405-4802-6078-8b80-d92f-1066-9ee6-a231.ngrok-free.app/api/minigame')
+            .get(`${APIlink}/api/minigame`)
             .then(res => res.data),
       },
       {
         queryKey: ['branch'],
         queryFn: async () =>
           axios
-            .get('https://29b4-2405-4802-6078-8b80-d92f-1066-9ee6-a231.ngrok-free.app/api/branch')
+            .get(`${APIlink}/api/branch`)
             .then(res => res.data),
       },
       {
         queryKey: ['voucher'],
         queryFn: async () =>
           axios
-            .get('https://29b4-2405-4802-6078-8b80-d92f-1066-9ee6-a231.ngrok-free.app/api/Voucher')
+            .get(`${APIlink}/api/Voucher`)
             .then(res => res.data),
       },
     ],

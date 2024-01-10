@@ -2,6 +2,7 @@ import  { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import { useNavigation } from '@react-navigation/native';
+import { APIlink } from './API';
 interface Branch {
     name: string;
     address: string;
@@ -13,7 +14,7 @@ const useSearch = () =>{
       queryKey: ['branch'],
       queryFn: async () =>
         axios
-          .get('https://29b4-2405-4802-6078-8b80-d92f-1066-9ee6-a231.ngrok-free.app/api/branch')
+          .get(`${APIlink}/api/branch`)
           .then((res) => res.data),
     });
     const handleSearch = (value: string): void => {

@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import axios from 'axios';
 import { Alert } from 'react-native';
+import { APIlink } from './API';
 
 interface UserData {
   id_user: number;
@@ -56,7 +57,7 @@ const useProfile = (): {
         const token = await AsyncStorage.getItem('token');
         if (token !== null) {
           const response = await axios.get<UserData>(
-            'https://29b4-2405-4802-6078-8b80-d92f-1066-9ee6-a231.ngrok-free.app/api/userprofile',
+            `${APIlink}/api/userprofile`,
             {
               headers: {
                 Authorization: `Bearer ${token}`, // Đặt header Authorization với giá trị token để xác thực
