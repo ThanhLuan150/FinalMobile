@@ -120,18 +120,12 @@ class RegisterController extends Controller
                 'message' => 'User not found',
             ], 404);
         }
-        $user = User::find($id_user);
+    
         $user->username = $request->input('username');
         $user->phone = $request->input('phone');
         $user->email = $request->input('email');
-        $password = $request->input('password');
-        if ($password) {
-            // Hash the password before saving
-            $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-            $user->password = $hashedPassword;
-        }
+        $user-> password= $request->input('password');
         $user->save();
-
         return response()->json([
             'message' => 'User updated successfully',
             'user' => $user,
