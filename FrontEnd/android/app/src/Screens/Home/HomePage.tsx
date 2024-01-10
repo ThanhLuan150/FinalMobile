@@ -17,7 +17,7 @@ export const HomePage = () => {
         .get('https://29b4-2405-4802-6078-8b80-d92f-1066-9ee6-a231.ngrok-free.app/api/Voucher')
         .then(res => res.data),
   });
-  console.log('voucher',data); 
+  console.log('voucher',data);
   const {voucher} = useRenderHomePage();
 
   return (
