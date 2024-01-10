@@ -26,10 +26,10 @@ import {OrderTrackingScreen} from './android/app/src/Screens/Books/OrderTracking
 import {OrderDetail} from './android/app/src/Screens/Books/OrderDetail';
 import {ServicePage} from './android/app/src/Screens/AddOrder/Service';
 import SearchScreen from './android/app/src/Screens/Home/Search';
-import { BranchDetail } from './android/app/src/Screens/AddOrder/BranchDetail';
+import {BranchDetail} from './android/app/src/Screens/AddOrder/BranchDetail';
 
 const Stack = createNativeStackNavigator();
-
+const Tab = createBottomTabNavigator();
 const Homestack = () => {
   return (
     <Tab.Navigator
@@ -64,12 +64,11 @@ const Homestack = () => {
   );
 };
 
-const Tab = createBottomTabNavigator();
+const queryClient = new QueryClient();
 function App(): React.JSX.Element {
-  const queryClient = new QueryClient();
   return (
-    <NavigationContainer>
-      <QueryClientProvider client={queryClient}>
+    <QueryClientProvider client={queryClient}>
+      <NavigationContainer>
         <Stack.Navigator
           screenOptions={{
             headerShown: false,
@@ -164,20 +163,20 @@ function App(): React.JSX.Element {
             component={SearchScreen}
             options={{headerShown: false}}
           />
-            <Stack.Screen
+          <Stack.Screen
             name="BranchDetail"
             component={BranchDetail}
             options={{headerShown: false}}
           />
-            <Stack.Screen
-              name="Addbooking"
-              component={AddBookingScreen}
-              options={{headerShown: false}}
-            />
+          <Stack.Screen
+            name="Addbooking"
+            component={AddBookingScreen}
+            options={{headerShown: false}}
+          />
           <Stack.Screen name="HomeScreen" component={Homestack} />
         </Stack.Navigator>
-      </QueryClientProvider>
-    </NavigationContainer>
+      </NavigationContainer>
+    </QueryClientProvider>
   );
 }
 

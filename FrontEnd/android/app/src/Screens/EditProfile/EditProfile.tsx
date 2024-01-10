@@ -1,11 +1,12 @@
 /* eslint-disable react/self-closing-comp */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React from 'react';
-import { View, KeyboardAvoidingView, TextInput, Text, Platform, TouchableWithoutFeedback, Keyboard, TouchableOpacity, Image} from 'react-native';;
+import { View, KeyboardAvoidingView, TextInput, Text, Platform, TouchableWithoutFeedback, Keyboard, TouchableOpacity, Image} from 'react-native';
 import styles from '../../Styles/EditProfile';
 import userEditUsers from '../../Hook/useEditProfile';
 const EditProfile = (): JSX.Element => {
-  const {username,onChangeUserName,phone,onChangePhone,email,onChangeEmail,navigation,userData,setUserData,isSaving,setIsSaving,goBack,saveProfile} = userEditUsers();
+  // const {username,onChangeUserName,phone,onChangePhone,email,onChangeEmail,navigation,userData,setUserData,isSaving,setIsSaving,goBack,saveProfile} = userEditUsers();
+  const {userData, handleOnChange, handleSubmit, isSaving, setIsSaving, goBack} = userEditUsers();
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
@@ -33,8 +34,8 @@ const EditProfile = (): JSX.Element => {
               <Text style={styles.textEdit}>Tên người nhận</Text>
               <TextInput
                 style={styles.textInput}
-                value={username}
-                onChangeText={onChangeUserName}
+                value={userData?.username}
+                onChangeText={(text => handleOnChange('username',text))}
                 placeholder="Nhập tên"
                 placeholderTextColor="#fff"
               />
@@ -44,8 +45,8 @@ const EditProfile = (): JSX.Element => {
               <TextInput
                 style={styles.textInput}
                 placeholder="Nhập số điện thoại"
-                value={phone}
-                onChangeText={onChangePhone}
+                value={userData?.phone}
+                onChangeText={(text => handleOnChange('phone',text))}
                 placeholderTextColor="#fff"
               />
             </View>
@@ -53,15 +54,15 @@ const EditProfile = (): JSX.Element => {
               <Text style={styles.textEdit}>Nhập email</Text>
               <TextInput
                 style={styles.textInput}
-                value={email}
-                onChangeText={onChangeEmail}
+                value={userData?.email}
+                onChangeText={(text => handleOnChange('email',text))}
                 placeholder="Nhập địa chỉ"
                 placeholderTextColor="#fff"
               />
             </View>
             <View style={{ paddingTop: 40, paddingLeft: 20, paddingRight: 20 }}>
               <View style={styles.viewEdit}>
-                <TouchableOpacity style={styles.button} onPress={saveProfile}>
+                <TouchableOpacity style={styles.button} onPress={handleSubmit}>
                   <Text style={styles.textButton}>Lưu Thông Tin</Text>
                 </TouchableOpacity>
               </View>

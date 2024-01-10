@@ -4,12 +4,21 @@ import React from 'react';
 import {ScrollView,Text,View,Image,TouchableOpacity,Switch} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import styles from '../../Styles/Profile';
-import userEditUsers from '../../Hook/useEditProfile';
 import useProfiles from '../../Hook/userProfile';
-
+import userEditUsers from '../../Hook/useEditProfile';
 
 const Profile: React.FC = (): JSX.Element => {
-  const {navigation,useNavigationVerifyEmail,useNavigationSetUpAccount,isEnabled,toggleSwitch,useNavigationRating,handleLogout,userData} = useProfiles();
+  const {navigation, userData} = userEditUsers();
+  console.log(userData);
+  const {
+    useNavigationVerifyEmail,
+    useNavigationSetUpAccount,
+    isEnabled,
+    toggleSwitch,
+    useNavigationRating,
+    handleLogout,
+  } = useProfiles();
+
   return (
     <ScrollView style={styles.container}>
       <View style={styles.viewNotification}>
@@ -20,36 +29,37 @@ const Profile: React.FC = (): JSX.Element => {
         />
       </View>
       <View style={{paddingTop: 20}}>
-        <View style={styles.viewbannerProfile}>
-          <View style={styles.viewImage}>
-            {userData?.image ? (
-              <Image style={styles.images} source={{uri: userData.image}} />
-            ) : (
-              <Image
-                style={styles.images}
-                source={require('../../Image/th.jpg')}></Image>
-            )}
-          </View>
-          <View style={styles.viewInformation}>
-            <Text style={styles.testname}>{userData?.username}</Text>
-            <View style={styles.viewRank}>
-              <Text style={styles.textRank}>Hạng Vàng</Text>
-              <Image
-                style={styles.icon}
-                source={require('../../Image/star.png')}
-              />
-            </View>
-            <Text style={styles.testname}>{userData?.phone}</Text>
-          </View>
-          <TouchableOpacity
-            onPress={() => navigation.navigate('EditProfile')}
-            style={styles.iconstar}>
+      <View style={styles.viewbannerProfile}>
+        <View style={styles.viewImage}>
+          {userData?.image ? (
+            <Image style={styles.images} source={{uri: userData.image}} />
+          ) : (
             <Image
-              style={styles.Image}
-              source={require('../../Image/edit.png')}
-            />
-          </TouchableOpacity>
+              style={styles.images}
+              source={require('../../Image/th.jpg')}
+            ></Image>
+          )}
         </View>
+        <View style={styles.viewInformation}>
+          <Text style={styles.testname}>{userData?.username}</Text>
+          <View style={styles.viewRank}>
+            <Text style={styles.textRank}>Hạng Vàng</Text>
+            <Image
+              style={styles.icon}
+              source={require('../../Image/star.png')}
+            />
+          </View>
+          <Text style={styles.testname}>{userData?.phone}</Text>
+        </View>
+        <TouchableOpacity
+          onPress={() => navigation.navigate('EditProfile')}
+          style={styles.iconstar}>
+          <Image
+            style={styles.Image}
+            source={require('../../Image/edit.png')}
+          />
+        </TouchableOpacity>
+      </View>
         <View style={{paddingTop: 10, paddingBottom: 20}}>
           <View style={styles.viewVerify}>
             <Text style={styles.textVerify}>
