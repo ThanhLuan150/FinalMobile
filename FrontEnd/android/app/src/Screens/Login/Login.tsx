@@ -3,14 +3,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React, {useState, useEffect} from 'react';
 import styles from '../../Styles/styleLogin';
-import {
-  View,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  Image,
- 
-} from 'react-native';
+import {View,Text,TextInput,TouchableOpacity,Image} from 'react-native';
 import useLoginUserObject from '../../Hook/useLogin';
 const LoginScreen = () => {
   const {

@@ -8,7 +8,7 @@ import styles from '../../Styles/RatingSucessfully';
 import {useNavigation} from '@react-navigation/native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 const RatingSucessfullyScreen: FC = (): JSX.Element => {
-    const navination =useNavigation();
+    const navination = useNavigation();
     const useNavigationEditRating =() =>{
         navination.navigate('EditRatingScreen')
     }

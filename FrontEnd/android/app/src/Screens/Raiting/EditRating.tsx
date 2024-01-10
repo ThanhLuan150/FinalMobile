@@ -76,5 +76,5 @@ const EditRatingScreen: FC = (): JSX.Element => {
         </TouchableWithoutFeedback>
       </KeyboardAvoidingView>
     );
-}
+};
 export  default EditRatingScreen;

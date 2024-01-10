@@ -1,6 +1,3 @@
-/* eslint-disable no-trailing-spaces */
-/* eslint-disable react/self-closing-comp */
-/* eslint-disable react-native/no-inline-styles */
 import React, {FC} from 'react';
 import {Text,View,Image,TouchableOpacity,FlatList,} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
