@@ -6,13 +6,7 @@ import { useQuery } from '@tanstack/react-query';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import axios from 'axios';
 import { FlatList, Text, TextInput, TouchableOpacity, View } from 'react-native';
-import { useNavigation } from '@react-navigation/native'; // Import useNavigation từ React Navigation
-
 import useSearchs from '../../Hook/useSearch';
-interface Branch {
-  name: string;
-  address: string;
-}
 const SearchScreen = (): JSX.Element => {
   const { searchValue,handleSearch,filteredData,navigateToDetail,} = useSearchs();
   return (
