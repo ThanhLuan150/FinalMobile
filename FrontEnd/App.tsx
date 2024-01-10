@@ -33,7 +33,7 @@ import {MapsScreen} from './android/app/src/Screens/Booking/Address';
 import {NextAddBookingScreen} from './android/app/src/Screens/Booking/NextAddBooking';
 
 const Stack = createNativeStackNavigator();
-
+const Tab = createBottomTabNavigator();
 const Homestack = () => {
   return (
     <Tab.Navigator
@@ -68,13 +68,13 @@ const Homestack = () => {
   );
 };
 
-const Tab = createBottomTabNavigator();
+const queryClient = new QueryClient();
 function App(): React.JSX.Element {
   const queryClient = new QueryClient();
   const authenticated = useCheckAuth();
   return (
-    <NavigationContainer>
-      <QueryClientProvider client={queryClient}>
+    <QueryClientProvider client={queryClient}>
+      <NavigationContainer>
         <Stack.Navigator
           // initialRouteName="AddAddress"
           screenOptions={{
@@ -197,8 +197,8 @@ function App(): React.JSX.Element {
           />
           <Stack.Screen name="HomeScreen" component={Homestack} />
         </Stack.Navigator>
-      </QueryClientProvider>
-    </NavigationContainer>
+      </NavigationContainer>
+    </QueryClientProvider>
   );
 }
 
