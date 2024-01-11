@@ -17,4 +17,8 @@ class Ratings extends Model
     {
         return $this->belongsTo(Branches::class, 'id_branch'); 
     }
+    public function order()
+    {
+        return $this->belongsTo(User::class, 'id_order'); 
+    }
 }

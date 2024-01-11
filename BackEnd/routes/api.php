@@ -5,6 +5,7 @@ use App\Http\Controllers\BranchController;
 use App\Http\Controllers\MiniGameController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\RatingController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\VerifyAccountController;
@@ -71,3 +72,8 @@ Route::post('/orders',[Order::class,'createOrder']);
 Route::get('/OrderDetails/{id_order}',[OrderController::class,'viewOrderDetails']);
 //API Notification 
 Route::get('/Notification',[NotificationController::class,'notification']);
+Route::get('/notification/{id_user}',[NotificationController::class,'getUserNotification']);
+//API Rating
+Route::get('/rating',[RatingController::class,'index']);
+Route::post('/ratings',[RatingController::class,'store']);
+Route::get('ratingss/{id_user}',[RatingController::class,'getUserRating']);
