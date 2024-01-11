@@ -2,8 +2,8 @@ import {useState, useEffect} from 'react';
 import {useNavigation} from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
-import {useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { APIlink } from './API';
+import {useMutation, useQuery, useQueryClient} from '@tanstack/react-query';
+import {APIlink} from './API';
 
 interface UserData {
   id_user: number;
@@ -14,7 +14,7 @@ interface UserData {
 }
 
 interface EditUserProps {
-  handleOnChange: (key: string, value:string) => void;
+  handleOnChange: (key: string, value: string) => void;
   username: string;
   onChangeUserName: (username: string) => void;
   phone: string;
@@ -36,16 +36,16 @@ export const getUser = async () => {
     const token = await AsyncStorage.getItem('token');
     console.log('token', token);
     if (token !== null) {
-          const response = await axios.get(
-            'https://29b4-2405-4802-6078-8b80-d92f-1066-9ee6-a231.ngrok-free.app/api/userprofile',
-            {
-              headers: {
-                Authorization: `Bearer ${token}`,
-              },
-            },
-          );
-          return response.data.user;
-        }
+      const response = await axios.get(
+        'https://29b4-2405-4802-6078-8b80-d92f-1066-9ee6-a231.ngrok-free.app/api/userprofile',
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
+      );
+      return response.data.user;
+    }
   } catch (error) {
     console.log(error);
   }
@@ -62,14 +62,14 @@ const useEditUser = (): EditUserProps => {
   const queryClient = useQueryClient();
   // const [newData, setNewData] = useState<UserData | null>(null);
   const [isSaving, setIsSaving] = useState<boolean>(false);
- 
+
   useEffect(() => {
     if (data) {
       setUserData(data);
     }
-  },[data]);
+  }, [data]);
 
-  const updateUser= useMutation({
+  const updateUser = useMutation({
     mutationFn: async (data: UserData) => {
       const token = await AsyncStorage.getItem('token');
       const res = await axios.put(
@@ -87,7 +87,7 @@ const useEditUser = (): EditUserProps => {
     onSettled: () => {
       console.log('vao day get');
       queryClient.invalidateQueries({queryKey: ['getUser']});
-    }
+    },
   });
 
   const handleOnChange = (key: string, value: string) => {
@@ -105,7 +105,7 @@ const useEditUser = (): EditUserProps => {
   const goBack = (): void => {
     navigation.goBack();
   };
-  
+
   return {
     handleOnChange,
     handleSubmit,

@@ -4,9 +4,11 @@ import React from 'react';
 import { View, KeyboardAvoidingView, TextInput, Text, Platform, TouchableWithoutFeedback, Keyboard, TouchableOpacity, Image} from 'react-native';
 import styles from '../../Styles/EditProfile';
 import userEditUsers from '../../Hook/useEditProfile';
+
 const EditProfile = (): JSX.Element => {
   // const {username,onChangeUserName,phone,onChangePhone,email,onChangeEmail,navigation,userData,setUserData,isSaving,setIsSaving,goBack,saveProfile} = userEditUsers();
   const {userData, handleOnChange, handleSubmit, isSaving, setIsSaving, goBack} = userEditUsers();
+  const ID_user = userData?.id_user;
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}

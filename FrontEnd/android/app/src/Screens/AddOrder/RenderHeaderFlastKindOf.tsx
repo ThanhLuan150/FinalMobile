@@ -1,10 +1,11 @@
 /* eslint-disable react-native/no-inline-styles */
-import { Text, TouchableOpacity, View} from 'react-native';
+import {Text, TouchableOpacity, View} from 'react-native';
 import React, {useState} from 'react';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {Dropdown} from 'react-native-element-dropdown';
-import { useNavigation } from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 import styles from '../../Styles/RenderHeaderFlastKindOf';
+
 export const RenderHeaderFlastKindOf = ({onDropdownChange}) => {
   const navigation = useNavigation();
   const data = [
@@ -13,10 +14,13 @@ export const RenderHeaderFlastKindOf = ({onDropdownChange}) => {
   ];
   const [value, setValue] = useState(0);
   console.log('value', value);
-
   return (
     <View>
-      <TouchableOpacity style={styles.squareCreateOrder} onPress={() => {navigation.navigate('Addbooking')}}>
+      <TouchableOpacity
+        style={styles.squareCreateOrder}
+        onPress={() => {
+          navigation.navigate('Addbooking');
+        }}>
         <Ionicons style={{color: 'lightblue'}} size={30} name="add-circle" />
         <Text style={{color: 'white'}}>Đơn giặt mới</Text>
       </TouchableOpacity>
@@ -73,11 +77,10 @@ export const RenderHeaderFlastKindOf = ({onDropdownChange}) => {
           placeholder="Giá giặt sấy"
           onChange={item => {
             setValue(item.value);
-            onDropdownChange(item.value)
+            onDropdownChange(item.value);
           }}
         />
       </View>
     </View>
   );
 };
-

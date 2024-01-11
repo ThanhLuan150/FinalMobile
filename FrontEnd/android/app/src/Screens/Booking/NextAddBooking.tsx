@@ -1,6 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable react/no-unstable-nested-components */
-import React, {FC, useState, useEffect, useRef} from 'react';
+import React, {FC, useState} from 'react';
 import {useNavigation} from '@react-navigation/native';
 import {styles} from './AddBookingStyle';
 import {
@@ -11,12 +11,19 @@ import {
   StyleSheet,
   TextInput,
 } from 'react-native';
-
+import {useRoute} from '@react-navigation/native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-// import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import {useMutation, useQueryClient} from '@tanstack/react-query';
+import {AsyncStorage} from 'react-native';
+import axios from 'axios';
+import {APIlink} from '../../Hook/API';
+import {Order} from './AddBooking';
 
 export const NextAddBookingScreen: FC = (): JSX.Element => {
   const navigation = useNavigation();
+  const route = useRoute();
+  const newOrder = route.params;
+  const [nextOrder, setNextOrder] = useState(newOrder);
   const DeliveryComponent: FC = (): JSX.Element => {
     const deliverys = [
       'Bình thường (24 - 32h)',
@@ -31,7 +38,7 @@ export const NextAddBookingScreen: FC = (): JSX.Element => {
     const toggleTypedelivery = (type: String) =>
       setdeliveryChecked(deliverys.filter(value => value === type)[0]);
     type ItemProps = {item: any; index: number};
-    const RenderTypedelivery = ({item}: ItemProps) => {
+    const RenderTypedelivery = ({item, index}: ItemProps) => {
       const style = StyleSheet.create({
         deliveryclothesCheckedStyle: {
           backgroundColor: deliveryChecked === item ? '#8888' : '#353B51',
@@ -45,7 +52,10 @@ export const NextAddBookingScreen: FC = (): JSX.Element => {
             ...style.deliveryclothesCheckedStyle,
           }}
           id={item}
-          onPress={() => toggleTypedelivery(item)}>
+          onPress={() => {
+            toggleTypedelivery(item);
+            setNextOrder(Object.assign(nextOrder, {id_transports: index + 1}));
+          }}>
           <Text
             style={{
               ...styles.clothesTypeText,
@@ -70,12 +80,7 @@ export const NextAddBookingScreen: FC = (): JSX.Element => {
           <Ionicons name="alert-circle" size={18} color={'#91d3fa'} />
         </View>
         <FlatList
-          ListFooterComponent={
-            <>
-              <SetTimeForDeliveryComponent />
-              <NoteFromCusComponent />
-            </>
-          }
+          ListFooterComponent={<NoteFromCusComponent />}
           showsVerticalScrollIndicator={false}
           style={{gap: 5}}
           data={deliverys}
@@ -85,64 +90,60 @@ export const NextAddBookingScreen: FC = (): JSX.Element => {
       </>
     );
   };
-  const ChoseReceivingAddressComponent: FC = (): JSX.Element => {
-    return (
-      <>
-        <View style={{...styles.headingTexts, marginTop: 10}}>
-          <Text style={styles.headingText}>Vận chuyển</Text>
-          <Ionicons name="alert-circle" size={18} color={'#91d3fa'} />
-        </View>
-        <TouchableOpacity
-          style={{
-            ...styles.clothesType,
-            borderColor: '#999999',
-          }}
-          onPress={() => {
-            navigation.navigate('Maps');
-          }}>
-          <Text
-            style={{
-              ...styles.clothesTypeText,
-              color: '#fff',
-            }}>
-            Thêm địa chỉ
-          </Text>
-          <Ionicons name="chevron-forward-outline" size={20} color="#fff" />
-        </TouchableOpacity>
-      </>
-    );
-  };
-  const SetTimeForDeliveryComponent: FC = (): JSX.Element => {
-    return (
-      <>
-        <View style={{...styles.headingTexts, marginTop: 10}}>
-          <Text style={styles.headingText}>Hẹn giờ shipper tới lấy</Text>
-          <Text style={{...styles.headingText, color: '#999999'}}>
-            Không bắt buộc*
-          </Text>
-        </View>
-        <TextInput style={{backgroundColor:'#999999', paddingRight: 50, borderRadius: 10}} placeholder="Tùy chọn"/>
-      </>
-    );
-  };
 
   const NoteFromCusComponent: FC = (): JSX.Element => {
+    const [inputValue, setInputValue] = useState('');
+    const handleInputChange = (text: any) => {
+      setInputValue(text);
+      setNextOrder(Object.assign(nextOrder, {note: text}));
+    };
     return (
       <>
         <View style={{...styles.headingTexts, marginTop: 10}}>
           <Text style={styles.headingText}>Ghi chú gửi tới WashWizie</Text>
         </View>
-        <TextInput placeholder="" />
+        <TextInput
+          style={{
+            backgroundColor: '#899999',
+            paddingLeft: 10,
+            borderRadius: 10,
+            height: 100,
+          }}
+          placeholder=""
+          value={inputValue}
+          onChangeText={handleInputChange}
+        />
       </>
     );
   };
+  const queryClient = useQueryClient();
+  const postBooking = useMutation({
+    mutationFn: async (data: Order) => {
+      const token = await AsyncStorage.getItem('token');
+      const res = await axios.post(`${APIlink}/api/orders`, data, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      return res.data;
+    },
+    onSettled: () => {
+      console.log('vao day get');
+      queryClient.invalidateQueries({queryKey: ['getUser']});
+    },
+  });
 
   const NextButton: FC = (): JSX.Element => {
     return (
       <TouchableOpacity
         style={styles.NextButton}
-        onPress={() => navigation.navigate('')}>
-        <Text style={styles.ButtonText}>Tiếp</Text>
+        onPress={() => {
+          // navigation.navigate('ConfirmBooking', newOrder);
+          postBooking.mutate(nextOrder);
+          console.log(nextOrder);
+          navigation.navigate('Trang chủ');
+        }}>
+        <Text style={styles.ButtonText}>Đặt đơn</Text>
       </TouchableOpacity>
     );
   };
@@ -158,8 +159,7 @@ export const NextAddBookingScreen: FC = (): JSX.Element => {
         <Text style={styles.headertext}>Đơn mới</Text>
       </View>
       <View style={styles.mainContent}>
-        <ChoseReceivingAddressComponent />
-        <DeliveryComponent/>
+        <DeliveryComponent />
       </View>
       <NextButton />
     </View>

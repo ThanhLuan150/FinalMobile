@@ -28,9 +28,9 @@ import {ServicePage} from './android/app/src/Screens/AddOrder/Service';
 import SearchScreen from './android/app/src/Screens/Home/Search';
 import {BranchDetail} from './android/app/src/Screens/AddOrder/BranchDetail';
 import {useCheckAuth} from './android/app/src/Hook/useCheckAuth';
-
 import {MapsScreen} from './android/app/src/Screens/Booking/Address';
 import {NextAddBookingScreen} from './android/app/src/Screens/Booking/NextAddBooking';
+// import {ConfirmBookingScreen} from './android/app/src/Screens/Booking/confirmBooking';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -195,6 +195,11 @@ function App(): React.JSX.Element {
             component={NextAddBookingScreen}
             options={{headerShown: false}}
           />
+          {/* <Stack.Screen
+            name="ConfirmBooking"
+            component={ConfirmBookingScreen}
+            options={{headerShown: false}}
+          /> */}
           <Stack.Screen name="HomeScreen" component={Homestack} />
         </Stack.Navigator>
       </NavigationContainer>

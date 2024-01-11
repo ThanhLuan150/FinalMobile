@@ -1,7 +1,14 @@
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable react/self-closing-comp */
 import React from 'react';
-import {ScrollView,Text,View,Image,TouchableOpacity,Switch} from 'react-native';
+import {
+  ScrollView,
+  Text,
+  View,
+  Image,
+  TouchableOpacity,
+  Switch,
+} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import styles from '../../Styles/Profile';
 import useProfiles from '../../Hook/userProfile';
@@ -9,7 +16,7 @@ import userEditUsers from '../../Hook/useEditProfile';
 
 const Profile: React.FC = (): JSX.Element => {
   const {navigation, userData} = userEditUsers();
-  console.log('userData', userData)
+  console.log('userData', userData);
   const {
     useNavigationVerifyEmail,
     useNavigationSetUpAccount,
@@ -29,37 +36,36 @@ const Profile: React.FC = (): JSX.Element => {
         />
       </View>
       <View style={{paddingTop: 20}}>
-      <View style={styles.viewbannerProfile}>
-        <View style={styles.viewImage}>
-          {userData?.image ? (
-            <Image style={styles.images} source={{uri: userData.image}} />
-          ) : (
-            <Image
-              style={styles.images}
-              source={require('../../Image/th.jpg')}
-            ></Image>
-          )}
-        </View>
-        <View style={styles.viewInformation}>
-          <Text style={styles.testname}>{userData?.username}</Text>
-          <View style={styles.viewRank}>
-            <Text style={styles.textRank}>Hạng Vàng</Text>
-            <Image
-              style={styles.icon}
-              source={require('../../Image/star.png')}
-            />
+        <View style={styles.viewbannerProfile}>
+          <View style={styles.viewImage}>
+            {userData?.image ? (
+              <Image style={styles.images} source={{uri: userData.image}} />
+            ) : (
+              <Image
+                style={styles.images}
+                source={require('../../Image/th.jpg')}></Image>
+            )}
           </View>
-          <Text style={styles.testname}>{userData?.phone}</Text>
+          <View style={styles.viewInformation}>
+            <Text style={styles.testname}>{userData?.username}</Text>
+            <View style={styles.viewRank}>
+              <Text style={styles.textRank}>Hạng Vàng</Text>
+              <Image
+                style={styles.icon}
+                source={require('../../Image/star.png')}
+              />
+            </View>
+            <Text style={styles.testname}>{userData?.phone}</Text>
+          </View>
+          <TouchableOpacity
+            onPress={() => navigation.navigate('EditProfile')}
+            style={styles.iconstar}>
+            <Image
+              style={styles.Image}
+              source={require('../../Image/edit.png')}
+            />
+          </TouchableOpacity>
         </View>
-        <TouchableOpacity
-          onPress={() => navigation.navigate('EditProfile')}
-          style={styles.iconstar}>
-          <Image
-            style={styles.Image}
-            source={require('../../Image/edit.png')}
-          />
-        </TouchableOpacity>
-      </View>
         <View style={{paddingTop: 10, paddingBottom: 20}}>
           <View style={styles.viewVerify}>
             <Text style={styles.textVerify}>
@@ -139,8 +145,7 @@ const Profile: React.FC = (): JSX.Element => {
               />
             </View>
           </View>
-          <TouchableOpacity
-            style={styles.viewInfomation}>
+          <TouchableOpacity style={styles.viewInfomation}>
             <View
               style={{
                 flexDirection: 'row',
@@ -152,8 +157,7 @@ const Profile: React.FC = (): JSX.Element => {
             </View>
             <Ionicons color={'#fff'} name="chevron-forward-outline" size={35} />
           </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.viewInfomation}>
+          <TouchableOpacity style={styles.viewInfomation}>
             <View
               style={{
                 flexDirection: 'row',
@@ -177,8 +181,7 @@ const Profile: React.FC = (): JSX.Element => {
               />
             </View>
           </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.viewInfomation}>
+          <TouchableOpacity style={styles.viewInfomation}>
             <View
               style={{
                 flexDirection: 'row',
