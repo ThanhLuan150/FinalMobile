@@ -1,7 +1,7 @@
 /* eslint-disable no-return-assign */
 /* eslint-disable react/no-unstable-nested-components */
 /* eslint-disable react-native/no-inline-styles */
-import React, {FC} from 'react';
+import React, {FC, toString} from 'react';
 import {useState} from 'react';
 
 import {
@@ -28,12 +28,12 @@ export interface Order {
   id_transports?: number;
   id_washingliquids?: number;
   id_fabricsofteners?: number;
-  id_extraservice?: number;
+  id_extraservices?: number;
   id_voucher?: number;
   delivery_time?: string;
   address?: string;
   note?: string;
-  total_price?: number;
+  total_price?: string;
 }
 
 export const AddBookingScreen: FC = (): JSX.Element => {
@@ -47,10 +47,10 @@ export const AddBookingScreen: FC = (): JSX.Element => {
     id_transports: 1,
     id_washingliquids: 1,
     id_fabricsofteners: 1,
-    id_extraservice: 1,
+    id_extraservices: 1,
     id_voucher: 1,
-    delivery_time: '',
-    address: '',
+    delivery_time: '2024-01-05 10:00:00',
+    address: '101 Lê Hữu Trác, Phước Mỹ, Sơn Trà, Đà Nẵng',
     note: '',
     total_price: 0,
   });
@@ -251,7 +251,7 @@ export const AddBookingScreen: FC = (): JSX.Element => {
 
   const QuantityDropdown: FC = (): JSX.Element => {
     const [quantity, setQuantity] = useState(1);
-    setNewOrder(Object.assign(newOrder, {total_price: quantity * 10000}));
+    setNewOrder(Object.assign(newOrder, {total_price: (quantity * 10000).toString()}));
     const updateQuantity = (newQuantity: number) => {
       // Ensure the quantity is a non-negative integer
       const clampedQuantity = Math.max(0, Math.floor(newQuantity));
@@ -511,7 +511,7 @@ export const AddBookingScreen: FC = (): JSX.Element => {
             onPress={() => {
               toggleservices(item.title);
               setNewOrder(
-                Object.assign(newOrder, {id_extraservice: index + 1}),
+                Object.assign(newOrder, {id_extraservices: index + 1}),
               );
             }}>
             <Text

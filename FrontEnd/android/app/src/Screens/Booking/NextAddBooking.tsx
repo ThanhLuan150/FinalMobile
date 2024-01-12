@@ -118,7 +118,7 @@ export const NextAddBookingScreen: FC = (): JSX.Element => {
   };
   const queryClient = useQueryClient();
   const postBooking = useMutation({
-    mutationFn: async (data: Order) => {
+    mutationFn: async (data: any) => {
       const token = await AsyncStorage.getItem('token');
       const res = await axios.post(`${APIlink}/api/orders`, data, {
         headers: {
@@ -132,7 +132,38 @@ export const NextAddBookingScreen: FC = (): JSX.Element => {
       queryClient.invalidateQueries({queryKey: ['getUser']});
     },
   });
-
+  interface NewData {
+    id_user: number;
+    id_branch: number;
+    id_service: number;
+    id_typeoflaundries: number;
+    id_transports: number;
+    id_washingliquids: number;
+    id_fabricsofteners: number;
+    id_extraservices: number;
+    id_voucher: number;
+    delivery_time: string;
+    address: string;
+    note: string;
+    total_price: string;
+}
+  const rearrangeKeys = (originalData: any): NewData => {
+    return {
+      id_user: originalData.id_user,
+      id_branch: originalData.id_branch,
+      id_service: originalData.id_service,
+      id_typeoflaundries: originalData.id_typeoflaundries,
+      id_transports: originalData.id_transports,
+      id_washingliquids: originalData.id_washingliquids,
+      id_fabricsofteners: originalData.id_fabricsofteners,
+      id_extraservices: originalData.id_extraservices,
+      id_voucher: originalData.id_voucher,
+      delivery_time: originalData.delivery_time,
+      address: originalData.address,
+      note: originalData.note,
+      total_price: originalData.total_price,
+    };
+  };
   const NextButton: FC = (): JSX.Element => {
     return (
       <TouchableOpacity
@@ -140,7 +171,7 @@ export const NextAddBookingScreen: FC = (): JSX.Element => {
         onPress={() => {
           // navigation.navigate('ConfirmBooking', newOrder);
           postBooking.mutate(nextOrder);
-          console.log(nextOrder);
+          console.log('Được ',rearrangeKeys(nextOrder));
           navigation.navigate('Trang chủ');
         }}>
         <Text style={styles.ButtonText}>Đặt đơn</Text>
